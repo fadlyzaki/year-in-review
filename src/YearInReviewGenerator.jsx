@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ReactGA from "react-ga4"; // Import GA4
 import { 
   ChevronLeft, 
   ChevronRight, 
@@ -208,7 +209,8 @@ const RenderRetro = ({ slide, data }) => {
   if (slide === 3) {
     const photoCount = data.photos.length;
     let gridClass = 'grid-cols-1 grid-rows-2'; 
-    if (photoCount >= 3) gridClass = 'grid-cols-2 grid-rows-2';
+    if (photoCount === 3) gridClass = 'grid-cols-2 grid-rows-2';
+    if (photoCount === 4) gridClass = 'grid-cols-2 grid-rows-2';
     if (photoCount >= 5) gridClass = 'grid-cols-2 grid-rows-3';
 
     return (
@@ -1013,6 +1015,124 @@ const RenderMinimal = ({ slide, data }) => {
        <p className={`text-2xl leading-relaxed font-light italic ${textPrimary} mb-8`}>"{data.summary}"</p>
        <div className={`font-sans text-xs font-bold uppercase tracking-[0.2em] ${textSecondary}`}>Fin.</div>
        {watermark}
+    </div>
+  );
+};
+
+// 6. HAND-DRAWN JOURNAL RENDERER
+const RenderJournal = ({ slide, data }) => {
+  const paperTexture = "bg-[#fcfaf2] bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]";
+  const tapeStyle = "h-4 w-16 bg-yellow-200/80 absolute shadow-sm transform";
+  const penColor = "text-amber-900";
+  const pencilColor = "text-slate-500";
+  const highlightColor = "bg-yellow-200/50";
+  const sketchBorder = "border-2 border-dashed border-amber-900/50";
+  const watermark = <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-handwriting text-amber-900/30 z-20 pointer-events-none">Made by YearInReview Generator</div>;
+  
+  if (slide === 0) return (
+      <div className={`h-full ${paperTexture} p-6 font-serif flex flex-col justify-center items-center relative select-none`}>
+        <Star className={`absolute top-10 left-10 w-8 h-8 ${pencilColor} opacity-50 animate-spin-slow`} />
+        <Heart className={`absolute bottom-16 right-10 w-6 h-6 ${pencilColor} opacity-50`} />
+        <div className={`relative z-10 text-center transform -rotate-1`}>
+          <div className={`font-handwriting text-2xl ${pencilColor} mb-2`}>My Year in Review...</div>
+          <div className="relative inline-block">
+            <span className={`absolute inset-0 ${highlightColor} transform -skew-y-2 rounded-sm`}></span>
+            <h1 className={`relative text-7xl font-black ${penColor} tracking-tighter leading-none mb-2`}>{data.year}</h1>
+          </div>
+        </div>
+        <div className={`mt-8 text-center relative z-10`}>
+          <h2 className={`text-3xl font-bold ${penColor} mb-2 font-handwriting underline decoration-wavy decoration-amber-500/50`}>{data.title}</h2>
+          <p className={`text-lg ${pencilColor} font-handwriting italic`}>"{data.subtitle}"</p>
+        </div>
+        <div className={`absolute bottom-8 font-handwriting text-sm ${pencilColor}`}>( drawings by me )</div>
+        {watermark}
+      </div>
+  );
+
+  if (slide === 1) return (
+      <div className={`h-full ${paperTexture} p-8 font-serif flex flex-col relative select-none`}>
+        <h3 className={`text-2xl font-bold text-center mb-8 ${penColor} font-handwriting underline decoration-2 decoration-amber-500/30`}>Some Numbers I Tracked</h3>
+        <div className="grid grid-cols-2 gap-6">
+          {data.stats.map((stat, idx) => (
+            <div key={stat.id} className={`p-4 flex flex-col items-center justify-center aspect-square relative ${idx%2 ? 'rotate-1' : '-rotate-1'}`}>
+              <div className={`absolute inset-0 ${sketchBorder} rounded-lg`}></div>
+              <div className="w-10 h-10 mb-2 relative flex items-center justify-center">
+                 <div className="absolute inset-0 border-2 border-amber-900/30 rounded-full transform rotate-3"></div>
+                 <div className={`relative z-10 ${penColor}`}>{ICON_MAP[stat.icon]}</div>
+              </div>
+              <div className={`text-3xl font-black ${penColor} font-handwriting`}>{stat.value}</div>
+              <div className={`text-sm ${pencilColor} font-handwriting text-center`}>{stat.label}</div>
+            </div>
+          ))}
+        </div>
+        {watermark}
+      </div>
+  );
+
+  if (slide === 2) return (
+      <div className={`h-full ${paperTexture} p-6 font-serif relative overflow-hidden flex flex-col select-none`}>
+         <h3 className={`text-2xl font-bold text-center mb-8 ${penColor} font-handwriting`}>
+           <span className="relative inline-block px-2">
+             <span className={`absolute inset-0 ${highlightColor} transform skew-x-6 rounded-sm`}></span>
+             <span className="relative">Big Moments!</span>
+           </span>
+         </h3>
+         <div className="flex-1 space-y-6 relative z-10">
+           {data.highlights.map((h, i) => (
+             <div key={h.id} className={`p-4 relative ${i%2 ? 'rotate-1' : '-rotate-1'}`}>
+               <div className={`absolute inset-0 ${sketchBorder} rounded-md bg-white/50`}></div>
+               <div className="relative z-10 flex items-start gap-3">
+                 <div className={`font-handwriting text-lg font-bold ${pencilColor}`}>#{i+1}</div>
+                 <div>
+                  <h4 className={`font-bold ${penColor} font-handwriting text-lg mb-1`}>{h.title}</h4>
+                  <p className={`text-sm leading-snug ${pencilColor} font-handwriting`}>{h.desc}</p>
+                 </div>
+               </div>
+             </div>
+           ))}
+         </div>
+         {watermark}
+      </div>
+  );
+
+  if (slide === 3) {
+    const photoCount = data.photos.length;
+    // Scale down items if there are many to ensure they fit in the frame
+    const itemWidth = photoCount > 4 ? 'w-24' : 'w-32';
+    
+    return (
+      <div className={`h-full ${paperTexture} p-6 font-serif relative overflow-hidden select-none flex flex-col items-center justify-center`}>
+         <div className="flex flex-wrap justify-center content-center gap-4 h-full w-full">
+           {data.photos.map((photo, i) => (
+             <div 
+              key={photo.id} 
+              className={`bg-white p-2 pb-6 shadow-md border border-stone-200 relative ${itemWidth} ${i % 2 === 0 ? 'rotate-3' : '-rotate-2'} ${i % 3 === 0 ? 'z-10' : ''}`}
+              style={{ zIndex: i }}
+             >
+                <div className={`${tapeStyle} -top-2 left-1/2 -translate-x-1/2 ${i%2===0 ? 'bg-blue-200/60' : 'bg-yellow-200/60'}`}></div>
+                <div className="aspect-square bg-stone-100 overflow-hidden filter sepia-[.2]">
+                   <img src={photo.url} alt="" className="w-full h-full object-cover" />
+                </div>
+             </div>
+           ))}
+         </div>
+         <Star className={`absolute bottom-8 right-8 w-6 h-6 ${pencilColor} animate-pulse`} />
+         {watermark}
+      </div>
+    );
+  }
+
+  return (
+    <div className={`h-full ${paperTexture} p-8 font-serif flex flex-col justify-center items-center text-center relative select-none`}>
+      <div className="bg-white p-8 shadow-xl rotate-1 border-8 border-white relative">
+         <div className="absolute top-0 left-0 w-0 h-0 border-t-[20px] border-l-[20px] border-t-stone-200 border-l-transparent"></div>
+         <p className="text-xl leading-relaxed italic text-stone-800 mb-4">{data.summary}</p>
+         <div className="flex justify-center gap-1 text-stone-400">
+           <Star className="w-4 h-4 fill-current" /><Star className="w-4 h-4 fill-current" /><Star className="w-4 h-4 fill-current" />
+         </div>
+      </div>
+      <div className="mt-12 font-handwriting text-stone-500 transform -rotate-6">See you next year...</div>
+      {watermark}
     </div>
   );
 };
