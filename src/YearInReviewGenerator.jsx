@@ -1,4 +1,3 @@
-import ReactGA from "react-ga4";
 import React, { useState, useEffect } from 'react';
 import { 
   ChevronLeft, 
@@ -73,7 +72,7 @@ const ICON_MAP = {
   disc: <Disc className="w-full h-full" />,
   
   // App/Activity Specific
-  duolingo: <Flame className="w-full h-full" />, // Streak
+  duolingo: <Flame className="w-full h-full" />, 
   language: <Languages className="w-full h-full" />,
   strava_cycle: <Bike className="w-full h-full" />,
   strava_run: <Footprints className="w-full h-full" />,
@@ -107,7 +106,6 @@ const QUOTES = [
   "Not a new me, just a better version.",
   "Turning pages and writing new chapters."
 ];
-
 
 // --- Theme Definitions ---
 const THEMES = [
@@ -210,8 +208,7 @@ const RenderRetro = ({ slide, data }) => {
   if (slide === 3) {
     const photoCount = data.photos.length;
     let gridClass = 'grid-cols-1 grid-rows-2'; 
-    if (photoCount === 3) gridClass = 'grid-cols-2 grid-rows-2';
-    if (photoCount === 4) gridClass = 'grid-cols-2 grid-rows-2';
+    if (photoCount >= 3) gridClass = 'grid-cols-2 grid-rows-2';
     if (photoCount >= 5) gridClass = 'grid-cols-2 grid-rows-3';
 
     return (
@@ -394,316 +391,6 @@ const RenderLoFi = ({ slide, data }) => {
                  <h4 className="font-bold font-sans text-sm uppercase tracking-wide text-stone-800">{h.title}</h4>
                </div>
                <p className="text-stone-600 italic leading-snug">{h.desc}</p>
-             </div>
-           ))}
-         </div>
-         {watermark}
-      </div>
-  );
-
-  if (slide === 3) {
-    const photoCount = data.photos.length;
-    // Scale down items if there are many to ensure they fit in the frame
-    const itemWidth = photoCount > 4 ? 'w-24' : 'w-32';
-    
-    return (
-      <div className={`h-full ${paperTexture} p-6 font-serif relative overflow-hidden select-none flex flex-col items-center justify-center`}>
-         <div className="flex flex-wrap justify-center content-center gap-4 h-full w-full">
-           {data.photos.map((photo, i) => (
-             <div 
-              key={photo.id} 
-              className={`bg-white p-2 pb-6 shadow-md border border-stone-200 relative ${itemWidth} ${i % 2 === 0 ? 'rotate-3' : '-rotate-2'} ${i % 3 === 0 ? 'z-10' : ''}`}
-              style={{ zIndex: i }}
-             >
-                <div className={`${tapeStyle} -top-2 left-1/2 -translate-x-1/2 ${i%2===0 ? 'bg-blue-200/60' : 'bg-yellow-200/60'}`}></div>
-                <div className="aspect-square bg-stone-100 overflow-hidden filter sepia-[.2]">
-                   <img src={photo.url} alt="" className="w-full h-full object-cover" />
-                </div>
-             </div>
-           ))}
-         </div>
-         <Star className={`absolute bottom-8 right-8 w-6 h-6 ${pencilColor} animate-pulse`} />
-         {watermark}
-      </div>
-    );
-  }
-
-  return (
-    <div className={`h-full ${paperTexture} p-8 font-serif flex flex-col justify-center items-center text-center relative select-none`}>
-      <div className="bg-white p-8 shadow-xl rotate-1 border-8 border-white relative">
-         <div className="absolute top-0 left-0 w-0 h-0 border-t-[20px] border-l-[20px] border-t-stone-200 border-l-transparent"></div>
-         <p className="text-xl leading-relaxed italic text-stone-800 mb-4">{data.summary}</p>
-         <div className="flex justify-center gap-1 text-stone-400">
-           <Star className="w-4 h-4 fill-current" /><Star className="w-4 h-4 fill-current" /><Star className="w-4 h-4 fill-current" />
-         </div>
-      </div>
-      <div className="mt-12 font-handwriting text-stone-500 transform -rotate-6">See you next year...</div>
-      {watermark}
-    </div>
-  );
-};
-
-// 4. CYBERPUNK NEON RENDERER
-const RenderNeon = ({ slide, data }) => {
-  const bgStyle = "bg-slate-950";
-  const textPrimary = "text-cyan-400";
-  const textSecondary = "text-fuchsia-500";
-  const borderStyle = `border-2 border-cyan-500/50 shadow-[0_0_10px_rgba(0,255,255,0.3)] bg-slate-900/50 backdrop-blur-md`;
-  const glowText = "drop-shadow-[0_0_5px_rgba(0,255,255,0.7)]";
-  const glowTextSecondary = "drop-shadow-[0_0_5px_rgba(217,70,239,0.7)]";
-  const watermark = <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[8px] uppercase tracking-[0.2em] text-cyan-500/30 z-20 pointer-events-none">Made by YearInReview Generator</div>;
-
-  if (slide === 0) return (
-      <div className={`h-full ${bgStyle} p-6 font-sans flex flex-col justify-center items-center relative overflow-hidden select-none`}>
-        <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[length:20px_20px]"></div>
-        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_50%,rgba(217,70,239,0.1),transparent_70%)]"></div>
-        <div className={`text-sm font-bold uppercase tracking-[0.2em] ${textSecondary} mb-4 animate-pulse ${glowTextSecondary}`}>:: SYSTEM_BOOT :: v.2025.1</div>
-        <h1 className={`text-7xl font-black tracking-tighter leading-none mb-2 ${textPrimary} ${glowText}`}>{data.year}</h1>
-        <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-fuchsia-500 rounded-full mb-6 shadow-[0_0_10px_rgba(0,255,255,0.5)]"></div>
-        <h2 className={`text-2xl font-bold uppercase tracking-tight text-white mb-2 ${glowText}`}>{data.title}</h2>
-        <p className={`text-lg ${textPrimary} font-medium text-center opacity-80`}>[{data.subtitle}]</p>
-        <div className="mt-12 flex gap-2">
-          <div className="w-2 h-2 rounded-full bg-cyan-500 animate-ping"></div>
-          <div className="w-2 h-2 rounded-full bg-fuchsia-500 animate-ping delay-150"></div>
-          <div className="w-2 h-2 rounded-full bg-cyan-500 animate-ping delay-300"></div>
-        </div>
-        {watermark}
-      </div>
-  );
-
-  if (slide === 1) return (
-      <div className={`h-full ${bgStyle} p-6 font-sans flex flex-col relative overflow-hidden select-none`}>
-        <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[length:20px_20px]"></div>
-        <h3 className={`text-xl font-bold uppercase mb-8 ${textSecondary} flex items-center gap-2 ${glowTextSecondary}`}><Activity className="w-5 h-5 animate-pulse" /> Neural Net Stats</h3>
-        <div className="grid grid-cols-2 gap-4 z-10">
-          {data.stats.map((stat, idx) => (
-            <div key={stat.id} className={`${borderStyle} p-4 flex flex-col items-center justify-center aspect-square rounded-lg relative overflow-hidden group`}>
-              <div className={`absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-fuchsia-500/10 opacity-0 group-hover:opacity-100 transition-opacity`}></div>
-              <div className={`w-8 h-8 mb-2 ${textSecondary} group-hover:scale-110 transition-transform ${glowTextSecondary}`}>{ICON_MAP[stat.icon]}</div>
-              <div className={`text-3xl font-black ${textPrimary} ${glowText}`}>{stat.value}</div>
-              <div className={`text-[10px] uppercase tracking-wider text-white opacity-70`}>{stat.label}</div>
-            </div>
-          ))}
-        </div>
-        {watermark}
-      </div>
-  );
-
-  if (slide === 2) return (
-      <div className={`h-full ${bgStyle} p-6 font-sans relative overflow-hidden flex flex-col`}>
-         <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[length:20px_20px]"></div>
-         <h3 className={`text-xl font-bold uppercase mb-8 ${textPrimary} ${glowText} flex items-center gap-2`}><Zap className="w-5 h-5" /> Core Memory Units</h3>
-         <div className="flex-1 space-y-6 z-10">
-           {data.highlights.map((h, i) => (
-             <div key={h.id} className={`${borderStyle} p-4 rounded-lg relative`}>
-               <div className={`absolute -left-1 top-1/2 -translate-y-1/2 w-1 h-12 bg-gradient-to-b from-cyan-500 to-fuchsia-500 rounded-full shadow-[0_0_10px_rgba(0,255,255,0.5)]`}></div>
-               <div className={`font-bold uppercase text-sm mb-1 ${textSecondary} ${glowTextSecondary}`}>// {h.title}</div>
-               <div className={`text-sm leading-snug text-white opacity-90`}>{h.desc}</div>
-             </div>
-           ))}
-         </div>
-         {watermark}
-      </div>
-  );
-
-  if (slide === 3) {
-    const photoCount = data.photos.length;
-    let gridClass = 'grid-cols-1 grid-rows-2'; 
-    if (photoCount >= 3) gridClass = 'grid-cols-2 grid-rows-2';
-    if (photoCount >= 5) gridClass = 'grid-cols-2 grid-rows-3';
-
-    return (
-      <div className={`h-full ${bgStyle} p-6 font-sans relative overflow-hidden flex flex-col`}>
-         <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[length:20px_20px]"></div>
-         <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_50%,rgba(0,255,255,0.1),transparent_60%)]"></div>
-         <h3 className={`text-xl font-bold uppercase mb-8 ${textSecondary} ${glowTextSecondary} flex items-center gap-2`}>
-           <Camera className="w-5 h-5" /> VISUAL_LOGS
-         </h3>
-         
-         <div className={`grid gap-4 h-full pb-8 w-full ${gridClass}`}>
-           {data.photos.map((photo, i) => (
-              <div 
-                key={photo.id} 
-                className={`relative rounded-xl overflow-hidden border border-cyan-500/50 shadow-[0_0_15px_rgba(0,255,255,0.2)] group ${photoCount === 3 && i === 0 ? 'row-span-2' : ''}`}
-              >
-                <div className="absolute inset-0 bg-cyan-900/20 z-10 group-hover:bg-transparent transition-colors"></div>
-                <img src={photo.url} alt="" className="w-full h-full object-cover" />
-                <div className="absolute bottom-2 left-2 text-[10px] text-cyan-400 font-mono z-20">IMG_{i+1}.RAW</div>
-             </div>
-           ))}
-         </div>
-         {watermark}
-      </div>
-    );
-  }
-
-  return (
-    <div className={`h-full ${bgStyle} p-8 font-sans flex flex-col justify-center items-center text-center relative overflow-hidden select-none`}>
-       <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[length:20px_20px]"></div>
-       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_50%,rgba(0,255,255,0.15),transparent_60%)] animate-pulse"></div>
-       <div className={`${borderStyle} p-6 rounded-xl relative z-10`}>
-         <Terminal className={`w-8 h-8 mb-4 mx-auto ${textPrimary} ${glowText}`} />
-         <p className={`text-xl font-bold leading-relaxed text-white italic ${glowText}`}>"{data.summary}"</p>
-       </div>
-       <div className={`mt-8 text-xs font-bold uppercase tracking-[0.2em] ${textSecondary} animate-pulse ${glowTextSecondary}`}>End of Line_</div>
-       {watermark}
-    </div>
-  );
-};
-
-// 5. MODERN MINIMALIST RENDERER
-const RenderMinimal = ({ slide, data }) => {
-  const bgStyle = "bg-stone-50";
-  const textPrimary = "text-stone-900";
-  const textSecondary = "text-stone-500";
-  const watermark = <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-[8px] uppercase tracking-[0.2em] text-stone-400/30 z-20 pointer-events-none">Made by YearInReview Generator</div>;
-
-  if (slide === 0) return (
-      <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col justify-center items-center text-center relative select-none`}>
-        <div className="absolute top-8 font-sans text-xs font-bold uppercase tracking-[0.2em] text-stone-400">The Annual Review</div>
-        <h1 className={`text-8xl font-light tracking-tight leading-none mb-4 ${textPrimary}`}>{data.year}</h1>
-        <div className="w-16 h-px bg-stone-300 mb-8"></div>
-        <h2 className={`text-2xl font-normal uppercase tracking-widest ${textPrimary} mb-2`}>{data.title}</h2>
-        <p className={`text-lg ${textSecondary} font-light italic`}>{data.subtitle}</p>
-        {watermark}
-      </div>
-  );
-
-  if (slide === 1) return (
-      <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col select-none`}>
-        <h3 className={`text-xl font-normal uppercase tracking-widest text-center mb-12 ${textPrimary}`}>Key Figures</h3>
-        <div className="grid grid-cols-2 gap-px bg-stone-200 border border-stone-200">
-          {data.stats.map((stat, idx) => (
-            <div key={stat.id} className={`bg-white p-6 flex flex-col items-center justify-center aspect-square`}>
-              <div className={`text-4xl font-light ${textPrimary} mb-2`}>{stat.value}</div>
-              <div className={`text-xs font-sans font-bold uppercase tracking-widest ${textSecondary}`}>{stat.label}</div>
-            </div>
-          ))}
-        </div>
-        {watermark}
-      </div>
-  );
-
-  if (slide === 2) return (
-      <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col select-none`}>
-         <h3 className={`text-xl font-normal uppercase tracking-widest text-center mb-12 ${textPrimary}`}>Highlights</h3>
-         <div className="flex-1 space-y-8">
-           {data.highlights.map((h, i) => (
-             <div key={h.id} className="text-center">
-               <div className="font-sans text-xs font-bold uppercase tracking-[0.2em] text-stone-400 mb-2">0{i+1}.</div>
-               <h4 className={`text-lg font-normal uppercase tracking-wide mb-2 ${textPrimary}`}>{h.title}</h4>
-               <p className={`text-sm leading-relaxed ${textSecondary} font-light italic px-4`}>{h.desc}</p>
-             </div>
-           ))}
-         </div>
-         {watermark}
-      </div>
-  );
-
-  if (slide === 3) {
-    const photoCount = data.photos.length;
-    let gridClass = 'grid-rows-2'; 
-    if (photoCount >= 3) gridClass = 'grid-cols-2 grid-rows-2';
-    if (photoCount >= 5) gridClass = 'grid-cols-2 grid-rows-3';
-
-    return (
-      <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col select-none`}>
-         <h3 className={`text-xl font-normal uppercase tracking-widest text-center mb-8 ${textPrimary}`}>Gallery</h3>
-         <div className={`grid gap-2 h-full pb-8 w-full ${gridClass}`}>
-           {data.photos.map((photo, i) => (
-              <div 
-                key={photo.id} 
-                className={`bg-stone-200 overflow-hidden ${photoCount === 3 && i === 0 ? 'col-span-2' : ''}`}
-              >
-                <img src={photo.url} alt="" className="w-full h-full object-cover opacity-90" />
-              </div>
-           ))}
-         </div>
-         {watermark}
-      </div>
-    );
-  }
-
-  return (
-    <div className={`h-full ${bgStyle} p-12 font-serif flex flex-col justify-center items-center text-center relative select-none`}>
-       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-20 bg-stone-300"></div>
-       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-20 bg-stone-300"></div>
-       <p className={`text-2xl leading-relaxed font-light italic ${textPrimary} mb-8`}>"{data.summary}"</p>
-       <div className={`font-sans text-xs font-bold uppercase tracking-[0.2em] ${textSecondary}`}>Fin.</div>
-       {watermark}
-    </div>
-  );
-};
-
-// 6. HAND-DRAWN JOURNAL RENDERER
-const RenderJournal = ({ slide, data }) => {
-  const paperTexture = "bg-[#fcfaf2] bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]";
-  const tapeStyle = "h-4 w-16 bg-yellow-200/80 absolute shadow-sm transform";
-  const penColor = "text-amber-900";
-  const pencilColor = "text-slate-500";
-  const highlightColor = "bg-yellow-200/50";
-  const sketchBorder = "border-2 border-dashed border-amber-900/50";
-  const watermark = <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-handwriting text-amber-900/30 z-20 pointer-events-none">Made by YearInReview Generator</div>;
-  
-  if (slide === 0) return (
-      <div className={`h-full ${paperTexture} p-6 font-serif flex flex-col justify-center items-center relative select-none`}>
-        <Star className={`absolute top-10 left-10 w-8 h-8 ${pencilColor} opacity-50 animate-spin-slow`} />
-        <Heart className={`absolute bottom-16 right-10 w-6 h-6 ${pencilColor} opacity-50`} />
-        <div className={`relative z-10 text-center transform -rotate-1`}>
-          <div className={`font-handwriting text-2xl ${pencilColor} mb-2`}>My Year in Review...</div>
-          <div className="relative inline-block">
-            <span className={`absolute inset-0 ${highlightColor} transform -skew-y-2 rounded-sm`}></span>
-            <h1 className={`relative text-7xl font-black ${penColor} tracking-tighter leading-none mb-2`}>{data.year}</h1>
-          </div>
-        </div>
-        <div className={`mt-8 text-center relative z-10`}>
-          <h2 className={`text-3xl font-bold ${penColor} mb-2 font-handwriting underline decoration-wavy decoration-amber-500/50`}>{data.title}</h2>
-          <p className={`text-lg ${pencilColor} font-handwriting italic`}>"{data.subtitle}"</p>
-        </div>
-        <div className={`absolute bottom-8 font-handwriting text-sm ${pencilColor}`}>( drawings by me )</div>
-        {watermark}
-      </div>
-  );
-
-  if (slide === 1) return (
-      <div className={`h-full ${paperTexture} p-8 font-serif flex flex-col relative select-none`}>
-        <h3 className={`text-2xl font-bold text-center mb-8 ${penColor} font-handwriting underline decoration-2 decoration-amber-500/30`}>Some Numbers I Tracked</h3>
-        <div className="grid grid-cols-2 gap-6">
-          {data.stats.map((stat, idx) => (
-            <div key={stat.id} className={`p-4 flex flex-col items-center justify-center aspect-square relative ${idx%2 ? 'rotate-1' : '-rotate-1'}`}>
-              <div className={`absolute inset-0 ${sketchBorder} rounded-lg`}></div>
-              <div className="w-10 h-10 mb-2 relative flex items-center justify-center">
-                 <div className="absolute inset-0 border-2 border-amber-900/30 rounded-full transform rotate-3"></div>
-                 <div className={`relative z-10 ${penColor}`}>{ICON_MAP[stat.icon]}</div>
-              </div>
-              <div className={`text-3xl font-black ${penColor} font-handwriting`}>{stat.value}</div>
-              <div className={`text-sm ${pencilColor} font-handwriting text-center`}>{stat.label}</div>
-            </div>
-          ))}
-        </div>
-        {watermark}
-      </div>
-  );
-
-  if (slide === 2) return (
-      <div className={`h-full ${paperTexture} p-6 font-serif relative overflow-hidden flex flex-col select-none`}>
-         <h3 className={`text-2xl font-bold text-center mb-8 ${penColor} font-handwriting`}>
-           <span className="relative inline-block px-2">
-             <span className={`absolute inset-0 ${highlightColor} transform skew-x-6 rounded-sm`}></span>
-             <span className="relative">Big Moments!</span>
-           </span>
-         </h3>
-         <div className="flex-1 space-y-6 relative z-10">
-           {data.highlights.map((h, i) => (
-             <div key={h.id} className={`p-4 relative ${i%2 ? 'rotate-1' : '-rotate-1'}`}>
-               <div className={`absolute inset-0 ${sketchBorder} rounded-md bg-white/50`}></div>
-               <div className="relative z-10 flex items-start gap-3">
-                 <div className={`font-handwriting text-lg font-bold ${pencilColor}`}>#{i+1}</div>
-                 <div>
-                  <h4 className={`font-bold ${penColor} font-handwriting text-lg mb-1`}>{h.title}</h4>
-                  <p className={`text-sm leading-snug ${pencilColor} font-handwriting`}>{h.desc}</p>
-                 </div>
-               </div>
              </div>
            ))}
          </div>
@@ -1138,6 +825,198 @@ const RenderBlueprint = ({ slide, data }) => {
   return <RenderRetro slide={slide} data={data} />; // Fallback
 };
 
+// 4. CYBERPUNK NEON RENDERER
+const RenderNeon = ({ slide, data }) => {
+  const bgStyle = "bg-slate-950";
+  const textPrimary = "text-cyan-400";
+  const textSecondary = "text-fuchsia-500";
+  const borderStyle = `border-2 border-cyan-500/50 shadow-[0_0_10px_rgba(0,255,255,0.3)] bg-slate-900/50 backdrop-blur-md`;
+  const glowText = "drop-shadow-[0_0_5px_rgba(0,255,255,0.7)]";
+  const glowTextSecondary = "drop-shadow-[0_0_5px_rgba(217,70,239,0.7)]";
+  const watermark = <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[8px] uppercase tracking-[0.2em] text-cyan-500/30 z-20 pointer-events-none">Made by YearInReview Generator</div>;
+
+  if (slide === 0) return (
+      <div className={`h-full ${bgStyle} p-6 font-sans flex flex-col justify-center items-center relative overflow-hidden select-none`}>
+        <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[length:20px_20px]"></div>
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_50%,rgba(217,70,239,0.1),transparent_70%)]"></div>
+        <div className={`text-sm font-bold uppercase tracking-[0.2em] ${textSecondary} mb-4 animate-pulse ${glowTextSecondary}`}>:: SYSTEM_BOOT :: v.2025.1</div>
+        <h1 className={`text-7xl font-black tracking-tighter leading-none mb-2 ${textPrimary} ${glowText}`}>{data.year}</h1>
+        <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-fuchsia-500 rounded-full mb-6 shadow-[0_0_10px_rgba(0,255,255,0.5)]"></div>
+        <h2 className={`text-2xl font-bold uppercase tracking-tight text-white mb-2 ${glowText}`}>{data.title}</h2>
+        <p className={`text-lg ${textPrimary} font-medium text-center opacity-80`}>[{data.subtitle}]</p>
+        <div className="mt-12 flex gap-2">
+          <div className="w-2 h-2 rounded-full bg-cyan-500 animate-ping"></div>
+          <div className="w-2 h-2 rounded-full bg-fuchsia-500 animate-ping delay-150"></div>
+          <div className="w-2 h-2 rounded-full bg-cyan-500 animate-ping delay-300"></div>
+        </div>
+        {watermark}
+      </div>
+  );
+
+  if (slide === 1) return (
+      <div className={`h-full ${bgStyle} p-6 font-sans flex flex-col relative overflow-hidden select-none`}>
+        <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[length:20px_20px]"></div>
+        <h3 className={`text-xl font-bold uppercase mb-8 ${textSecondary} flex items-center gap-2 ${glowTextSecondary}`}><Activity className="w-5 h-5 animate-pulse" /> Neural Net Stats</h3>
+        <div className="grid grid-cols-2 gap-4 z-10">
+          {data.stats.map((stat, idx) => (
+            <div key={stat.id} className={`${borderStyle} p-4 flex flex-col items-center justify-center aspect-square rounded-lg relative overflow-hidden group`}>
+              <div className={`absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-fuchsia-500/10 opacity-0 group-hover:opacity-100 transition-opacity`}></div>
+              <div className={`w-8 h-8 mb-2 ${textSecondary} group-hover:scale-110 transition-transform ${glowTextSecondary}`}>{ICON_MAP[stat.icon]}</div>
+              <div className={`text-3xl font-black ${textPrimary} ${glowText}`}>{stat.value}</div>
+              <div className={`text-[10px] uppercase tracking-wider text-white opacity-70`}>{stat.label}</div>
+            </div>
+          ))}
+        </div>
+        {watermark}
+      </div>
+  );
+
+  if (slide === 2) return (
+      <div className={`h-full ${bgStyle} p-6 font-sans relative overflow-hidden flex flex-col`}>
+         <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[length:20px_20px]"></div>
+         <h3 className={`text-xl font-bold uppercase mb-8 ${textPrimary} ${glowText} flex items-center gap-2`}><Zap className="w-5 h-5" /> Core Memory Units</h3>
+         <div className="flex-1 space-y-6 z-10">
+           {data.highlights.map((h, i) => (
+             <div key={h.id} className={`${borderStyle} p-4 rounded-lg relative`}>
+               <div className={`absolute -left-1 top-1/2 -translate-y-1/2 w-1 h-12 bg-gradient-to-b from-cyan-500 to-fuchsia-500 rounded-full shadow-[0_0_10px_rgba(0,255,255,0.5)]`}></div>
+               <div className={`font-bold uppercase text-sm mb-1 ${textSecondary} ${glowTextSecondary}`}>// {h.title}</div>
+               <div className={`text-sm leading-snug text-white opacity-90`}>{h.desc}</div>
+             </div>
+           ))}
+         </div>
+         {watermark}
+      </div>
+  );
+
+  if (slide === 3) {
+    const photoCount = data.photos.length;
+    let gridClass = 'grid-cols-1 grid-rows-2'; 
+    if (photoCount >= 3) gridClass = 'grid-cols-2 grid-rows-2';
+    if (photoCount >= 5) gridClass = 'grid-cols-2 grid-rows-3';
+
+    return (
+      <div className={`h-full ${bgStyle} p-6 font-sans relative overflow-hidden flex flex-col`}>
+         <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[length:20px_20px]"></div>
+         <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_50%,rgba(0,255,255,0.1),transparent_60%)]"></div>
+         <h3 className={`text-xl font-bold uppercase mb-8 ${textSecondary} ${glowTextSecondary} flex items-center gap-2`}>
+           <Camera className="w-5 h-5" /> VISUAL_LOGS
+         </h3>
+         
+         <div className={`grid gap-4 h-full pb-8 w-full ${gridClass}`}>
+           {data.photos.map((photo, i) => (
+              <div 
+                key={photo.id} 
+                className={`relative rounded-xl overflow-hidden border border-cyan-500/50 shadow-[0_0_15px_rgba(0,255,255,0.2)] group ${photoCount === 3 && i === 0 ? 'row-span-2' : ''}`}
+              >
+                <div className="absolute inset-0 bg-cyan-900/20 z-10 group-hover:bg-transparent transition-colors"></div>
+                <img src={photo.url} alt="" className="w-full h-full object-cover" />
+                <div className="absolute bottom-2 left-2 text-[10px] text-cyan-400 font-mono z-20">IMG_{i+1}.RAW</div>
+             </div>
+           ))}
+         </div>
+         {watermark}
+      </div>
+    );
+  }
+
+  return (
+    <div className={`h-full ${bgStyle} p-8 font-sans flex flex-col justify-center items-center text-center relative overflow-hidden select-none`}>
+       <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[length:20px_20px]"></div>
+       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_50%,rgba(0,255,255,0.15),transparent_60%)] animate-pulse"></div>
+       <div className={`${borderStyle} p-6 rounded-xl relative z-10`}>
+         <Terminal className={`w-8 h-8 mb-4 mx-auto ${textPrimary} ${glowText}`} />
+         <p className={`text-xl font-bold leading-relaxed text-white italic ${glowText}`}>"{data.summary}"</p>
+       </div>
+       <div className={`mt-8 text-xs font-bold uppercase tracking-[0.2em] ${textSecondary} animate-pulse ${glowTextSecondary}`}>End of Line_</div>
+       {watermark}
+    </div>
+  );
+};
+
+// 5. MODERN MINIMALIST RENDERER
+const RenderMinimal = ({ slide, data }) => {
+  const bgStyle = "bg-stone-50";
+  const textPrimary = "text-stone-900";
+  const textSecondary = "text-stone-500";
+  const watermark = <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-[8px] uppercase tracking-[0.2em] text-stone-400/30 z-20 pointer-events-none">Made by YearInReview Generator</div>;
+
+  if (slide === 0) return (
+      <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col justify-center items-center text-center relative select-none`}>
+        <div className="absolute top-8 font-sans text-xs font-bold uppercase tracking-[0.2em] text-stone-400">The Annual Review</div>
+        <h1 className={`text-8xl font-light tracking-tight leading-none mb-4 ${textPrimary}`}>{data.year}</h1>
+        <div className="w-16 h-px bg-stone-300 mb-8"></div>
+        <h2 className={`text-2xl font-normal uppercase tracking-widest ${textPrimary} mb-2`}>{data.title}</h2>
+        <p className={`text-lg ${textSecondary} font-light italic`}>{data.subtitle}</p>
+        {watermark}
+      </div>
+  );
+
+  if (slide === 1) return (
+      <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col select-none`}>
+        <h3 className={`text-xl font-normal uppercase tracking-widest text-center mb-12 ${textPrimary}`}>Key Figures</h3>
+        <div className="grid grid-cols-2 gap-px bg-stone-200 border border-stone-200">
+          {data.stats.map((stat, idx) => (
+            <div key={stat.id} className={`bg-white p-6 flex flex-col items-center justify-center aspect-square`}>
+              <div className={`text-4xl font-light ${textPrimary} mb-2`}>{stat.value}</div>
+              <div className={`text-xs font-sans font-bold uppercase tracking-widest ${textSecondary}`}>{stat.label}</div>
+            </div>
+          ))}
+        </div>
+        {watermark}
+      </div>
+  );
+
+  if (slide === 2) return (
+      <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col select-none`}>
+         <h3 className={`text-xl font-normal uppercase tracking-widest text-center mb-12 ${textPrimary}`}>Highlights</h3>
+         <div className="flex-1 space-y-8">
+           {data.highlights.map((h, i) => (
+             <div key={h.id} className="text-center">
+               <div className="font-sans text-xs font-bold uppercase tracking-[0.2em] text-stone-400 mb-2">0{i+1}.</div>
+               <h4 className={`text-lg font-normal uppercase tracking-wide mb-2 ${textPrimary}`}>{h.title}</h4>
+               <p className={`text-sm leading-relaxed ${textSecondary} font-light italic px-4`}>{h.desc}</p>
+             </div>
+           ))}
+         </div>
+         {watermark}
+      </div>
+  );
+
+  if (slide === 3) {
+    const photoCount = data.photos.length;
+    let gridClass = 'grid-rows-2'; 
+    if (photoCount >= 3) gridClass = 'grid-cols-2 grid-rows-2';
+    if (photoCount >= 5) gridClass = 'grid-cols-2 grid-rows-3';
+
+    return (
+      <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col select-none`}>
+         <h3 className={`text-xl font-normal uppercase tracking-widest text-center mb-8 ${textPrimary}`}>Gallery</h3>
+         <div className={`grid gap-2 h-full pb-8 w-full ${gridClass}`}>
+           {data.photos.map((photo, i) => (
+              <div 
+                key={photo.id} 
+                className={`bg-stone-200 overflow-hidden ${photoCount === 3 && i === 0 ? 'col-span-2' : ''}`}
+              >
+                <img src={photo.url} alt="" className="w-full h-full object-cover opacity-90" />
+              </div>
+           ))}
+         </div>
+         {watermark}
+      </div>
+    );
+  }
+
+  return (
+    <div className={`h-full ${bgStyle} p-12 font-serif flex flex-col justify-center items-center text-center relative select-none`}>
+       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-20 bg-stone-300"></div>
+       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-20 bg-stone-300"></div>
+       <p className={`text-2xl leading-relaxed font-light italic ${textPrimary} mb-8`}>"{data.summary}"</p>
+       <div className={`font-sans text-xs font-bold uppercase tracking-[0.2em] ${textSecondary}`}>Fin.</div>
+       {watermark}
+    </div>
+  );
+};
+
 
 export default function YearInReviewGenerator() {
   const [data, setData] = useState(() => {
@@ -1154,9 +1033,9 @@ export default function YearInReviewGenerator() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isCleanMode, setIsCleanMode] = useState(false);
   const [saveStatus, setSaveStatus] = useState('');
-  const [isDownloading, setIsDownloading] = useState(false); 
+  const [isDownloading, setIsDownloading] = useState(false); // Added missing state
 
-  const totalSlides = 4; // Normalized for new themes simplicity
+  const totalSlides = 5; 
 
   // --- Persistence ---
   useEffect(() => {
@@ -1283,20 +1162,6 @@ export default function YearInReviewGenerator() {
       localStorage.removeItem('yearInReviewData');
     }
   };
-
-// Inside your main component function, before the return:
-useEffect(() => {
-  ReactGA.initialize("G-E8TW7JKQYT");
-  ReactGA.send({ hitType: "pageview", page: window.location.pathname });
-}, []);
-const handleDownload = () => {
-  // ... existing download logic ...
-  ReactGA.event({
-    category: "User Action",
-    action: "Download Slide",
-    label: `Theme: ${currentTheme}`
-  });
-};
 
   const generateQuote = () => {
     const randomQuote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
