@@ -96,7 +96,7 @@ const ICON_MAP = {
 };
 
 // --- Quotes Library ---
-const QUOTES = [
+const QUOTES_EN = [
   "A year defined not by the destination, but by the journey.",
   "Small steps, consistent effort, and a few surprises along the way.",
   "Growth is uncomfortable, but absolutely necessary.",
@@ -108,6 +108,157 @@ const QUOTES = [
   "Not a new me, just a better version.",
   "Turning pages and writing new chapters."
 ];
+
+const QUOTES_ID = [
+  "Tahun yang didefinisikan bukan oleh tujuan, tapi perjalanannya.",
+  "Langkah kecil, usaha konsisten, dan kejutan di sepanjang jalan.",
+  "Bertumbuh itu tidak nyaman, tapi mutlak diperlukan.",
+  "Mengoleksi momen, bukan barang. 2025 punya cerita.",
+  "Bersyukur untuk naik turunnya kehidupan tahun ini.",
+  "Tahun di mana aku mulai membangun jalanku sendiri.",
+  "Bekerja dalam diam, biarkan suksesmu yang berbicara.",
+  "Nikmati prosesnya, percaya pada hasilnya.",
+  "Bukan aku yang baru, tapi versi yang lebih baik.",
+  "Membuka lembaran baru dan menulis bab selanjutnya."
+];
+
+// --- Translations ---
+const TRANSLATIONS = {
+  en: {
+    // UI
+    title: "RECAP GENERATOR",
+    subtitle: "Turn your year into a visual story.",
+    reset: "Reset Data",
+    chooseVibe: "6. Choose Vibe",
+    scroll: "Scroll",
+    coreInfo: "1. Core Info",
+    year: "Year",
+    themeTitle: "Theme Title",
+    metaSubtitle: "Subtitle / Metaphor",
+    numbers: "2. The Numbers",
+    highlights: "3. Highlights",
+    highlightTitle: "Highlight Title",
+    desc: "Description",
+    gallery: "4. Photo Gallery",
+    change: "Change",
+    add: "Add",
+    summary: "5. The Summary",
+    autoGen: "Auto-Generate",
+    privacyTitle: "Privacy First",
+    privacyText: "We do not store your data. All text and photos are saved locally on your device and never sent to a server.",
+    preview: "Live Preview",
+    saveSlide: "Save Slide",
+    saving: "Saving...",
+    exitScreenshot: "Exit Screenshot Mode",
+    screenshotHint: "Use Screenshot Mode to Share",
+    madeBy: "Made by @fadlyzaki",
+    // Themes
+    pressStart: "PRESS START TO CONTINUE",
+    playerStats: "PLAYER_STATS",
+    achievements: "ACHIEVEMENTS",
+    memoryDump: "MEMORY_DUMP",
+    endTrans: "END OF TRANSMISSION",
+    annualReport: "ANNUAL REPORT",
+    keyPoints: "KEY POINTS",
+    endReport: "End Report",
+    collection: "The Collection",
+    moments: "MOMENTS",
+    seeYou: "See you next year...",
+    systemBoot: ":: SYSTEM_BOOT ::",
+    neuralStats: "Neural Net Stats",
+    coreMem: "Core Memory Units",
+    visualLogs: "VISUAL_LOGS",
+    endLine: "End of Line_",
+    keyFigures: "Key Figures",
+    fin: "Fin.",
+    someNumbers: "Some Numbers I Tracked",
+    bigMoments: "Big Moments!",
+    scrapbook: "Scrapbook",
+    recap: "Recap",
+    myStats: "My Stats",
+    wins: "WINS",
+    pics: "PICS",
+    aesthetics: "A E S T H E T I C S",
+    memoriesExe: "Memories.exe",
+    visuals: "V I S U A L S",
+    volume: "Volume",
+    indexRerum: "Index Rerum",
+    chronicles: "Chronicles",
+    plates: "Plates",
+    finis: "— Finis —",
+    wow: "WOW!",
+    pow: "POW!",
+    snap: "SNAP!",
+    fig: "FIG"
+  },
+  id: {
+    // UI
+    title: "GENERATOR REKAP",
+    subtitle: "Ubah tahunmu menjadi cerita visual.",
+    reset: "Reset Data",
+    chooseVibe: "6. Pilih Vibe",
+    scroll: "Geser",
+    coreInfo: "1. Info Utama",
+    year: "Tahun",
+    themeTitle: "Judul Tema",
+    metaSubtitle: "Subjudul / Metafora",
+    numbers: "2. Angka-Angka",
+    highlights: "3. Sorotan Utama",
+    highlightTitle: "Judul Sorotan",
+    desc: "Deskripsi",
+    gallery: "4. Galeri Foto",
+    change: "Ganti",
+    add: "Tambah",
+    summary: "5. Ringkasan",
+    autoGen: "Buat Otomatis",
+    privacyTitle: "Privasi Terjaga",
+    privacyText: "Kami tidak menyimpan data Anda. Semua teks dan foto tersimpan secara lokal di perangkat Anda.",
+    preview: "Pratinjau",
+    saveSlide: "Simpan Slide",
+    saving: "Menyimpan...",
+    exitScreenshot: "Keluar Mode Screenshot",
+    screenshotHint: "Gunakan Mode Screenshot untuk Berbagi",
+    madeBy: "Dibuat oleh @fadlyzaki",
+    // Themes
+    pressStart: "TEKAN MULAI UNTUK LANJUT",
+    playerStats: "STATISTIK_PEMAIN",
+    achievements: "PENCAPAIAN",
+    memoryDump: "MEMORI_DUMP",
+    endTrans: "TRANSMISI SELESAI",
+    annualReport: "LAPORAN TAHUNAN",
+    keyPoints: "POIN UTAMA",
+    endReport: "Laporan Selesai",
+    collection: "Koleksi",
+    moments: "MOMEN",
+    seeYou: "Sampai jumpa tahun depan...",
+    systemBoot: ":: SISTEM_MULAI ::",
+    neuralStats: "Statistik Neural",
+    coreMem: "Unit Memori Inti",
+    visualLogs: "LOG_VISUAL",
+    endLine: "Akhir Baris_",
+    keyFigures: "Angka Kunci",
+    fin: "Selesai.",
+    someNumbers: "Angka Yang Saya Lacak",
+    bigMoments: "Momen Besar!",
+    scrapbook: "Buku Kliping",
+    recap: "Rekap",
+    myStats: "Statistikku",
+    wins: "MENANG",
+    pics: "FOTO",
+    aesthetics: "E S T E T I K A",
+    memoriesExe: "Memori.exe",
+    visuals: "V I S U A L",
+    volume: "Jilid",
+    indexRerum: "Indeks",
+    chronicles: "Kronik",
+    plates: "Pelat",
+    finis: "— Tamat —",
+    wow: "WAH!",
+    pow: "DUAR!",
+    snap: "JEPRET!",
+    fig: "GBR"
+  }
+};
 
 // --- Theme Definitions (24 VIBES) ---
 const THEMES = [
@@ -158,22 +309,22 @@ const THEMES = [
   { id: 'pop', name: 'Pop Art', vibe: 'Comic, Halftone', color: 'bg-cyan-400' }
 ];
 
-// --- Initial Data ---
+// --- Initial Data (INDONESIAN DEFAULT) ---
 const INITIAL_DATA = {
   year: '2025',
-  title: 'The Year of Growth',
-  subtitle: 'Building Foundations',
-  summary: "A year defined not by the destination, but by the journey. Small steps, consistent effort, and a few surprises along the way.",
+  title: 'Tahun Bertumbuh',
+  subtitle: 'Membangun Pondasi',
+  summary: "Tahun yang didefinisikan bukan oleh tujuan, tapi perjalanannya. Langkah kecil, usaha konsisten, dan kejutan di sepanjang jalan.",
   stats: [
-    { id: 1, label: 'Books Read', value: '12', icon: 'book' },
-    { id: 2, label: 'Streak Days', value: '365', icon: 'duolingo' },
-    { id: 3, label: 'km Run', value: '150', icon: 'strava_run' },
-    { id: 4, label: 'Commits', value: '840', icon: 'git' }
+    { id: 1, label: 'Buku Tamat', value: '12', icon: 'book' },
+    { id: 2, label: 'Hari Streak', value: '365', icon: 'duolingo' },
+    { id: 3, label: 'km Lari', value: '150', icon: 'strava_run' },
+    { id: 4, label: 'Total Commit', value: '840', icon: 'git' }
   ],
   highlights: [
-    { id: 1, title: 'Career Milestone', desc: 'Started a new role and shipped my first major project.' },
-    { id: 2, title: 'Travel Goal', desc: 'Finally visited Japan during cherry blossom season.' },
-    { id: 3, title: 'New Hobby', desc: 'Learned photography and actually used manual mode.' }
+    { id: 1, title: 'Karir Baru', desc: 'Memulai peran baru dan menyelesaikan proyek besar pertama.' },
+    { id: 2, title: 'Liburan Impian', desc: 'Akhirnya mengunjungi Jepang saat musim sakura.' },
+    { id: 3, title: 'Hobi Baru', desc: 'Belajar fotografi dan akhirnya paham mode manual.' }
   ],
   photos: [
     { id: 1, url: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=500', caption: 'Big Wins' },
@@ -185,7 +336,7 @@ const INITIAL_DATA = {
 // --- RENDERERS ---
 
 // 1. RETRO RENDERER
-const RenderRetro = ({ slide, data, themeId }) => {
+const RenderRetro = ({ slide, data, themeId, t }) => {
   const isTerminal = themeId === 'terminal';
   const isGlitch = themeId === 'glitch';
 
@@ -207,7 +358,7 @@ const RenderRetro = ({ slide, data, themeId }) => {
   }
 
   const borderStyle = `border-4 ${borderColor} ${bgColor} ${textColor} shadow-[8px_8px_0px_0px_rgba(0,0,0,0.2)]`;
-  const watermark = <div className={`absolute bottom-1 left-1/2 -translate-x-1/2 text-[6px] font-mono uppercase ${watermarkColor} z-20 pointer-events-none`}>Made by @fadlyzaki</div>;
+  const watermark = <div className={`absolute bottom-1 left-1/2 -translate-x-1/2 text-[6px] font-mono uppercase ${watermarkColor} z-20 pointer-events-none`}>{t.madeBy}</div>;
   
   if (slide === 0) return (
       <div className={`h-full ${bgColor} p-6 font-mono flex flex-col justify-between relative overflow-hidden select-none`}>
@@ -221,7 +372,7 @@ const RenderRetro = ({ slide, data, themeId }) => {
         <div className={`flex-1 flex items-center justify-center ${textColor}`}>
              <div className={`text-sm ${isTerminal ? 'bg-green-900/20' : 'bg-black/5'} p-4 font-bold w-full`}>{`> ${data.subtitle}`}<span className="animate-pulse">_</span></div>
         </div>
-        <div className={`text-[10px] uppercase text-center mt-4 ${textColor}`}>PRESS START TO CONTINUE</div>
+        <div className={`text-[10px] uppercase text-center mt-4 ${textColor}`}>{t.pressStart}</div>
         {watermark}
       </div>
   );
@@ -229,7 +380,7 @@ const RenderRetro = ({ slide, data, themeId }) => {
   if (slide === 1) return (
       <div className={`h-full ${bgColor} p-6 font-mono flex flex-col relative overflow-hidden select-none`}>
          <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%)] z-10 bg-[length:100%_4px]"></div>
-        <h3 className={`text-xl font-black uppercase mb-6 ${isTerminal ? 'bg-green-900 text-green-100' : isGlitch ? 'bg-red-900 text-red-100' : 'bg-emerald-900 text-emerald-100'} inline-block px-2 py-1 self-start`}>PLAYER_STATS</h3>
+        <h3 className={`text-xl font-black uppercase mb-6 ${isTerminal ? 'bg-green-900 text-green-100' : isGlitch ? 'bg-red-900 text-red-100' : 'bg-emerald-900 text-emerald-100'} inline-block px-2 py-1 self-start`}>{t.playerStats}</h3>
         <div className="grid grid-cols-2 gap-4">
           {data.stats.map(stat => (
             <div key={stat.id} className={`${borderStyle} p-3 flex flex-col items-center justify-center aspect-square`}>
@@ -246,7 +397,7 @@ const RenderRetro = ({ slide, data, themeId }) => {
   if (slide === 2) return (
       <div className={`h-full ${bgColor} p-6 font-mono relative overflow-hidden select-none`}>
          <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%)] z-10 bg-[length:100%_4px]"></div>
-        <h3 className={`text-xl font-black uppercase mb-6 border-b-4 ${borderColor} pb-2 ${textColor}`}>ACHIEVEMENTS</h3>
+        <h3 className={`text-xl font-black uppercase mb-6 border-b-4 ${borderColor} pb-2 ${textColor}`}>{t.achievements}</h3>
         <div className="space-y-4">
           {data.highlights.map((h, i) => (
              <div key={h.id} className={`${borderStyle} p-3 relative`}>
@@ -269,9 +420,8 @@ const RenderRetro = ({ slide, data, themeId }) => {
     return (
       <div className={`h-full ${bgColor} p-4 font-mono relative overflow-hidden select-none flex flex-col`}>
          <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%)] z-10 bg-[length:100%_4px]"></div>
-         <h3 className={`text-xl font-black uppercase mb-4 ${isTerminal ? 'bg-green-900 text-green-100' : 'bg-emerald-900 text-emerald-100'} inline-block px-2 py-1 self-start`}>MEMORY_DUMP</h3>
+         <h3 className={`text-xl font-black uppercase mb-4 ${isTerminal ? 'bg-green-900 text-green-100' : 'bg-emerald-900 text-emerald-100'} inline-block px-2 py-1 self-start`}>{t.memoryDump}</h3>
          
-         {/* Added min-h-0 to prevent overflow in flex container */}
          <div className={`grid gap-2 flex-1 w-full ${gridClass} min-h-0`}>
             {data.photos.map((photo, i) => (
               <div 
@@ -295,14 +445,14 @@ const RenderRetro = ({ slide, data, themeId }) => {
        <div className={`border-2 ${isTerminal ? 'border-green-100 bg-green-800' : isGlitch ? 'border-red-500 bg-red-950' : 'border-emerald-100 bg-emerald-800'} p-4 shadow-[8px_8px_0px_0px_rgba(255,255,255,0.2)]`}>
           <p className="text-lg font-bold leading-relaxed">"{data.summary}"</p>
        </div>
-       <div className="mt-8 text-xs animate-pulse">END OF TRANSMISSION</div>
-       <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-mono uppercase ${isTerminal ? 'text-green-400/30' : 'text-emerald-500/30'} z-20 pointer-events-none`}>Made by @fadlyzaki</div>
+       <div className="mt-8 text-xs animate-pulse">{t.endTrans}</div>
+       <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-mono uppercase ${isTerminal ? 'text-green-400/30' : 'text-emerald-500/30'} z-20 pointer-events-none`}>{t.madeBy}</div>
     </div>
   );
 };
 
 // 2. SWISS RENDERER
-const RenderSwiss = ({ slide, data, themeId }) => {
+const RenderSwiss = ({ slide, data, themeId, t }) => {
   const isMono = themeId === 'monochrome';
   const isY2k = themeId === 'y2k';
 
@@ -311,8 +461,8 @@ const RenderSwiss = ({ slide, data, themeId }) => {
   let borderClass = isMono ? 'border-white' : isY2k ? 'border-blue-900' : 'border-black';
   let cardBg = isMono ? 'bg-stone-900' : 'bg-white';
 
-  const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-bold uppercase tracking-widest ${isMono ? 'text-white/30' : 'text-black/20'} z-20 pointer-events-none`}>Made by @fadlyzaki</div>;
-  const darkWatermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-bold uppercase tracking-widest ${isMono ? 'text-black/20' : 'text-white/20'} z-20 pointer-events-none`}>Made by @fadlyzaki</div>;
+  const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-bold uppercase tracking-widest ${isMono ? 'text-white/30' : 'text-black/20'} z-20 pointer-events-none`}>{t.madeBy}</div>;
+  const darkWatermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-bold uppercase tracking-widest ${isMono ? 'text-black/20' : 'text-white/20'} z-20 pointer-events-none`}>{t.madeBy}</div>;
 
   if (slide === 0) return (
       <div className={`h-full ${bgClass} p-4 font-sans flex flex-col relative select-none`}>
@@ -323,14 +473,14 @@ const RenderSwiss = ({ slide, data, themeId }) => {
           <h2 className="text-3xl font-bold uppercase leading-none tracking-tight">{data.title}</h2>
           <p className="mt-2 text-sm font-medium opacity-60">{data.subtitle}</p>
         </div>
-        <div className="absolute bottom-4 right-4 text-xs font-bold transform -rotate-90 origin-bottom-right">ANNUAL REPORT / {data.year}</div>
+        <div className="absolute bottom-4 right-4 text-xs font-bold transform -rotate-90 origin-bottom-right">{t.annualReport} / {data.year}</div>
         {watermark}
       </div>
   );
 
   if (slide === 1) return (
       <div className={`h-full ${isMono ? 'bg-white text-black' : isY2k ? 'bg-blue-900 text-white' : 'bg-[#1a1a1a] text-[#f2f2f2]'} p-6 font-sans flex flex-col select-none`}>
-        <h3 className={`text-4xl font-black mb-8 border-b-2 ${isMono ? 'border-black' : isY2k ? 'border-pink-500' : 'border-red-600'} pb-2`}>DATA.</h3>
+        <h3 className={`text-4xl font-black mb-8 border-b-2 ${isMono ? 'border-black' : isY2k ? 'border-pink-500' : 'border-red-600'} pb-2`}>{t.keyPoints}</h3>
         <div className="space-y-6">
           {data.stats.map((stat, idx) => (
             <div key={stat.id} className="flex items-baseline justify-between group">
@@ -346,7 +496,7 @@ const RenderSwiss = ({ slide, data, themeId }) => {
   if (slide === 2) return (
       <div className={`h-full ${bgClass} font-sans flex flex-col select-none`}>
          <div className={`${isMono ? 'bg-gray-800' : isY2k ? 'bg-pink-500' : 'bg-red-600'} text-white p-6 pb-12 rounded-bl-[4rem]`}>
-           <h3 className="text-4xl font-black leading-none">KEY<br/>POINTS.</h3>
+           <h3 className="text-4xl font-black leading-none">{t.keyPoints}</h3>
          </div>
          <div className="flex-1 p-6 -mt-8 space-y-4">
            {data.highlights.map((h, i) => (
@@ -378,7 +528,7 @@ const RenderSwiss = ({ slide, data, themeId }) => {
               className={`overflow-hidden border ${isMono ? 'border-black' : 'border-white'} relative group ${photoCount === 3 && i === 0 ? 'row-span-2' : ''} ${i % 2 === 0 ? 'bg-black' : 'bg-gray-500'}`}
              >
                 <img src={photo.url} alt="" className={`w-full h-full object-cover filter ${isMono ? 'grayscale contrast-125' : ''} hover:grayscale-0 transition-all duration-500 opacity-90`} />
-                <div className="absolute top-2 left-2 bg-white text-black text-[10px] font-bold px-2 py-1">FIG. {String.fromCharCode(65+i)}</div>
+                <div className="absolute top-2 left-2 bg-white text-black text-[10px] font-bold px-2 py-1">{t.fig}. {String.fromCharCode(65+i)}</div>
              </div>
            ))}
          </div>
@@ -394,14 +544,14 @@ const RenderSwiss = ({ slide, data, themeId }) => {
        <div className={`z-10 ${isMono ? 'bg-white text-black' : 'bg-[#1a1a1a] text-white'} p-6 transform -rotate-2 shadow-2xl`}>
          <p className="text-2xl font-black uppercase leading-tight italic">"{data.summary}"</p>
        </div>
-       <div className={`z-10 mt-8 ${isMono ? 'bg-black' : isY2k ? 'bg-pink-500' : 'bg-red-600'} text-white px-4 py-1 text-sm font-bold uppercase tracking-widest`}>End Report</div>
+       <div className={`z-10 mt-8 ${isMono ? 'bg-black' : isY2k ? 'bg-pink-500' : 'bg-red-600'} text-white px-4 py-1 text-sm font-bold uppercase tracking-widest`}>{t.endReport}</div>
        {watermark}
     </div>
   );
 };
 
 // 3. LO-FI RENDERER
-const RenderLoFi = ({ slide, data, themeId }) => {
+const RenderLoFi = ({ slide, data, themeId, t }) => {
   const isBotanical = themeId === 'botanical';
   const isBoho = themeId === 'boho';
   
@@ -422,14 +572,14 @@ const RenderLoFi = ({ slide, data, themeId }) => {
     accentColor = "text-orange-600";
   }
 
-  const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-handwriting ${secondaryColor} mix-blend-multiply z-20 pointer-events-none`}>Made by @fadlyzaki</div>;
+  const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-handwriting ${secondaryColor} mix-blend-multiply z-20 pointer-events-none`}>{t.madeBy}</div>;
   
   if (slide === 0) return (
       <div className={`h-full ${paperTexture} p-6 font-serif flex flex-col justify-center items-center relative ${textColor} select-none`}>
         <div className={`${tapeStyle} -top-2 left-1/3 -rotate-3 ${isBotanical ? 'bg-green-200/80' : ''}`}></div>
         <div className={`${tapeStyle} bottom-10 right-10 bg-pink-200/80 rotate-12`}></div>
         <div className="border border-stone-300 bg-white p-6 shadow-md rotate-2 mb-8 w-full aspect-[4/3] flex flex-col items-center justify-center">
-          <div className={`text-sm font-sans ${secondaryColor} mb-2 uppercase tracking-widest`}>Year In Review</div>
+          <div className={`text-sm font-sans ${secondaryColor} mb-2 uppercase tracking-widest`}>{t.recap}</div>
           <h1 className="text-6xl italic font-black mb-1">{data.year}</h1>
           <div className={`w-12 h-1 ${isBotanical ? 'bg-green-800' : 'bg-stone-800'} rounded-full`}></div>
         </div>
@@ -444,7 +594,7 @@ const RenderLoFi = ({ slide, data, themeId }) => {
   if (slide === 1) return (
       <div className={`h-full ${paperTexture} p-6 font-serif flex flex-col relative select-none`}>
         <div className="text-center mb-8 relative inline-block self-center">
-           <span className="relative z-10 text-2xl font-bold italic bg-white/50 px-4 py-1 transform -rotate-1 inline-block border border-stone-200 shadow-sm">The Collection</span>
+           <span className="relative z-10 text-2xl font-bold italic bg-white/50 px-4 py-1 transform -rotate-1 inline-block border border-stone-200 shadow-sm">{t.collection}</span>
         </div>
         <div className="grid grid-cols-2 gap-4">
           {data.stats.map((stat, idx) => (
@@ -462,7 +612,7 @@ const RenderLoFi = ({ slide, data, themeId }) => {
 
   if (slide === 2) return (
       <div className={`h-full ${paperTexture} p-6 font-serif relative overflow-hidden select-none`}>
-         <h3 className={`text-5xl font-sans font-black ${isBotanical ? 'text-green-100' : 'text-stone-200'} absolute -right-4 top-10 rotate-90 z-0 select-none`}>MOMENTS</h3>
+         <h3 className={`text-5xl font-sans font-black ${isBotanical ? 'text-green-100' : 'text-stone-200'} absolute -right-4 top-10 rotate-90 z-0 select-none`}>{t.moments}</h3>
          <div className="relative z-10 space-y-6 mt-4">
            {data.highlights.map((h, i) => (
              <div key={h.id} className={`bg-white p-4 shadow-sm border border-stone-200 ${i % 2 === 0 ? 'rotate-1' : '-rotate-1'}`}>
@@ -513,14 +663,14 @@ const RenderLoFi = ({ slide, data, themeId }) => {
            <Star className="w-4 h-4 fill-current" /><Star className="w-4 h-4 fill-current" /><Star className="w-4 h-4 fill-current" />
          </div>
       </div>
-      <div className={`mt-12 font-handwriting ${secondaryColor} transform -rotate-6`}>See you next year...</div>
+      <div className={`mt-12 font-handwriting ${secondaryColor} transform -rotate-6`}>{t.seeYou}</div>
       {watermark}
     </div>
   );
 };
 
 // 4. CYBERPUNK NEON RENDERER
-const RenderNeon = ({ slide, data, themeId }) => {
+const RenderNeon = ({ slide, data, themeId, t }) => {
   const isMidnight = themeId === 'midnight';
   
   const bgStyle = isMidnight ? "bg-indigo-950" : "bg-slate-950";
@@ -529,13 +679,13 @@ const RenderNeon = ({ slide, data, themeId }) => {
   const borderStyle = `border-2 ${isMidnight ? 'border-purple-500/50 shadow-[0_0_10px_rgba(168,85,247,0.3)]' : 'border-cyan-500/50 shadow-[0_0_10px_rgba(0,255,255,0.3)]'} bg-slate-900/50 backdrop-blur-md`;
   const glowText = isMidnight ? "drop-shadow-[0_0_5px_rgba(168,85,247,0.7)]" : "drop-shadow-[0_0_5px_rgba(0,255,255,0.7)]";
   const glowTextSecondary = isMidnight ? "drop-shadow-[0_0_5px_rgba(147,197,253,0.7)]" : "drop-shadow-[0_0_5px_rgba(217,70,239,0.7)]";
-  const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] uppercase tracking-[0.2em] ${textPrimary} z-20 pointer-events-none font-bold`}>Made by @fadlyzaki</div>;
+  const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] uppercase tracking-[0.2em] ${textPrimary} z-20 pointer-events-none font-bold`}>{t.madeBy}</div>;
 
   if (slide === 0) return (
       <div className={`h-full ${bgStyle} p-6 font-sans flex flex-col justify-center items-center relative overflow-hidden select-none`}>
         <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[length:20px_20px]"></div>
         <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_70%)]"></div>
-        <div className={`text-sm font-bold uppercase tracking-[0.2em] ${textSecondary} mb-4 animate-pulse ${glowTextSecondary}`}>:: SYSTEM_BOOT :: v.2025.1</div>
+        <div className={`text-sm font-bold uppercase tracking-[0.2em] ${textSecondary} mb-4 animate-pulse ${glowTextSecondary}`}>{t.systemBoot}</div>
         <h1 className={`text-7xl font-black tracking-tighter leading-none mb-2 ${textPrimary} ${glowText}`}>{data.year}</h1>
         <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-fuchsia-500 rounded-full mb-6 shadow-[0_0_10px_rgba(0,255,255,0.5)]"></div>
         <h2 className={`text-2xl font-bold uppercase tracking-tight text-white mb-2 ${glowText}`}>{data.title}</h2>
@@ -552,7 +702,7 @@ const RenderNeon = ({ slide, data, themeId }) => {
   if (slide === 1) return (
       <div className={`h-full ${bgStyle} p-6 font-sans flex flex-col relative overflow-hidden select-none`}>
         <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[length:20px_20px]"></div>
-        <h3 className={`text-xl font-bold uppercase mb-8 ${textSecondary} flex items-center gap-2 ${glowTextSecondary}`}><Activity className="w-5 h-5 animate-pulse" /> Neural Net Stats</h3>
+        <h3 className={`text-xl font-bold uppercase mb-8 ${textSecondary} flex items-center gap-2 ${glowTextSecondary}`}><Activity className="w-5 h-5 animate-pulse" /> {t.neuralStats}</h3>
         <div className="grid grid-cols-2 gap-4 z-10">
           {data.stats.map((stat, idx) => (
             <div key={stat.id} className={`${borderStyle} p-4 flex flex-col items-center justify-center aspect-square rounded-lg relative overflow-hidden group`}>
@@ -570,7 +720,7 @@ const RenderNeon = ({ slide, data, themeId }) => {
   if (slide === 2) return (
       <div className={`h-full ${bgStyle} p-6 font-sans relative overflow-hidden flex flex-col`}>
          <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[length:20px_20px]"></div>
-         <h3 className={`text-xl font-bold uppercase mb-8 ${textPrimary} ${glowText} flex items-center gap-2`}><Zap className="w-5 h-5" /> Core Memory Units</h3>
+         <h3 className={`text-xl font-bold uppercase mb-8 ${textPrimary} ${glowText} flex items-center gap-2`}><Zap className="w-5 h-5" /> {t.coreMem}</h3>
          <div className="flex-1 space-y-6 z-10">
            {data.highlights.map((h, i) => (
              <div key={h.id} className={`${borderStyle} p-4 rounded-lg relative`}>
@@ -595,10 +745,10 @@ const RenderNeon = ({ slide, data, themeId }) => {
          <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[length:20px_20px]"></div>
          <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_50%,rgba(0,255,255,0.1),transparent_60%)]"></div>
          <h3 className={`text-xl font-bold uppercase mb-8 ${textSecondary} ${glowTextSecondary} flex items-center gap-2`}>
-           <Camera className="w-5 h-5" /> VISUAL_LOGS
+           <Camera className="w-5 h-5" /> {t.visualLogs}
          </h3>
          
-         <div className={`grid gap-4 h-full pb-8 w-full ${gridClass}`}>
+         <div className={`grid gap-2 flex-1 w-full ${gridClass} min-h-0`}>
            {data.photos.map((photo, i) => (
               <div 
                 key={photo.id} 
@@ -622,14 +772,14 @@ const RenderNeon = ({ slide, data, themeId }) => {
          <Terminal className={`w-8 h-8 mb-4 mx-auto ${textPrimary} ${glowText}`} />
          <p className={`text-xl font-bold leading-relaxed text-white italic ${glowText}`}>"{data.summary}"</p>
        </div>
-       <div className={`mt-8 text-xs font-bold uppercase tracking-[0.2em] ${textSecondary} animate-pulse ${glowTextSecondary}`}>End of Line_</div>
+       <div className={`mt-8 text-xs font-bold uppercase tracking-[0.2em] ${textSecondary} animate-pulse ${glowTextSecondary}`}>{t.endLine}</div>
        {watermark}
     </div>
   );
 };
 
 // 5. MODERN MINIMALIST RENDERER
-const RenderMinimal = ({ slide, data, themeId }) => {
+const RenderMinimal = ({ slide, data, themeId, t }) => {
   const isCorporate = themeId === 'corporate';
   const isWarm = themeId === 'warm';
 
@@ -647,11 +797,11 @@ const RenderMinimal = ({ slide, data, themeId }) => {
     textSecondary = "text-[#8a7e68]";
   }
 
-  const watermark = <div className={`absolute bottom-4 left-1/2 -translate-x-1/2 text-[6px] uppercase tracking-[0.2em] ${textSecondary} opacity-50 z-20 pointer-events-none`}>Made by @fadlyzaki</div>;
+  const watermark = <div className={`absolute bottom-4 left-1/2 -translate-x-1/2 text-[6px] uppercase tracking-[0.2em] ${textSecondary} opacity-50 z-20 pointer-events-none`}>{t.madeBy}</div>;
 
   if (slide === 0) return (
       <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col justify-center items-center text-center relative select-none`}>
-        <div className={`absolute top-8 font-sans text-xs font-bold uppercase tracking-[0.2em] ${textSecondary}`}>The Annual Review</div>
+        <div className={`absolute top-8 font-sans text-xs font-bold uppercase tracking-[0.2em] ${textSecondary}`}>{t.annualReport}</div>
         <h1 className={`text-8xl font-light tracking-tight leading-none mb-4 ${textPrimary}`}>{data.year}</h1>
         <div className={`w-16 h-px ${isCorporate ? 'bg-blue-300' : 'bg-stone-300'} mb-8`}></div>
         <h2 className={`text-2xl font-normal uppercase tracking-widest ${textPrimary} mb-2`}>{data.title}</h2>
@@ -662,7 +812,7 @@ const RenderMinimal = ({ slide, data, themeId }) => {
 
   if (slide === 1) return (
       <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col select-none`}>
-        <h3 className={`text-xl font-normal uppercase tracking-widest text-center mb-12 ${textPrimary}`}>Key Figures</h3>
+        <h3 className={`text-xl font-normal uppercase tracking-widest text-center mb-12 ${textPrimary}`}>{t.keyFigures}</h3>
         <div className={`grid grid-cols-2 gap-px ${isCorporate ? 'bg-blue-200 border-blue-200' : 'bg-stone-200 border-stone-200'} border`}>
           {data.stats.map((stat, idx) => (
             <div key={stat.id} className={`bg-white p-6 flex flex-col items-center justify-center aspect-square`}>
@@ -677,7 +827,7 @@ const RenderMinimal = ({ slide, data, themeId }) => {
 
   if (slide === 2) return (
       <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col select-none`}>
-         <h3 className={`text-xl font-normal uppercase tracking-widest text-center mb-12 ${textPrimary}`}>Highlights</h3>
+         <h3 className={`text-xl font-normal uppercase tracking-widest text-center mb-12 ${textPrimary}`}>{t.highlights}</h3>
          <div className="flex-1 space-y-8">
            {data.highlights.map((h, i) => (
              <div key={h.id} className="text-center">
@@ -699,7 +849,7 @@ const RenderMinimal = ({ slide, data, themeId }) => {
 
     return (
       <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col select-none`}>
-         <h3 className={`text-xl font-normal uppercase tracking-widest text-center mb-8 ${textPrimary}`}>Gallery</h3>
+         <h3 className={`text-xl font-normal uppercase tracking-widest text-center mb-8 ${textPrimary}`}>{t.gallery}</h3>
          <div className={`grid gap-2 h-full pb-8 w-full ${gridClass}`}>
            {data.photos.map((photo, i) => (
               <div 
@@ -720,14 +870,14 @@ const RenderMinimal = ({ slide, data, themeId }) => {
        <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-px h-20 ${isCorporate ? 'bg-blue-300' : 'bg-stone-300'}`}></div>
        <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-20 ${isCorporate ? 'bg-blue-300' : 'bg-stone-300'}`}></div>
        <p className={`text-2xl leading-relaxed font-light italic ${textPrimary} mb-8`}>"{data.summary}"</p>
-       <div className={`font-sans text-xs font-bold uppercase tracking-[0.2em] ${textSecondary}`}>Fin.</div>
+       <div className={`font-sans text-xs font-bold uppercase tracking-[0.2em] ${textSecondary}`}>{t.fin}</div>
        {watermark}
     </div>
   );
 };
 
 // 7. GLASSMORPHISM RENDERER (Handles: Glass, Pastel, Gradient)
-const RenderGlass = ({ slide, data, themeId }) => {
+const RenderGlass = ({ slide, data, themeId, t }) => {
   const isPastel = themeId === 'pastel';
   const isGradient = themeId === 'gradient';
 
@@ -744,7 +894,7 @@ const RenderGlass = ({ slide, data, themeId }) => {
     cardStyle = "backdrop-blur-2xl bg-black/10 border border-white/20 shadow-2xl text-white";
   }
 
-  const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-medium uppercase tracking-widest ${textColor} opacity-50 z-20 pointer-events-none`}>Made by @fadlyzaki</div>;
+  const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-medium uppercase tracking-widest ${textColor} opacity-50 z-20 pointer-events-none`}>{t.madeBy}</div>;
 
   if (slide === 0) return (
     <div className={`h-full ${bgStyle} p-8 font-sans flex flex-col justify-center items-center text-center relative select-none overflow-hidden`}>
@@ -752,7 +902,7 @@ const RenderGlass = ({ slide, data, themeId }) => {
       <div className="absolute bottom-[-20%] right-[-20%] w-[300px] h-[300px] bg-yellow-400 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-2000"></div>
       
       <div className={`${cardStyle} p-8 rounded-3xl w-full flex flex-col items-center gap-4`}>
-        <div className={`text-xs font-bold uppercase tracking-[0.3em] ${textColor} opacity-70`}>Recap</div>
+        <div className={`text-xs font-bold uppercase tracking-[0.3em] ${textColor} opacity-70`}>{t.recap}</div>
         <h1 className="text-7xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">{data.year}</h1>
         <div className="w-12 h-1 bg-white/50 rounded-full"></div>
         <h2 className="text-2xl font-bold">{data.title}</h2>
@@ -765,7 +915,7 @@ const RenderGlass = ({ slide, data, themeId }) => {
   if (slide === 1) return (
     <div className={`h-full ${bgStyle} p-6 font-sans flex flex-col relative select-none overflow-hidden`}>
       <div className="absolute top-[20%] right-[-10%] w-[200px] h-[200px] bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
-      <h3 className={`text-2xl font-bold ${textColor} mb-8 drop-shadow-md`}>My Stats</h3>
+      <h3 className={`text-2xl font-bold ${textColor} mb-8 drop-shadow-md`}>{t.myStats}</h3>
       <div className="grid grid-cols-2 gap-4 relative z-10">
         {data.stats.map(stat => (
           <div key={stat.id} className={`${cardStyle} p-4 rounded-2xl flex flex-col items-center justify-center aspect-square`}>
@@ -781,7 +931,7 @@ const RenderGlass = ({ slide, data, themeId }) => {
 
   if (slide === 2) return (
     <div className={`h-full ${bgStyle} p-6 font-sans relative select-none overflow-hidden`}>
-      <h3 className={`text-2xl font-bold ${textColor} mb-8 drop-shadow-md`}>Highlights</h3>
+      <h3 className={`text-2xl font-bold ${textColor} mb-8 drop-shadow-md`}>{t.highlights}</h3>
       <div className="space-y-4 relative z-10">
         {data.highlights.map((h, i) => (
           <div key={h.id} className={`${cardStyle} p-5 rounded-2xl`}>
@@ -802,7 +952,7 @@ const RenderGlass = ({ slide, data, themeId }) => {
 
     return (
       <div className={`h-full ${bgStyle} p-6 font-sans flex flex-col relative select-none overflow-hidden`}>
-        <h3 className={`text-2xl font-bold ${textColor} mb-6 drop-shadow-md`}>Gallery</h3>
+        <h3 className={`text-2xl font-bold ${textColor} mb-6 drop-shadow-md`}>{t.gallery}</h3>
         <div className={`grid gap-3 flex-1 w-full ${gridClass}`}>
           {data.photos.map((photo, i) => (
             <div 
@@ -829,7 +979,7 @@ const RenderGlass = ({ slide, data, themeId }) => {
 };
 
 // 8. NEO-BRUTALISM RENDERER (Handles: Brutal, Bauhaus)
-const RenderBrutal = ({ slide, data, themeId }) => {
+const RenderBrutal = ({ slide, data, themeId, t }) => {
   const isBauhaus = themeId === 'bauhaus';
   const bgStyle = isBauhaus ? "bg-[#f0f0f0]" : "bg-[#FFFDF5]";
   const cardStyle = isBauhaus ? "bg-white border-4 border-blue-600 shadow-[6px_6px_0px_0px_rgba(220,38,38,1)]" : "bg-white border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]";
@@ -837,7 +987,7 @@ const RenderBrutal = ({ slide, data, themeId }) => {
   const accent1 = isBauhaus ? "bg-yellow-400" : "bg-yellow-400";
   const accent2 = isBauhaus ? "bg-red-600" : "bg-purple-400";
   
-  const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-black uppercase tracking-tighter ${isBauhaus ? 'bg-blue-600 text-white' : 'bg-black text-white'} px-2 py-1 transform -rotate-2 z-20 pointer-events-none`}>Made by @fadlyzaki</div>;
+  const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-black uppercase tracking-tighter ${isBauhaus ? 'bg-blue-600 text-white' : 'bg-black text-white'} px-2 py-1 transform -rotate-2 z-20 pointer-events-none`}>{t.madeBy}</div>;
 
   if (slide === 0) return (
     <div className={`h-full ${bgStyle} p-6 font-sans flex flex-col justify-center items-center relative select-none`}>
@@ -855,7 +1005,7 @@ const RenderBrutal = ({ slide, data, themeId }) => {
 
   if (slide === 1) return (
     <div className={`h-full ${bgStyle} p-6 font-sans relative select-none`}>
-      <h3 className={`text-4xl font-black ${textPrimary} mb-8 underline decoration-wavy decoration-4 decoration-purple-500`}>STATS_</h3>
+      <h3 className={`text-4xl font-black ${textPrimary} mb-8 underline decoration-wavy decoration-4 decoration-purple-500`}>{t.myStats}_</h3>
       <div className="grid grid-cols-2 gap-6">
         {data.stats.map((stat, i) => (
           <div key={stat.id} className={`${cardStyle} p-4 flex flex-col items-center justify-center aspect-square hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all`}>
@@ -871,7 +1021,7 @@ const RenderBrutal = ({ slide, data, themeId }) => {
 
   if (slide === 2) return (
     <div className={`h-full ${bgStyle} p-6 font-sans relative select-none`}>
-      <h3 className={`text-4xl font-black ${textPrimary} mb-8 bg-green-400 border-4 border-black inline-block p-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`}>WINS</h3>
+      <h3 className={`text-4xl font-black ${textPrimary} mb-8 bg-green-400 border-4 border-black inline-block p-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`}>{t.wins}</h3>
       <div className="space-y-6">
         {data.highlights.map((h, i) => (
           <div key={h.id} className={`${cardStyle} p-4`}>
@@ -891,7 +1041,7 @@ const RenderBrutal = ({ slide, data, themeId }) => {
     if (photoCount >= 5) gridClass = 'grid-cols-2 grid-rows-3';
      return (
       <div className={`h-full ${bgStyle} p-6 font-sans relative select-none flex flex-col`}>
-        <h3 className={`text-4xl font-black ${textPrimary} mb-6 italic`}>PICS</h3>
+        <h3 className={`text-4xl font-black ${textPrimary} mb-6 italic`}>{t.pics}</h3>
         <div className={`grid gap-4 flex-1 w-full ${gridClass}`}>
           {data.photos.map((photo, i) => (
             <div key={photo.id} className={`${cardStyle} p-0 overflow-hidden relative ${photoCount === 3 && i === 0 ? 'row-span-2' : ''}`}>
@@ -915,11 +1065,11 @@ const RenderBrutal = ({ slide, data, themeId }) => {
 };
 
 // 9. VAPORWAVE RENDERER (Handles: Vapor, Synth)
-const RenderVapor = ({ slide, data, themeId }) => {
+const RenderVapor = ({ slide, data, themeId, t }) => {
   const isSynth = themeId === 'synth';
   const bgStyle = isSynth ? "bg-gradient-to-b from-orange-500 via-red-500 to-purple-900" : "bg-gradient-to-b from-fuchsia-900 to-purple-900";
   const gridStyle = "bg-[linear-gradient(rgba(0,255,255,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.2)_1px,transparent_1px)] bg-[length:40px_40px] perspective-[500px]";
-  const watermark = <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-mono text-cyan-400/50 z-20 pointer-events-none drop-shadow-[1px_1px_0px_rgba(255,0,255,0.5)]">Made by @fadlyzaki</div>;
+  const watermark = <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-mono text-cyan-400/50 z-20 pointer-events-none drop-shadow-[1px_1px_0px_rgba(255,0,255,0.5)]">{t.madeBy}</div>;
   
   if (slide === 0) return (
     <div className={`h-full ${bgStyle} p-6 font-sans flex flex-col justify-center items-center relative select-none overflow-hidden`}>
@@ -938,7 +1088,7 @@ const RenderVapor = ({ slide, data, themeId }) => {
   if (slide === 1) return (
     <div className={`h-full ${bgStyle} p-6 font-mono relative select-none overflow-hidden`}>
        <div className={`absolute inset-0 ${gridStyle} opacity-30`}></div>
-       <h3 className="text-2xl text-cyan-400 mb-6 relative z-10 italic">A E S T H E T I C S</h3>
+       <h3 className="text-2xl text-cyan-400 mb-6 relative z-10 italic">{t.aesthetics}</h3>
        <div className="grid grid-cols-2 gap-4 relative z-10">
          {data.stats.map(stat => (
            <div key={stat.id} className="bg-black/40 border border-pink-500 p-4 backdrop-blur-sm shadow-[4px_4px_0px_rgba(0,255,255,0.5)]">
@@ -955,7 +1105,7 @@ const RenderVapor = ({ slide, data, themeId }) => {
   if (slide === 2) return (
     <div className={`h-full ${bgStyle} p-6 font-mono relative select-none overflow-hidden`}>
        <div className={`absolute inset-0 ${gridStyle} opacity-30`}></div>
-       <h3 className="text-2xl text-pink-400 mb-6 relative z-10 uppercase">Memories.exe</h3>
+       <h3 className="text-2xl text-pink-400 mb-6 relative z-10 uppercase">{t.memoriesExe}</h3>
        <div className="space-y-4 relative z-10">
          {data.highlights.map(h => (
            <div key={h.id} className="bg-gradient-to-r from-cyan-900/80 to-purple-900/80 p-4 border-l-4 border-cyan-400">
@@ -970,7 +1120,7 @@ const RenderVapor = ({ slide, data, themeId }) => {
 
   if (slide === 3) return (
     <div className={`h-full ${bgStyle} p-6 font-mono relative select-none overflow-hidden flex flex-col`}>
-       <h3 className="text-2xl text-white mb-6 italic text-center drop-shadow-[2px_2px_0px_#ff00ff]">V I S U A L S</h3>
+       <h3 className="text-2xl text-white mb-6 italic text-center drop-shadow-[2px_2px_0px_#ff00ff]">{t.visuals}</h3>
        <div className={`grid gap-3 flex-1 w-full grid-cols-1 ${data.photos.length > 1 ? 'grid-rows-2' : ''}`}>
           {/* Simplified grid for Vaporwave to keep aesthetic simple/glitchy */}
           <div className="relative border-2 border-pink-500 p-1 shadow-[4px_4px_0px_cyan]">
@@ -997,13 +1147,13 @@ const RenderVapor = ({ slide, data, themeId }) => {
 };
 
 // 10. DARK ACADEMIA RENDERER
-const RenderAcademia = ({ slide, data }) => {
+const RenderAcademia = ({ slide, data, t }) => {
   const bgStyle = "bg-[#2c241b] text-[#e0d8c3]";
-  const watermark = <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-[6px] font-serif uppercase tracking-[0.2em] text-[#e0d8c3]/20 z-20 pointer-events-none">Made by @fadlyzaki</div>;
+  const watermark = <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-[6px] font-serif uppercase tracking-[0.2em] text-[#e0d8c3]/20 z-20 pointer-events-none">{t.madeBy}</div>;
 
   if (slide === 0) return (
     <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col justify-center items-center text-center relative select-none border-[12px] border-double border-[#5c4d3c]`}>
-      <div className="uppercase tracking-[0.3em] text-xs text-[#8a7e68] mb-4">Volume MMXXV</div>
+      <div className="uppercase tracking-[0.3em] text-xs text-[#8a7e68] mb-4">{t.volume} MMXXV</div>
       <h1 className="text-7xl font-bold text-[#d4af37] mb-2">{data.year}</h1>
       <div className="w-full h-px bg-[#5c4d3c] my-6"></div>
       <h2 className="text-3xl italic">{data.title}</h2>
@@ -1014,7 +1164,7 @@ const RenderAcademia = ({ slide, data }) => {
   
   if (slide === 1) return (
     <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col select-none`}>
-      <h3 className="text-2xl text-[#d4af37] border-b border-[#5c4d3c] pb-2 mb-8 italic">Index Rerum</h3>
+      <h3 className="text-2xl text-[#d4af37] border-b border-[#5c4d3c] pb-2 mb-8 italic">{t.indexRerum}</h3>
       <div className="space-y-6">
         {data.stats.map(stat => (
           <div key={stat.id} className="flex items-center justify-between">
@@ -1030,7 +1180,7 @@ const RenderAcademia = ({ slide, data }) => {
   // ... Keeping Academia minimal for brevity in this large file
   if (slide === 2) return (
     <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col select-none`}>
-      <h3 className="text-2xl text-[#d4af37] border-b border-[#5c4d3c] pb-2 mb-8 italic">Chronicles</h3>
+      <h3 className="text-2xl text-[#d4af37] border-b border-[#5c4d3c] pb-2 mb-8 italic">{t.chronicles}</h3>
       <div className="space-y-8">
         {data.highlights.map((h, i) => (
           <div key={h.id}>
@@ -1046,7 +1196,7 @@ const RenderAcademia = ({ slide, data }) => {
 
   if (slide === 3) return (
     <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col select-none`}>
-       <h3 className="text-2xl text-[#d4af37] mb-6 italic text-center">Plates</h3>
+       <h3 className="text-2xl text-[#d4af37] mb-6 italic text-center">{t.plates}</h3>
        <div className="grid grid-cols-1 gap-6 h-full pb-8">
           {data.photos.slice(0, 2).map((photo, i) => (
              <div key={photo.id} className="border-[8px] border-[#e0d8c3] shadow-xl overflow-hidden h-40">
@@ -1063,16 +1213,16 @@ const RenderAcademia = ({ slide, data }) => {
        <div className="italic text-xl text-[#d4af37] leading-loose">
          "{data.summary}"
        </div>
-       <div className="mt-8 text-xs text-[#8a7e68] uppercase tracking-widest">— Finis —</div>
+       <div className="mt-8 text-xs text-[#8a7e68] uppercase tracking-widest">{t.finis}</div>
        {watermark}
     </div>
   );
 };
 
 // 11. POP ART RENDERER
-const RenderPop = ({ slide, data }) => {
+const RenderPop = ({ slide, data, t }) => {
   const bgStyle = "bg-cyan-300";
-  const watermark = <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-black uppercase bg-white/50 text-black/50 px-1 z-20 pointer-events-none">Made by @fadlyzaki</div>;
+  const watermark = <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-black uppercase bg-white/50 text-black/50 px-1 z-20 pointer-events-none">{t.madeBy}</div>;
 
   if (slide === 0) return (
     <div className={`h-full ${bgStyle} p-6 font-sans flex flex-col justify-center items-center relative select-none overflow-hidden`}>
@@ -1091,7 +1241,7 @@ const RenderPop = ({ slide, data }) => {
   if (slide === 1) return (
     <div className={`h-full bg-yellow-300 p-6 font-sans relative select-none`}>
        <div className="absolute inset-0 bg-[radial-gradient(circle,black_1px,transparent_1px)] bg-[length:10px_10px] opacity-10"></div>
-       <h3 className="text-5xl font-black text-black mb-6 italic drop-shadow-[2px_2px_0px_white]">WOW!</h3>
+       <h3 className="text-5xl font-black text-black mb-6 italic drop-shadow-[2px_2px_0px_white]">{t.wow}</h3>
        <div className="grid grid-cols-2 gap-4 relative z-10">
          {data.stats.map(stat => (
            <div key={stat.id} className="bg-white border-4 border-black p-2 shadow-[4px_4px_0px_black] rounded-full aspect-square flex flex-col items-center justify-center">
@@ -1104,20 +1254,51 @@ const RenderPop = ({ slide, data }) => {
     </div>
   );
 
-  return <RenderRetro slide={slide} data={data} themeId='retro' />; // Fallback for brevity
+  if (slide === 2) return (
+    <div className={`h-full bg-cyan-300 p-6 font-sans relative select-none`}>
+       <div className="absolute inset-0 bg-[radial-gradient(circle,black_1px,transparent_1px)] bg-[length:10px_10px] opacity-10"></div>
+       <h3 className="text-5xl font-black text-black mb-6 italic drop-shadow-[2px_2px_0px_white]">{t.pow}</h3>
+       <div className="space-y-4 relative z-10">
+         {data.highlights.map(h => (
+           <div key={h.id} className="bg-white border-4 border-black p-4 shadow-[4px_4px_0px_black]">
+             <h4 className="text-xl font-black uppercase">{h.title}</h4>
+             <p className="text-sm font-bold">{h.desc}</p>
+           </div>
+         ))}
+       </div>
+       {watermark}
+    </div>
+  );
+
+  if (slide === 3) return (
+    <div className={`h-full bg-yellow-300 p-6 font-sans relative select-none`}>
+       <div className="absolute inset-0 bg-[radial-gradient(circle,black_1px,transparent_1px)] bg-[length:10px_10px] opacity-10"></div>
+       <h3 className="text-5xl font-black text-black mb-6 italic drop-shadow-[2px_2px_0px_white]">{t.snap}</h3>
+       <div className="grid grid-cols-1 gap-4 relative z-10">
+          {data.photos.map((photo, i) => (
+            <div key={photo.id} className="bg-white border-4 border-black p-2 shadow-[4px_4px_0px_black] h-40 overflow-hidden">
+              <img src={photo.url} alt="" className="w-full h-full object-cover grayscale contrast-125" />
+            </div>
+          ))}
+       </div>
+       {watermark}
+    </div>
+  );
+
+  return <RenderRetro slide={slide} data={data} themeId='retro' t={t} />; 
 };
 
 // 12. BLUEPRINT RENDERER
-const RenderBlueprint = ({ slide, data }) => {
+const RenderBlueprint = ({ slide, data, t }) => {
   const bgStyle = "bg-[#003399] text-white";
   const grid = "bg-[linear-gradient(rgba(255,255,255,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.2)_1px,transparent_1px)] bg-[length:20px_20px]";
-  const watermark = <div className="absolute bottom-2 right-2 text-[6px] font-mono border border-white/50 px-2 py-0.5 z-20 pointer-events-none bg-[#003399]/50 text-white/50">DWG: Made by @fadlyzaki</div>;
+  const watermark = <div className="absolute bottom-2 right-2 text-[6px] font-mono border border-white/50 px-2 py-0.5 z-20 pointer-events-none bg-[#003399]/50 text-white/50">DWG: {t.madeBy}</div>;
 
   if (slide === 0) return (
     <div className={`h-full ${bgStyle} p-8 font-mono flex flex-col justify-center relative select-none`}>
       <div className={`absolute inset-0 ${grid}`}></div>
       <div className="border-4 border-white p-6 relative z-10">
-        <div className="absolute top-0 left-0 bg-white text-[#003399] px-2 text-xs font-bold">FIG 1.0</div>
+        <div className="absolute top-0 left-0 bg-white text-[#003399] px-2 text-xs font-bold">{t.fig} 1.0</div>
         <h1 className="text-6xl font-bold mb-4">{data.year}</h1>
         <h2 className="text-xl border-t border-white pt-2">{data.title}</h2>
         <div className="absolute bottom-0 right-0 w-8 h-8 border-t border-l border-white"></div>
@@ -1126,7 +1307,61 @@ const RenderBlueprint = ({ slide, data }) => {
     </div>
   );
 
-  return <RenderRetro slide={slide} data={data} themeId='retro' />; // Fallback
+  if (slide === 1) return (
+    <div className={`h-full ${bgStyle} p-8 font-mono flex flex-col relative select-none`}>
+      <div className={`absolute inset-0 ${grid}`}></div>
+      <div className="border-4 border-white p-6 relative z-10 h-full">
+        <div className="absolute top-0 left-0 bg-white text-[#003399] px-2 text-xs font-bold">{t.fig} 1.1 - {t.playerStats}</div>
+        <div className="grid grid-cols-2 gap-4 mt-8">
+          {data.stats.map(stat => (
+            <div key={stat.id} className="border border-white p-2 text-center">
+              <div className="text-2xl font-bold">{stat.value}</div>
+              <div className="text-[10px] uppercase">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      {watermark}
+    </div>
+  );
+
+  if (slide === 2) return (
+    <div className={`h-full ${bgStyle} p-8 font-mono flex flex-col relative select-none`}>
+      <div className={`absolute inset-0 ${grid}`}></div>
+      <div className="border-4 border-white p-6 relative z-10 h-full">
+        <div className="absolute top-0 left-0 bg-white text-[#003399] px-2 text-xs font-bold">{t.fig} 1.2 - {t.highlights}</div>
+        <div className="space-y-4 mt-8">
+          {data.highlights.map((h, i) => (
+            <div key={h.id} className="border-b border-white pb-2">
+              <div className="text-xs font-bold">ITEM {i+1}</div>
+              <div className="text-sm">{h.title}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      {watermark}
+    </div>
+  );
+
+  if (slide === 3) return (
+    <div className={`h-full ${bgStyle} p-8 font-mono flex flex-col relative select-none`}>
+      <div className={`absolute inset-0 ${grid}`}></div>
+      <div className="border-4 border-white p-6 relative z-10 h-full">
+        <div className="absolute top-0 left-0 bg-white text-[#003399] px-2 text-xs font-bold">{t.fig} 1.3 - {t.visuals}</div>
+        <div className="grid grid-cols-1 gap-4 mt-8 h-full pb-8">
+          {data.photos.map((photo, i) => (
+             <div key={photo.id} className="border border-white h-32 overflow-hidden relative">
+                <img src={photo.url} alt="" className="w-full h-full object-cover opacity-50 grayscale" />
+                <div className="absolute top-0 left-0 bg-white text-[#003399] text-[8px] px-1">IMG_{i+1}</div>
+             </div>
+          ))}
+        </div>
+      </div>
+      {watermark}
+    </div>
+  );
+
+  return <RenderRetro slide={slide} data={data} themeId='retro' t={t} />; 
 };
 
 
@@ -1146,8 +1381,10 @@ export default function YearInReviewGenerator() {
   const [isCleanMode, setIsCleanMode] = useState(false);
   const [saveStatus, setSaveStatus] = useState('');
   const [isDownloading, setIsDownloading] = useState(false); // Added missing state
+  const [language, setLanguage] = useState('id'); // Default to Indonesian
 
-  const totalSlides = 5; 
+  const t = TRANSLATIONS[language]; // Translation helper
+  const totalSlides = 4; 
 
   const scrollContainerRef = useRef(null);
 
@@ -1156,6 +1393,10 @@ export default function YearInReviewGenerator() {
       const scrollAmount = direction === 'left' ? -200 : 200;
       scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
+  };
+
+  const toggleLanguage = () => {
+    setLanguage(prev => prev === 'en' ? 'id' : 'en');
   };
 
   // --- Persistence ---
@@ -1285,7 +1526,8 @@ export default function YearInReviewGenerator() {
   };
 
   const generateQuote = () => {
-    const randomQuote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+    const quoteList = language === 'en' ? QUOTES_EN : QUOTES_ID;
+    const randomQuote = quoteList[Math.floor(Math.random() * quoteList.length)];
     handleInputChange('summary', randomQuote);
   };
 
@@ -1340,20 +1582,21 @@ export default function YearInReviewGenerator() {
   };
 
   const renderContent = () => {
+    const props = { slide: currentSlide, data, themeId: currentTheme, t };
     switch(currentTheme) {
-      case 'retro': case 'terminal': case 'glitch': return <RenderRetro slide={currentSlide} data={data} themeId={currentTheme} />;
-      case 'swiss': case 'monochrome': case 'y2k': return <RenderSwiss slide={currentSlide} data={data} themeId={currentTheme} />;
-      case 'lofi': case 'botanical': case 'boho': return <RenderLoFi slide={currentSlide} data={data} themeId={currentTheme} />;
-      case 'neon': case 'midnight': return <RenderNeon slide={currentSlide} data={data} themeId={currentTheme} />;
-      case 'minimal': case 'corporate': case 'warm': return <RenderMinimal slide={currentSlide} data={data} themeId={currentTheme} />;
-      case 'journal': case 'newspaper': return <RenderJournal slide={currentSlide} data={data} />;
-      case 'glass': case 'pastel': case 'gradient': case 'aura': return <RenderGlass slide={currentSlide} data={data} themeId={currentTheme} />;
-      case 'brutal': case 'bauhaus': return <RenderBrutal slide={currentSlide} data={data} themeId={currentTheme} />;
-      case 'vapor': case 'synth': return <RenderVapor slide={currentSlide} data={data} themeId={currentTheme} />;
-      case 'academia': return <RenderAcademia slide={currentSlide} data={data} />;
-      case 'pop': return <RenderPop slide={currentSlide} data={data} />;
-      case 'blueprint': return <RenderBlueprint slide={currentSlide} data={data} />;
-      default: return <RenderRetro slide={currentSlide} data={data} themeId={currentTheme} />;
+      case 'retro': case 'terminal': case 'glitch': return <RenderRetro {...props} />;
+      case 'swiss': case 'monochrome': case 'y2k': return <RenderSwiss {...props} />;
+      case 'lofi': case 'botanical': case 'boho': return <RenderLoFi {...props} />;
+      case 'neon': case 'midnight': return <RenderNeon {...props} />;
+      case 'minimal': case 'corporate': case 'warm': return <RenderMinimal {...props} />;
+      case 'journal': case 'newspaper': return <RenderJournal {...props} />;
+      case 'glass': case 'pastel': case 'gradient': case 'aura': return <RenderGlass {...props} />;
+      case 'brutal': case 'bauhaus': return <RenderBrutal {...props} />;
+      case 'vapor': case 'synth': return <RenderVapor {...props} />;
+      case 'academia': return <RenderAcademia {...props} />;
+      case 'pop': return <RenderPop {...props} />;
+      case 'blueprint': return <RenderBlueprint {...props} />;
+      default: return <RenderRetro {...props} />;
     }
   };
 
@@ -1366,17 +1609,29 @@ export default function YearInReviewGenerator() {
           <header className="mb-8 border-b pb-4 flex justify-between items-start">
             <div>
               <h1 className="text-3xl font-black tracking-tight flex items-center gap-2 text-slate-900">
-                <RefreshCw className="text-indigo-600" /> RECAP GENERATOR
+                <RefreshCw className="text-indigo-600" /> {t.title}
               </h1>
-              <p className="text-slate-500 mt-2 font-medium">Turn your year into a visual story.</p>
+               {/* Privacy Note MOVED HERE */}
+               <div className="mt-2 text-xs text-slate-400 bg-slate-50 p-2 rounded border border-slate-100 flex items-start gap-2">
+                  <ShieldCheck className="w-3 h-3 mt-0.5 text-green-600 shrink-0" />
+                  <span>{t.privacyText}</span>
+               </div>
             </div>
             <div className="flex flex-col items-end gap-2">
-               <button 
-                 onClick={resetData}
-                 className="text-[10px] uppercase font-bold text-red-400 hover:text-red-600 flex items-center gap-1 transition-colors"
-               >
-                 <RotateCcw className="w-3 h-3" /> Reset Data
-               </button>
+               <div className="flex items-center gap-2">
+                  <button 
+                    onClick={toggleLanguage}
+                    className="text-[10px] font-bold bg-slate-100 px-2 py-1 rounded hover:bg-slate-200 flex items-center gap-1"
+                  >
+                    <Globe className="w-3 h-3" /> {language === 'en' ? 'EN' : 'ID'}
+                  </button>
+                  <button 
+                    onClick={resetData}
+                    className="text-[10px] uppercase font-bold text-red-400 hover:text-red-600 flex items-center gap-1 transition-colors"
+                  >
+                    <RotateCcw className="w-3 h-3" /> {t.reset}
+                  </button>
+               </div>
                {saveStatus && (
                  <span className="text-[10px] font-bold text-green-500 uppercase tracking-wider animate-pulse flex items-center gap-1">
                    <Save className="w-3 h-3" /> {saveStatus}
@@ -1386,19 +1641,19 @@ export default function YearInReviewGenerator() {
           </header>
           
           <section className="mb-10 space-y-4">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2"><Type className="w-4 h-4" /> 1. Core Info</h3>
+            <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2"><Type className="w-4 h-4" /> {t.coreInfo}</h3>
             <div className="grid grid-cols-3 gap-4">
               <div className="col-span-1">
-                <label className="block text-xs font-bold text-slate-500 mb-1">Year</label>
+                <label className="block text-xs font-bold text-slate-500 mb-1">{t.year}</label>
                 <input type="text" value={data.year} onChange={(e) => handleInputChange('year', e.target.value)} className="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none font-bold text-lg"/>
               </div>
               <div className="col-span-2">
-                <label className="block text-xs font-bold text-slate-500 mb-1">Theme Title</label>
+                <label className="block text-xs font-bold text-slate-500 mb-1">{t.themeTitle}</label>
                 <input type="text" value={data.title} onChange={(e) => handleInputChange('title', e.target.value)} className="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"/>
               </div>
             </div>
             <div>
-              <label className="block text-xs font-bold text-slate-500 mb-1">Subtitle / Metaphor</label>
+              <label className="block text-xs font-bold text-slate-500 mb-1">{t.metaSubtitle}</label>
               <input type="text" value={data.subtitle} onChange={(e) => handleInputChange('subtitle', e.target.value)} className="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"/>
             </div>
           </section>
@@ -1406,7 +1661,7 @@ export default function YearInReviewGenerator() {
           {/* STATS SECTION */}
           <section className="mb-10">
             <div className="flex justify-between items-center mb-4">
-               <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2"><Activity className="w-4 h-4" /> 2. The Numbers</h3>
+               <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2"><Activity className="w-4 h-4" /> {t.numbers}</h3>
                <span className="text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded-full">{data.stats.length} / 6</span>
             </div>
             <div className="grid grid-cols-2 gap-4 mb-4">
@@ -1432,7 +1687,7 @@ export default function YearInReviewGenerator() {
             </div>
             {data.stats.length < 6 && (
               <button onClick={addStat} className="w-full py-2 border-2 border-dashed border-slate-200 rounded-xl text-slate-400 text-xs font-bold uppercase hover:border-indigo-500 hover:text-indigo-600 transition-colors flex items-center justify-center gap-2">
-                <Plus className="w-4 h-4" /> Add Stat
+                <Plus className="w-4 h-4" /> {t.add} Stat
               </button>
             )}
           </section>
@@ -1440,7 +1695,7 @@ export default function YearInReviewGenerator() {
           {/* HIGHLIGHTS SECTION */}
           <section className="mb-10">
             <div className="flex justify-between items-center mb-4">
-               <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2"><Layout className="w-4 h-4" /> 3. Highlights</h3>
+               <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2"><Layout className="w-4 h-4" /> {t.highlights}</h3>
                <span className="text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded-full">{data.highlights.length} / 4</span>
             </div>
             <div className="space-y-4 mb-4">
@@ -1453,14 +1708,14 @@ export default function YearInReviewGenerator() {
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
-                   <input type="text" value={item.title} onChange={(e) => handleHighlightChange(item.id, 'title', e.target.value)} className="w-full mb-2 text-sm font-bold border-b border-slate-100 pb-2 focus:border-indigo-500 outline-none pr-8" placeholder="Highlight Title"/>
-                  <textarea value={item.desc} onChange={(e) => handleHighlightChange(item.id, 'desc', e.target.value)} className="w-full text-xs text-slate-600 resize-none outline-none h-12" placeholder="Description"/>
+                   <input type="text" value={item.title} onChange={(e) => handleHighlightChange(item.id, 'title', e.target.value)} className="w-full mb-2 text-sm font-bold border-b border-slate-100 pb-2 focus:border-indigo-500 outline-none pr-8" placeholder={t.highlightTitle}/>
+                  <textarea value={item.desc} onChange={(e) => handleHighlightChange(item.id, 'desc', e.target.value)} className="w-full text-xs text-slate-600 resize-none outline-none h-12" placeholder={t.desc}/>
                 </div>
               ))}
             </div>
             {data.highlights.length < 4 && (
               <button onClick={addHighlight} className="w-full py-2 border-2 border-dashed border-slate-200 rounded-xl text-slate-400 text-xs font-bold uppercase hover:border-indigo-500 hover:text-indigo-600 transition-colors flex items-center justify-center gap-2">
-                <Plus className="w-4 h-4" /> Add Highlight
+                <Plus className="w-4 h-4" /> {t.add} Highlight
               </button>
             )}
           </section>
@@ -1468,7 +1723,7 @@ export default function YearInReviewGenerator() {
           {/* PHOTOS SECTION */}
           <section className="mb-10">
              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2"><ImageIcon className="w-4 h-4" /> 4. Photo Gallery</h3>
+                <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2"><ImageIcon className="w-4 h-4" /> {t.gallery}</h3>
                 <span className="text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded-full">{data.photos.length} / 6</span>
              </div>
              
@@ -1489,7 +1744,7 @@ export default function YearInReviewGenerator() {
                       {/* Upload Overlay */}
                       <label className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center transition-opacity cursor-pointer text-white z-10">
                          <Upload className="w-6 h-6 mb-1" />
-                         <span className="text-[10px] uppercase font-bold">Change</span>
+                         <span className="text-[10px] uppercase font-bold">{t.change}</span>
                          <input type="file" accept="image/*" className="hidden" onChange={(e) => handlePhotoUpload(photo.id, e)} />
                       </label>
                    </div>
@@ -1498,7 +1753,7 @@ export default function YearInReviewGenerator() {
                 {data.photos.length < 6 && (
                    <button onClick={addPhoto} className="aspect-square border-2 border-dashed border-slate-200 rounded-lg text-slate-400 flex flex-col items-center justify-center gap-1 hover:border-indigo-500 hover:text-indigo-600 transition-colors">
                       <Plus className="w-6 h-6" />
-                      <span className="text-[10px] font-bold uppercase">Add</span>
+                      <span className="text-[10px] font-bold uppercase">{t.add}</span>
                    </button>
                 )}
              </div>
@@ -1507,9 +1762,9 @@ export default function YearInReviewGenerator() {
 
            <section className="mb-12">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2"><Feather className="w-4 h-4" /> 5. The Summary</h3>
+              <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2"><Feather className="w-4 h-4" /> {t.summary}</h3>
               <button onClick={generateQuote} className="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full flex items-center gap-1 hover:bg-indigo-100 transition-colors">
-                <Wand2 className="w-3 h-3" /> Auto-Generate
+                <Wand2 className="w-3 h-3" /> {t.autoGen}
               </button>
             </div>
             <textarea value={data.summary} onChange={(e) => handleInputChange('summary', e.target.value)} className="w-full p-4 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none h-32 text-sm leading-relaxed shadow-sm resize-none" placeholder="Sum up the year..."/>
@@ -1517,7 +1772,7 @@ export default function YearInReviewGenerator() {
 
           <section className="mb-10">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2"><Palette className="w-4 h-4" /> 6. Choose Vibe</h3>
+              <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2"><Palette className="w-4 h-4" /> {t.chooseVibe}</h3>
               <div className="flex gap-2">
                 <button onClick={() => scrollThemes('left')} className="p-1 bg-slate-100 rounded hover:bg-slate-200">
                   <ChevronLeft className="w-3 h-3 text-slate-600" />
@@ -1552,14 +1807,6 @@ export default function YearInReviewGenerator() {
 
           {/* Site Footer */}
           <div className="mt-8 border-t border-slate-200 pt-6">
-             <div className="bg-indigo-50 rounded-lg p-4 mb-6 flex items-start gap-3 text-indigo-900">
-                <ShieldCheck className="w-5 h-5 shrink-0 mt-0.5 text-indigo-600" />
-                <div className="text-xs leading-relaxed">
-                   <strong className="block font-bold mb-1">Privacy First</strong>
-                   We do not store your data. All text and photos are saved locally on your device and never sent to a server.
-                </div>
-             </div>
-            
             <p className="text-center text-slate-400 text-xs">
               &copy; {new Date().getFullYear()} <a href="https://www.linkedin.com/in/fadlyzaki/" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-indigo-600 transition-colors">@fadlyzaki</a>. All rights reserved.
             </p>
@@ -1576,13 +1823,13 @@ export default function YearInReviewGenerator() {
             {/* Header Controls - Hidden in Clean Mode */}
             <div className={`flex items-center justify-between w-full max-w-[340px] mb-6 transition-opacity duration-300 ${isCleanMode ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
                 <div className="text-slate-400 text-xs font-bold uppercase tracking-widest flex items-center gap-2">
-                    <Play className="w-3 h-3 text-indigo-400 fill-current" /> Live Preview
+                    <Play className="w-3 h-3 text-indigo-400 fill-current" /> {t.preview}
                 </div>
                 <button 
                   onClick={handleDownload} disabled={isDownloading} 
                   className="flex items-center gap-2 px-3 py-1.5 bg-indigo-600 text-white rounded-full text-xs font-bold uppercase tracking-wider hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-500/20"
                 >
-                   {isDownloading ? <><RefreshCw className="w-3 h-3 animate-spin" /> Saving...</> : <><Download className="w-3 h-3" /> Save Slide</>}
+                   {isDownloading ? <><RefreshCw className="w-3 h-3 animate-spin" /> {t.saving}</> : <><Download className="w-3 h-3" /> {t.saveSlide}</>}
                 </button>
             </div>
 
@@ -1641,14 +1888,14 @@ export default function YearInReviewGenerator() {
                   onClick={toggleCleanMode}
                   className="px-6 py-2 bg-slate-800 text-white rounded-full font-bold uppercase text-xs tracking-wider shadow-xl hover:bg-slate-700 transition-colors flex items-center gap-2"
                  >
-                   <Minimize2 className="w-3 h-3" /> Exit Screenshot Mode
+                   <Minimize2 className="w-3 h-3" /> {t.exitScreenshot}
                  </button>
                </div>
             )}
 
             {!isCleanMode && (
               <p className="mt-6 text-slate-500 text-[10px] uppercase tracking-wider opacity-60 flex items-center gap-1">
-              <Share2 className="w-3 h-3" /> Use Screenshot Mode to Share
+              <Share2 className="w-3 h-3" /> {t.screenshotHint}
               </p>
             )}
         </div>
