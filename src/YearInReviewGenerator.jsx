@@ -1449,6 +1449,7 @@ const RenderPop = ({ slide, data, t }) => {
     </div>
   );
 
+  // FIXED: POP ART PHOTO GRID (Supports 6 photos)
   if (slide === 3) {
      const photoCount = data.photos.length;
      let gridClass = 'grid-cols-1 grid-rows-2'; 
@@ -1475,19 +1476,13 @@ const RenderPop = ({ slide, data, t }) => {
   }
 
   return (
-    <div className={`h-full ${bgStyle} p-8 font-mono flex flex-col justify-center items-center text-center relative select-none overflow-hidden`}>
-       <div className="absolute inset-0 bg-[radial-gradient(circle,black_1px,transparent_1px)] bg-[length:10px_10px] opacity-20"></div>
-       <div className="bg-white border-4 border-black p-6 shadow-[8px_8px_0px_black] relative z-10 rotate-1">
-         <p className="text-xl font-black text-black leading-tight italic">"{data.summary}"</p>
-       </div>
-       <div className="mt-8 bg-magenta-500 text-white border-4 border-black px-4 py-1 text-sm font-bold uppercase transform -rotate-2 relative z-10">
-         {t.fin}
-       </div>
+    <div className={`h-full bg-yellow-300 p-6 font-sans relative select-none`}>
+       <div className="absolute inset-0 bg-[radial-gradient(circle,black_1px,transparent_1px)] bg-[length:10px_10px] opacity-10"></div>
+       <h3 className="text-5xl font-black text-black mb-6 italic drop-shadow-[2px_2px_0px_white]">{t.snap}</h3>
        {watermark}
     </div>
   );
 };
-
 // 12. BLUEPRINT RENDERER
 const RenderBlueprint = ({ slide, data, t }) => {
   const bgStyle = "bg-[#003399] text-white";
