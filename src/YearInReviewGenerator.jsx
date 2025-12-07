@@ -259,7 +259,7 @@ const generateSmartSummary = (data, lang) => {
 // --- Translations ---
 const TRANSLATIONS = {
   en: {
-    // UI
+    // UI - Modern & Editorial Tone
     title: "MY YEAR EDIT", 
     subtitle: "Curate your moments, design your story.",
     reset: "Start Over",
@@ -286,6 +286,8 @@ const TRANSLATIONS = {
     exitScreenshot: "Exit Capture Mode",
     screenshotHint: "Tap 'Save Image' to download & share to stories",
     madeBy: "made with year-in-review-generator",
+    songPlaceholder: "Song Title",
+    artistPlaceholder: "Artist Name",
     // Help Modal
     helpTitle: "How to use",
     helpDesc: "Create your own aesthetic year-in-review in minutes.",
@@ -337,7 +339,7 @@ const TRANSLATIONS = {
     fig: "FIG"
   },
   id: {
-    // UI
+    // UI - Santai & Personal
     title: "EDISI TAHUNKU",
     subtitle: "Kurasi momenmu, desain ceritamu.",
     reset: "Ulang Awal",
@@ -364,6 +366,8 @@ const TRANSLATIONS = {
     exitScreenshot: "Keluar Mode Foto",
     screenshotHint: "Ketuk 'Simpan Gambar' untuk share ke story",
     madeBy: "dibuat dengan year-in-review-generator",
+    songPlaceholder: "Judul Lagu",
+    artistPlaceholder: "Nama Artis",
     // Help Modal
     helpTitle: "Cara Pakai",
     helpDesc: "Bikin rekap tahunan estetikmu dalam hitungan menit.",
@@ -424,14 +428,13 @@ const THEMES = [
   { id: 'minimal', name: 'Modern Minimalist', vibe: 'Clean, Editorial', color: 'bg-slate-800' },
   { id: 'journal', name: 'Hand-Drawn', vibe: 'Sketchy, Notebook', color: 'bg-amber-600' },
   { id: 'glass', name: 'Glassmorphism', vibe: 'Frosted, Gradient', color: 'bg-indigo-400' },
-  { id: 'brutal', name: 'Neo-Brutalism', vibe: 'Raw, Contrast', color: 'bg-yellow-400' },
   { id: 'vapor', name: 'Vaporwave', vibe: 'Retro-future, Pink', color: 'bg-pink-500' },
   { id: 'academia', name: 'Dark Academia', vibe: 'Classic, Serif', color: 'bg-stone-700' },
   { id: 'pop', name: 'Pop Art', vibe: 'Comic, Halftone', color: 'bg-cyan-400' },
   { id: 'blueprint', name: 'Blueprint', vibe: 'Technical, Blue', color: 'bg-blue-800' }
 ];
 
-// --- Initial Data ---
+// --- Initial Data (Templates - Music Removed) ---
 const TEMPLATES = {
   en: {
     year: '2025',
@@ -735,7 +738,6 @@ const RenderLoFi = ({ slide, data, t }) => {
       </div>
   );
 
-  // HIGHLIGHTS WITH EMOJI UPDATE
   if (slide === 2) return (
       <div className={`h-full ${paperTexture} p-6 font-serif relative overflow-hidden select-none flex flex-col`}>
          <h3 className={`text-5xl font-sans font-black text-stone-200 absolute -right-4 top-10 rotate-90 z-0 select-none`}>{t.moments}</h3>
@@ -852,8 +854,8 @@ const RenderNeon = ({ slide, data, t }) => {
            {data.highlights.map((h, i) => (
              <div key={h.id} className={`${borderStyle} p-4 rounded-lg relative flex gap-3 items-start`}>
                {/* Neon Emoji */}
-               <div className={`text-2xl ${glowTextSecondary} shrink-0`}>{h.emoji}</div>
-               <div className="min-w-0">
+               <div className={`text-2xl ${glowTextSecondary}`}>{h.emoji}</div>
+               <div>
                   <div className={`font-bold uppercase text-sm mb-1 ${textSecondary} ${glowTextSecondary} truncate`}>// {h.title}</div>
                   <div className={`text-sm leading-snug text-white opacity-90 line-clamp-2`}>{h.desc}</div>
                </div>
@@ -1187,8 +1189,8 @@ const RenderGlass = ({ slide, data, themeId, t }) => {
 
   if (slide === 3) {
     const photoCount = data.photos.length;
-    let gridClass = 'grid-rows-2'; 
-    if (photoCount > 2) gridClass = 'grid-cols-2 grid-rows-2';
+    let gridClass = 'grid-cols-1 grid-rows-2'; 
+    if (photoCount >= 3) gridClass = 'grid-cols-2 grid-rows-2';
     if (photoCount >= 5) gridClass = 'grid-cols-2 grid-rows-3';
 
     return (
@@ -1219,101 +1221,11 @@ const RenderGlass = ({ slide, data, themeId, t }) => {
   );
 };
 
-// 8. NEO-BRUTALISM RENDERER (Handles: Brutal, Bauhaus)
-const RenderBrutal = ({ slide, data, t }) => {
-  const bgStyle = "bg-[#FFFDF5]";
-  const cardStyle = "bg-white border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]";
-  const textPrimary = "text-black";
-  const accent1 = "bg-yellow-400";
-  const accent2 = "bg-purple-400";
-  
-  const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-black uppercase tracking-tighter bg-black text-white px-2 py-1 transform -rotate-2 z-20 pointer-events-none`}>{t.madeBy}</div>;
 
-  if (slide === 0) return (
-    <div className={`h-full ${bgStyle} p-6 font-sans flex flex-col justify-center items-center relative select-none`}>
-      <div className={`absolute top-10 right-10 w-16 h-16 ${accent1} rounded-full border-4 border-black`}></div>
-      <div className={`${cardStyle} p-8 w-full rotate-2 mb-8`}>
-        <h1 className={`text-8xl font-black ${textPrimary} leading-[0.8]`}>{data.year}</h1>
-      </div>
-      <div className={`${accent2} border-4 border-black p-4 -rotate-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`}>
-        <h2 className="text-3xl font-black text-white uppercase">{data.title}</h2>
-      </div>
-      <p className="mt-8 font-bold text-xl text-center max-w-xs">{data.subtitle}</p>
-      {watermark}
-    </div>
-  );
-
-  if (slide === 1) return (
-    <div className={`h-full ${bgStyle} p-6 font-sans relative select-none`}>
-      <h3 className={`text-4xl font-black ${textPrimary} mb-8 underline decoration-wavy decoration-4 decoration-purple-500`}>{t.myStats}_</h3>
-      <div className="grid grid-cols-2 gap-6">
-        {data.stats.map((stat, i) => (
-          <div key={stat.id} className={`${cardStyle} p-4 flex flex-col items-center justify-center aspect-square hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all`}>
-            <div className={`w-10 h-10 mb-2 ${textPrimary}`}>{ICON_MAP[stat.icon]}</div>
-            <div className={`text-4xl font-black ${textPrimary}`}>{stat.value}</div>
-            <div className="text-xs font-bold uppercase bg-yellow-300 px-2 border-2 border-black">{stat.label}</div>
-          </div>
-        ))}
-      </div>
-      {watermark}
-    </div>
-  );
-
-  if (slide === 2) return (
-    <div className={`h-full ${bgStyle} p-6 font-sans relative select-none flex flex-col`}>
-      <h3 className={`text-4xl font-black ${textPrimary} mb-8 bg-green-400 border-4 border-black inline-block p-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] shrink-0`}>{t.wins}</h3>
-      <div className="space-y-6 flex-1 min-h-0 overflow-y-auto scrollbar-hide">
-        {data.highlights.map((h, i) => (
-          <div key={h.id} className={`${cardStyle} p-4`}>
-             <div className="flex justify-between">
-                <h4 className="text-xl font-black uppercase mb-1 bg-pink-300 inline-block px-1 border-2 border-black truncate max-w-[80%]">{h.title}</h4>
-                <span className="text-2xl">{h.emoji}</span>
-             </div>
-            <p className={`${textPrimary} font-bold leading-tight mt-2 line-clamp-2`}>{h.desc}</p>
-          </div>
-        ))}
-      </div>
-      {watermark}
-    </div>
-  );
-
-  if (slide === 3) {
-     const photoCount = data.photos.length;
-    let gridClass = 'grid-cols-1 grid-rows-2'; 
-    if (photoCount >= 3) gridClass = 'grid-cols-2 grid-rows-2';
-    if (photoCount >= 5) gridClass = 'grid-cols-2 grid-rows-3';
-     return (
-      <div className={`h-full ${bgStyle} p-6 font-sans relative select-none flex flex-col`}>
-        <h3 className={`text-4xl font-black ${textPrimary} mb-6 italic`}>{t.pics}</h3>
-        <div className={`grid gap-4 flex-1 w-full ${gridClass}`}>
-          {data.photos.map((photo, i) => (
-            <div key={photo.id} className={`${cardStyle} p-0 overflow-hidden relative ${photoCount === 3 && i === 0 ? 'row-span-2' : ''}`}>
-               <img src={photo.url} alt="" className="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition-all" />
-            </div>
-          ))}
-        </div>
-        {watermark}
-      </div>
-    );
-  }
-
-  return (
-    <div className={`h-full ${bgStyle} p-8 font-sans flex flex-col justify-center items-center text-center relative select-none`}>
-      <div className={`${cardStyle} p-8 ${accent2} -rotate-1`}>
-         <p className="text-2xl font-black text-white leading-tight uppercase">"{data.summary}"</p>
-      </div>
-      <div className={`mt-8 ${accent1} border-4 border-black px-4 py-2 font-black text-black transform rotate-2`}>
-        {t.fin}
-      </div>
-      {watermark}
-    </div>
-  );
-};
 
 // 9. VAPORWAVE RENDERER (Handles: Vapor, Synth)
-const RenderVapor = ({ slide, data, themeId, t }) => {
-  const isSynth = themeId === 'synth';
-  const bgStyle = isSynth ? "bg-gradient-to-b from-orange-500 via-red-500 to-purple-900" : "bg-gradient-to-b from-fuchsia-900 to-purple-900";
+const RenderVapor = ({ slide, data, t }) => {
+  const bgStyle = "bg-gradient-to-b from-fuchsia-900 to-purple-900";
   const gridStyle = "bg-[linear-gradient(rgba(0,255,255,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.2)_1px,transparent_1px)] bg-[length:40px_40px] perspective-[500px]";
   const watermark = <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-mono text-cyan-400/50 z-20 pointer-events-none drop-shadow-[1px_1px_0px_rgba(255,0,255,0.5)]">{t.madeBy}</div>;
   
@@ -1365,23 +1277,29 @@ const RenderVapor = ({ slide, data, themeId, t }) => {
     </div>
   );
 
-  if (slide === 3) return (
+  if (slide === 3) {
+     const photoCount = data.photos.length;
+     let gridClass = 'grid-rows-2'; 
+     if (photoCount > 2) gridClass = 'grid-cols-2 grid-rows-2';
+     if (photoCount >= 5) gridClass = 'grid-cols-2 grid-rows-3';
+
+     return (
     <div className={`h-full ${bgStyle} p-6 font-mono relative select-none overflow-hidden flex flex-col`}>
        <h3 className="text-2xl text-white mb-6 italic text-center drop-shadow-[2px_2px_0px_#ff00ff]">{t.visuals}</h3>
-       <div className={`grid gap-3 flex-1 w-full grid-cols-1 ${data.photos.length > 1 ? 'grid-rows-2' : ''}`}>
-          {/* Simplified grid for Vaporwave to keep aesthetic simple/glitchy */}
-          <div className="relative border-2 border-pink-500 p-1 shadow-[4px_4px_0px_cyan]">
-             <img src={data.photos[0].url} alt="" className="w-full h-full object-cover filter hue-rotate-15 contrast-125" />
-          </div>
-          {data.photos.length > 1 && (
-             <div className="relative border-2 border-cyan-500 p-1 shadow-[-4px_4px_0px_magenta]">
-                <img src={data.photos[1].url} alt="" className="w-full h-full object-cover filter sepia contrast-125" />
+       <div className={`grid gap-3 flex-1 w-full ${gridClass}`}>
+          {data.photos.map((photo, i) => (
+             <div 
+               key={photo.id} 
+               className={`relative border-2 ${i % 2 === 0 ? 'border-pink-500 shadow-[4px_4px_0px_cyan]' : 'border-cyan-500 shadow-[-4px_4px_0px_magenta]'} p-1 overflow-hidden ${photoCount === 3 && i === 0 ? 'row-span-2' : ''}`}
+             >
+                <img src={photo.url} alt="" className={`w-full h-full object-cover filter contrast-125 ${i % 2 === 0 ? 'hue-rotate-15' : 'sepia'}`} />
              </div>
-          )}
+          ))}
        </div>
        {watermark}
     </div>
   );
+  }
 
   return (
     <div className={`h-full ${bgStyle} p-8 font-mono flex flex-col justify-center items-center text-center relative select-none overflow-hidden`}>
@@ -1392,6 +1310,7 @@ const RenderVapor = ({ slide, data, themeId, t }) => {
     </div>
   );
 };
+
 
 // 10. DARK ACADEMIA RENDERER
 const RenderAcademia = ({ slide, data, t }) => {
@@ -1442,6 +1361,7 @@ const RenderAcademia = ({ slide, data, t }) => {
     </div>
   );
 
+  // FIXED: ACADEMIA PHOTO GRID (Supports 6 photos)
   if (slide === 3) {
     const photoCount = data.photos.length;
     let gridClass = 'grid-rows-2'; 
@@ -1531,9 +1451,10 @@ const RenderPop = ({ slide, data, t }) => {
 
   if (slide === 3) {
      const photoCount = data.photos.length;
-    let gridClass = 'grid-cols-1 grid-rows-2'; 
-    if (photoCount >= 3) gridClass = 'grid-cols-2 grid-rows-2';
-    if (photoCount >= 5) gridClass = 'grid-cols-2 grid-rows-3';
+     let gridClass = 'grid-cols-1 grid-rows-2'; 
+     if (photoCount >= 3) gridClass = 'grid-cols-2 grid-rows-2';
+     if (photoCount >= 5) gridClass = 'grid-cols-2 grid-rows-3';
+
      return (
     <div className={`h-full bg-yellow-300 p-6 font-sans relative select-none flex flex-col`}>
        <div className="absolute inset-0 bg-[radial-gradient(circle,black_1px,transparent_1px)] bg-[length:10px_10px] opacity-10"></div>
@@ -1553,16 +1474,13 @@ const RenderPop = ({ slide, data, t }) => {
   );
   }
 
-  // FIXED: POP ART SUMMARY (Slide 5)
   return (
-    <div className={`h-full bg-cyan-300 p-8 font-sans flex flex-col justify-center items-center text-center relative select-none overflow-hidden`}>
+    <div className={`h-full ${bgStyle} p-8 font-mono flex flex-col justify-center items-center text-center relative select-none overflow-hidden`}>
        <div className="absolute inset-0 bg-[radial-gradient(circle,black_1px,transparent_1px)] bg-[length:10px_10px] opacity-20"></div>
-       <div className="bg-white border-4 border-black p-8 shadow-[8px_8px_0px_black] relative z-10 rotate-2">
-         <div className="absolute -top-4 -left-4 text-4xl transform -rotate-12">❝</div>
-         <p className="text-2xl font-black text-black leading-tight italic uppercase">"{data.summary}"</p>
-         <div className="absolute -bottom-4 -right-4 text-4xl transform -rotate-12">❞</div>
+       <div className="bg-white border-4 border-black p-6 shadow-[8px_8px_0px_black] relative z-10 rotate-1">
+         <p className="text-xl font-black text-black leading-tight italic">"{data.summary}"</p>
        </div>
-       <div className="mt-8 bg-yellow-400 text-black border-4 border-black px-6 py-2 font-black uppercase transform -rotate-3 relative z-10 shadow-[4px_4px_0px_black]">
+       <div className="mt-8 bg-magenta-500 text-white border-4 border-black px-4 py-1 text-sm font-bold uppercase transform -rotate-2 relative z-10">
          {t.fin}
        </div>
        {watermark}
@@ -1628,6 +1546,7 @@ const RenderBlueprint = ({ slide, data, t }) => {
     </div>
   );
 
+  // FIXED: BLUEPRINT PHOTO GRID (Supports 6 photos)
   if (slide === 3) {
     const photoCount = data.photos.length;
     let gridClass = 'grid-rows-2'; 
@@ -1910,7 +1829,6 @@ export default function YearInReviewGenerator() {
       case 'minimal': return <RenderMinimal {...props} />;
       case 'journal': return <RenderJournal {...props} />;
       case 'glass': return <RenderGlass {...props} />;
-      case 'brutal': return <RenderBrutal {...props} />;
       case 'vapor': return <RenderVapor {...props} />;
       case 'academia': return <RenderAcademia {...props} />;
       case 'pop': return <RenderPop {...props} />;
