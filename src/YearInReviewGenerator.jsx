@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import ReactGA from "react-ga4"; // Import GA4
 import { 
   ChevronLeft, 
-  ChevronRight, 
+  ChevronRight,       
   Coffee, 
   Book, 
   Activity, 
@@ -52,10 +52,11 @@ import {
   Twitter,
   Instagram,
   Linkedin,
-  ShieldCheck
+  ShieldCheck,
+  SmilePlus // New icon for empty state
 } from 'lucide-react';
 
-// --- Icon Mapping ---
+// ... (ICON_MAP remains same)
 const ICON_MAP = {
   // General
   coffee: <Coffee className="w-full h-full" />,
@@ -95,7 +96,80 @@ const ICON_MAP = {
   social_linked: <Linkedin className="w-full h-full" />
 };
 
-// --- Quotes Library ---
+// ... (DEFAULT_LABELS, QUOTES_EN, QUOTES_ID remain same)
+const DEFAULT_LABELS = {
+  en: {
+    coffee: "Coffees",
+    book: "Books Read",
+    activity: "Workouts",
+    zap: "Moments",
+    heart: "Kindness",
+    work: "Projects",
+    music: "Minutes Listened",
+    globe: "Countries",
+    terminal: "Lines of Code",
+    feather: "Words Written",
+    phone: "Screen Time",
+    camera: "Photos Taken",
+    star: "Achievements",
+    disc: "Albums",
+    duolingo: "Streak Days",
+    language: "Languages",
+    strava_cycle: "km Cycled",
+    strava_run: "km Run",
+    gym: "Gym Sessions",
+    travel: "Trips",
+    gaming: "Hours Played",
+    coding: "Commits",
+    git: "PRs Merged",
+    design: "Designs",
+    finance: "Savings",
+    spotify: "Top Genre",
+    youtube: "Hours Watched",
+    food: "New Foods",
+    sleep: "Avg Sleep",
+    location: "Places",
+    social_x: "Tweets",
+    social_insta: "Posts",
+    social_linked: "Connections"
+  },
+  id: {
+    coffee: "Kopi Diminum",
+    book: "Buku Tamat",
+    activity: "Olahraga",
+    zap: "Momen Seru",
+    heart: "Kebaikan",
+    work: "Proyek",
+    music: "Menit Dengar",
+    globe: "Negara",
+    terminal: "Baris Kode",
+    feather: "Kata Ditulis",
+    phone: "Durasi Layar",
+    camera: "Foto Diambil",
+    star: "Pencapaian",
+    disc: "Album",
+    duolingo: "Hari Streak",
+    language: "Bahasa",
+    strava_cycle: "km Sepeda",
+    strava_run: "km Lari",
+    gym: "Sesi Gym",
+    travel: "Perjalanan",
+    gaming: "Jam Main",
+    coding: "Total Commit",
+    git: "PR Merged",
+    design: "Desain",
+    finance: "Tabungan",
+    spotify: "Genre Top",
+    youtube: "Jam Nonton",
+    food: "Makanan Baru",
+    sleep: "Rata-rata Tidur",
+    location: "Tempat",
+    social_x: "Tweets",
+    social_insta: "Postingan",
+    social_linked: "Koneksi"
+  }
+};
+
 const QUOTES_EN = [
   "A year defined not by the destination, but by the journey.",
   "Small steps, consistent effort, and a few surprises along the way.",
@@ -122,151 +196,251 @@ const QUOTES_ID = [
   "Membuka lembaran baru dan menulis bab selanjutnya."
 ];
 
-// --- Translations ---
+const generateSmartSummary = (data, lang) => {
+  const stats = data.stats;
+  const highlights = data.highlights;
+  
+  let trait = 'balanced'; 
+  const labels = stats.map(s => s.label.toLowerCase());
+  const icons = stats.map(s => s.icon);
+  
+  if (icons.some(i => ['strava_run', 'strava_cycle', 'gym', 'activity'].includes(i)) || labels.some(l => l.includes('run') || l.includes('lari') || l.includes('gym'))) {
+    trait = 'active';
+  } else if (icons.some(i => ['book', 'feather', 'terminal', 'coding', 'git'].includes(i)) || labels.some(l => l.includes('read') || l.includes('baca') || l.includes('code'))) {
+    trait = 'intellectual';
+  } else if (icons.some(i => ['coffee'].includes(i)) || labels.some(l => l.includes('coffee') || l.includes('kopi'))) {
+    trait = 'caffeinated';
+  } else if (icons.some(i => ['travel', 'globe', 'plane', 'location'].includes(i))) {
+    trait = 'traveler';
+  } else if (icons.some(i => ['gaming', 'gamepad2'].includes(i))) {
+    trait = 'gamer';
+  }
+
+  const highlight = highlights[0]?.title || (lang === 'en' ? 'unforgettable moments' : 'momen tak terlupakan');
+  const statVal = stats[0]?.value || '100';
+  const statLab = stats[0]?.label || (lang === 'en' ? 'things' : 'hal');
+
+  const templates = {
+    en: {
+      active: [
+        `2025 was a marathon, not a sprint. You crushed ${statVal} ${statLab} and proved that consistency is key. Keep moving!`,
+        `Sweat, grit, and glory. You defined your year by action, clocking in ${statVal} ${statLab}. A true athlete's year.`
+      ],
+      intellectual: [
+        `A year of expanding horizons. From ${statVal} ${statLab} to "${highlight}", you spent 2025 leveling up your mind.`,
+        `Quiet moments, loud growth. You dedicated 2025 to learning and creating, proving that "${highlight}" was just the beginning.`
+      ],
+      caffeinated: [
+        `Powered by ${statVal} ${statLab} and big dreams. You stayed awake long enough to make "${highlight}" happen!`,
+        `High energy, higher goals. A year fueled by caffeine and ambition. ${statVal} ${statLab} later, you're still standing.`
+      ],
+      traveler: [
+        `Chasing horizons. 2025 was about the journey, exploring new places and collecting ${statVal} ${statLab} along the way.`,
+        `The world got a little smaller for you this year. From "${highlight}" to every hidden gem, you truly lived.`
+      ],
+      gamer: [
+        `Level Up! You spent 2025 grinding for greatness. With ${statVal} ${statLab}, you absolutely dominated the game of life.`,
+        `Achievement Unlocked: "${highlight}". You played hard and won big this year.`
+      ],
+      balanced: [
+        `2025: A chapter of balance. From "${highlight}" to tracking ${statVal} ${statLab}, you made every moment count.`,
+        `Defined by growth. You focused on what matters: ${statVal} ${statLab} and making memories that last.`
+      ]
+    },
+    id: {
+      active: [
+        `2025 bukan lari cepat, tapi maraton. Dengan ${statVal} ${statLab}, kamu buktikan konsistensi itu kunci. Gas terus!`,
+        `Keringat dan perjuangan. Tahun ini kamu definisikan dengan aksi nyata, menuntaskan ${statVal} ${statLab}. Juara!`
+      ],
+      intellectual: [
+        `Tahun memperluas wawasan. Dari ${statVal} ${statLab} hingga "${highlight}", 2025 adalah tahun upgrade diri.`,
+        `Tenang tapi menghanyutkan. Kamu habiskan 2025 untuk belajar dan berkarya. "${highlight}" cuma permulaan.`
+      ],
+      caffeinated: [
+        `Ditenagai oleh ${statVal} ${statLab} dan mimpi besar. Kamu terjaga cukup lama untuk mewujudkan "${highlight}"!`,
+        `Energi tinggi, target tinggi. Tahun yang didorong kafein dan ambisi. ${statVal} ${statLab} kemudian, kamu masih bertahan.`
+      ],
+      traveler: [
+        `Mengejar cakrawala. 2025 adalah tentang perjalanan, mengoleksi ${statVal} ${statLab} dan kenangan baru.`,
+        `Dunia terasa makin kecil buatmu tahun ini. Dari "${highlight}" ke tempat baru lainnya, kamu benar-benar hidup.`
+      ],
+      gamer: [
+        `Level Up! 2025 adalah ajang grinding menuju kejayaan. Dengan ${statVal} ${statLab}, kamu mendominasi permainan hidup.`,
+        `Achievement Unlocked: "${highlight}". Kamu main serius dan menang banyak tahun ini.`
+      ],
+      balanced: [
+        `2025: Bab tentang keseimbangan. Dari "${highlight}" hingga mencatat ${statVal} ${statLab}, semua momen berharga.`,
+        `Didefinisikan oleh pertumbuhan. Kamu fokus pada yang penting: ${statVal} ${statLab} dan kenangan abadi.`
+      ]
+    }
+  };
+
+  const options = templates[lang][trait];
+  return options[Math.floor(Math.random() * options.length)];
+};
+
+// ... (TRANSLATIONS & THEMES remain same)
 const TRANSLATIONS = {
   en: {
-    // UI
-    title: "RECAP GENERATOR",
-    subtitle: "Turn your year into a visual story.",
-    reset: "Reset Data",
-    chooseVibe: "6. Choose Vibe",
+    // UI - Modern & Editorial Tone
+    title: "MY YEAR EDIT", 
+    subtitle: "Curate your moments, design your story.",
+    reset: "Start Over",
+    chooseVibe: "6. Vibe Check",
     scroll: "Scroll",
-    coreInfo: "1. Core Info",
+    coreInfo: "1. The Intro",
     year: "Year",
     themeTitle: "Theme Title",
     metaSubtitle: "Subtitle / Metaphor",
-    numbers: "2. The Numbers",
-    highlights: "3. Highlights",
-    highlightTitle: "Highlight Title",
+    numbers: "2. The Receipts", 
+    highlights: "3. Core Memories", 
+    highlightTitle: "Moment Title",
     desc: "Description",
-    gallery: "4. Photo Gallery",
-    change: "Change",
+    gallery: "4. Photo Dump",
+    change: "Swap",
     add: "Add",
-    summary: "5. The Summary",
-    autoGen: "Auto-Generate",
-    privacyTitle: "Privacy First",
-    privacyText: "We do not store your data. All text and photos are saved locally on your device and never sent to a server.",
-    preview: "Live Preview",
-    saveSlide: "Save Slide",
+    summary: "6. The Outro",
+    autoGen: "Magic Write",
+    privacyTitle: "100% Private",
+    privacyText: "Your data stays on your device. Nothing is sent to any server.",
+    preview: "Preview Story",
+    saveSlide: "Save Image",
     saving: "Saving...",
-    exitScreenshot: "Exit Screenshot Mode",
-    screenshotHint: "Use Screenshot Mode to Share",
-    madeBy: "Made by @fadlyzaki",
-    // Themes
-    pressStart: "PRESS START TO CONTINUE",
+    exitScreenshot: "Exit Capture Mode",
+    screenshotHint: "Tap 'Save Image' to download & share to stories",
+    madeBy: "Designed by @fadlyzaki",
+    songPlaceholder: "Song Title",
+    artistPlaceholder: "Artist Name",
+    // Themes - Consistent Caps/Style
+    pressStart: "PRESS START",
     playerStats: "PLAYER_STATS",
     achievements: "ACHIEVEMENTS",
+    audioLogs: "AUDIO_LOGS",
     memoryDump: "MEMORY_DUMP",
-    endTrans: "END OF TRANSMISSION",
+    endTrans: "END_OF_TRANSMISSION",
     annualReport: "ANNUAL REPORT",
     keyPoints: "KEY POINTS",
-    endReport: "End Report",
+    topTracks: "TOP TRACKS",
+    endReport: "END REPORT",
     collection: "The Collection",
     moments: "MOMENTS",
+    mixtape: "MIXTAPE",
     seeYou: "See you next year...",
     systemBoot: ":: SYSTEM_BOOT ::",
-    neuralStats: "Neural Net Stats",
-    coreMem: "Core Memory Units",
+    neuralStats: "NEURAL_STATS",
+    coreMem: "CORE_MEMORY",
     visualLogs: "VISUAL_LOGS",
-    endLine: "End of Line_",
+    endLine: "END_OF_LINE_",
     keyFigures: "Key Figures",
+    soundtrack: "The Soundtrack",
     fin: "Fin.",
-    someNumbers: "Some Numbers I Tracked",
-    bigMoments: "Big Moments!",
+    someNumbers: "By The Numbers",
+    bigMoments: "Big Moments",
+    myPlaylist: "On Repeat",
     scrapbook: "Scrapbook",
-    recap: "Recap",
-    myStats: "My Stats",
+    recap: "RECAP",
+    myStats: "MY STATS",
     wins: "WINS",
     pics: "PICS",
     aesthetics: "A E S T H E T I C S",
-    memoriesExe: "Memories.exe",
+    memoriesExe: "memories.exe",
+    audioExe: "audio.exe",
     visuals: "V I S U A L S",
-    volume: "Volume",
-    indexRerum: "Index Rerum",
-    chronicles: "Chronicles",
-    plates: "Plates",
-    finis: "— Finis —",
+    volume: "VOL",
+    indexRerum: "INDEX RERUM",
+    chronicles: "CHRONICLES",
+    harmonia: "HARMONIA",
+    plates: "PLATES",
+    finis: "— FINIS —",
     wow: "WOW!",
     pow: "POW!",
+    boom: "BOOM!",
     snap: "SNAP!",
     fig: "FIG"
   },
   id: {
-    // UI
-    title: "GENERATOR REKAP",
-    subtitle: "Ubah tahunmu menjadi cerita visual.",
-    reset: "Reset Data",
-    chooseVibe: "6. Pilih Vibe",
+    // UI - Santai & Personal
+    title: "EDISI TAHUNKU",
+    subtitle: "Kurasi momenmu, desain ceritamu.",
+    reset: "Ulang Awal",
+    chooseVibe: "6. Cek Vibe",
     scroll: "Geser",
-    coreInfo: "1. Info Utama",
+    coreInfo: "1. Intro Dulu",
     year: "Tahun",
-    themeTitle: "Judul Tema",
-    metaSubtitle: "Subjudul / Metafora",
-    numbers: "2. Angka-Angka",
-    highlights: "3. Sorotan Utama",
-    highlightTitle: "Judul Sorotan",
+    themeTitle: "Judul Utama",
+    metaSubtitle: "Subjudul / Mood",
+    numbers: "2. Spill Angka", 
+    highlights: "3. Highlight Seru",
+    highlightTitle: "Judul Momen",
     desc: "Deskripsi",
-    gallery: "4. Galeri Foto",
+    gallery: "4. Dump Foto", 
     change: "Ganti",
     add: "Tambah",
-    summary: "5. Ringkasan",
-    autoGen: "Buat Otomatis",
-    privacyTitle: "Privasi Terjaga",
-    privacyText: "Kami tidak menyimpan data Anda. Semua teks dan foto tersimpan secara lokal di perangkat Anda.",
+    summary: "6. Pesan & Kesan",
+    autoGen: "Tulis Ajaib",
+    privacyTitle: "100% Privat",
+    privacyText: "Data kamu aman di perangkat ini. Tidak ada yang dikirim ke server.",
     preview: "Pratinjau",
-    saveSlide: "Simpan Slide",
+    saveSlide: "Simpan Gambar",
     saving: "Menyimpan...",
-    exitScreenshot: "Keluar Mode Screenshot",
-    screenshotHint: "Gunakan Mode Screenshot untuk Berbagi",
-    madeBy: "Dibuat oleh @fadlyzaki",
+    exitScreenshot: "Keluar Mode Foto",
+    screenshotHint: "Ketuk 'Simpan Gambar' untuk share ke story",
+    madeBy: "Karya @fadlyzaki",
     // Themes
-    pressStart: "TEKAN MULAI UNTUK LANJUT",
+    pressStart: "TEKAN MULAI",
     playerStats: "STATISTIK_PEMAIN",
     achievements: "PENCAPAIAN",
+    audioLogs: "LOG_AUDIO",
     memoryDump: "MEMORI_DUMP",
     endTrans: "TRANSMISI SELESAI",
     annualReport: "LAPORAN TAHUNAN",
     keyPoints: "POIN UTAMA",
-    endReport: "Laporan Selesai",
+    topTracks: "LAGU TERATAS",
+    endReport: "LAPORAN SELESAI",
     collection: "Koleksi",
     moments: "MOMEN",
-    seeYou: "Sampai jumpa tahun depan...",
+    mixtape: "MIXTAPE",
+    seeYou: "Sampai jumpa...",
     systemBoot: ":: SISTEM_MULAI ::",
-    neuralStats: "Statistik Neural",
-    coreMem: "Unit Memori Inti",
+    neuralStats: "STAT_NEURAL",
+    coreMem: "MEMORI_INTI",
     visualLogs: "LOG_VISUAL",
-    endLine: "Akhir Baris_",
+    endLine: "AKHIR_BARIS_",
     keyFigures: "Angka Kunci",
+    soundtrack: "Soundtrack",
     fin: "Selesai.",
-    someNumbers: "Angka Yang Saya Lacak",
-    bigMoments: "Momen Besar!",
+    someNumbers: "Dalam Angka",
+    bigMoments: "Momen Besar",
+    myPlaylist: "Diulang-ulang",
     scrapbook: "Buku Kliping",
-    recap: "Rekap",
-    myStats: "Statistikku",
+    recap: "REKAP",
+    myStats: "STATISTIKKU",
     wins: "MENANG",
     pics: "FOTO",
     aesthetics: "E S T E T I K A",
-    memoriesExe: "Memori.exe",
+    memoriesExe: "memori.exe",
+    audioExe: "audio.exe",
     visuals: "V I S U A L",
-    volume: "Jilid",
-    indexRerum: "Indeks",
-    chronicles: "Kronik",
-    plates: "Pelat",
-    finis: "— Tamat —",
+    volume: "JILID",
+    indexRerum: "INDEKS",
+    chronicles: "KRONIK",
+    harmonia: "HARMONIA",
+    plates: "PELAT",
+    finis: "— TAMAT —",
     wow: "WAH!",
     pow: "DUAR!",
+    boom: "BOOM!",
     snap: "JEPRET!",
     fig: "GBR"
   }
 };
 
-// --- Theme Definitions (24 VIBES) ---
 const THEMES = [
   // 1. Retro Group
   { id: 'retro', name: '8-Bit Retro', vibe: 'Nostalgic, Console', color: 'bg-emerald-600' },
   { id: 'terminal', name: 'Hacker Terminal', vibe: 'Matrix, Code', color: 'bg-green-900' },
   { id: 'glitch', name: 'System Error', vibe: 'Distorted, Cyber', color: 'bg-red-700' },
-  
+  // ... (Other themes remain same)
   // 2. Swiss Group
   { id: 'swiss', name: 'Swiss Grid', vibe: 'Bold, Typographic', color: 'bg-red-600' },
   { id: 'monochrome', name: 'Mono Lux', vibe: 'Black & White', color: 'bg-black' },
@@ -309,34 +483,59 @@ const THEMES = [
   { id: 'pop', name: 'Pop Art', vibe: 'Comic, Halftone', color: 'bg-cyan-400' }
 ];
 
-// --- Initial Data (INDONESIAN DEFAULT) ---
-const INITIAL_DATA = {
-  year: '2025',
-  title: 'Tahun Bertumbuh',
-  subtitle: 'Membangun Pondasi',
-  summary: "Tahun yang didefinisikan bukan oleh tujuan, tapi perjalanannya. Langkah kecil, usaha konsisten, dan kejutan di sepanjang jalan.",
-  stats: [
-    { id: 1, label: 'Buku Tamat', value: '12', icon: 'book' },
-    { id: 2, label: 'Hari Streak', value: '365', icon: 'duolingo' },
-    { id: 3, label: 'km Lari', value: '150', icon: 'strava_run' },
-    { id: 4, label: 'Total Commit', value: '840', icon: 'git' }
-  ],
-  highlights: [
-    { id: 1, title: 'Karir Baru', desc: 'Memulai peran baru dan menyelesaikan proyek besar pertama.' },
-    { id: 2, title: 'Liburan Impian', desc: 'Akhirnya mengunjungi Jepang saat musim sakura.' },
-    { id: 3, title: 'Hobi Baru', desc: 'Belajar fotografi dan akhirnya paham mode manual.' }
-  ],
-  photos: [
-    { id: 1, url: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=500', caption: 'Big Wins' },
-    { id: 2, url: 'https://images.unsplash.com/photo-1516724562728-afc824a36e84?auto=format&fit=crop&q=80&w=500', caption: 'Vibes' },
-    { id: 3, url: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&q=80&w=500', caption: 'Adventure' }
-  ]
+// --- Initial Data (Templates - Updated with Emojis) ---
+const TEMPLATES = {
+  en: {
+    year: '2025',
+    title: 'The Year of Growth',
+    subtitle: 'Building Foundations',
+    summary: "A year defined not by the destination, but by the journey. Small steps, consistent effort, and a few surprises along the way.",
+    stats: [
+      { id: 1, label: 'Books Read', value: '12', icon: 'book' },
+      { id: 2, label: 'Streak Days', value: '365', icon: 'duolingo' },
+      { id: 3, label: 'km Run', value: '150', icon: 'strava_run' },
+      { id: 4, label: 'Commits', value: '840', icon: 'git' }
+    ],
+    highlights: [
+      { id: 1, title: 'Career Milestone', desc: 'Started a new role and shipped my first major project.', emoji: '🚀' },
+      { id: 2, title: 'Travel Goal', desc: 'Finally visited Japan during cherry blossom season.', emoji: '🌸' },
+      { id: 3, title: 'New Hobby', desc: 'Learned photography and actually used manual mode.', emoji: '📸' }
+    ],
+    photos: [
+      { id: 1, url: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=500', caption: 'Big Wins' },
+      { id: 2, url: 'https://images.unsplash.com/photo-1516724562728-afc824a36e84?auto=format&fit=crop&q=80&w=500', caption: 'Vibes' },
+      { id: 3, url: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&q=80&w=500', caption: 'Adventure' }
+    ]
+  },
+  id: {
+    year: '2025',
+    title: 'Tahun Bertumbuh',
+    subtitle: 'Membangun Pondasi',
+    summary: "Tahun yang didefinisikan bukan oleh tujuan, tapi perjalanannya. Langkah kecil, usaha konsisten, dan kejutan di sepanjang jalan.",
+    stats: [
+      { id: 1, label: 'Buku Tamat', value: '12', icon: 'book' },
+      { id: 2, label: 'Hari Streak', value: '365', icon: 'duolingo' },
+      { id: 3, label: 'km Lari', value: '150', icon: 'strava_run' },
+      { id: 4, label: 'Total Commit', value: '840', icon: 'git' }
+    ],
+    highlights: [
+      { id: 1, title: 'Karir Baru', desc: 'Memulai peran baru dan menyelesaikan proyek besar pertama.', emoji: '🚀' },
+      { id: 2, title: 'Liburan Impian', desc: 'Akhirnya mengunjungi Jepang saat musim sakura.', emoji: '🌸' },
+      { id: 3, title: 'Hobi Baru', desc: 'Belajar fotografi dan akhirnya paham mode manual.', emoji: '📸' }
+    ],
+    photos: [
+      { id: 1, url: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=500', caption: 'Big Wins' },
+      { id: 2, url: 'https://images.unsplash.com/photo-1516724562728-afc824a36e84?auto=format&fit=crop&q=80&w=500', caption: 'Vibes' },
+      { id: 3, url: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&q=80&w=500', caption: 'Adventure' }
+    ]
+  }
 };
 
 // --- RENDERERS ---
 
 // 1. RETRO RENDERER
 const RenderRetro = ({ slide, data, themeId, t }) => {
+  // ... (previous setup variables)
   const isTerminal = themeId === 'terminal';
   const isGlitch = themeId === 'glitch';
 
@@ -394,16 +593,22 @@ const RenderRetro = ({ slide, data, themeId, t }) => {
       </div>
   );
 
+  // HIGHLIGHTS WITH EMOJI UPDATE
   if (slide === 2) return (
       <div className={`h-full ${bgColor} p-6 font-mono relative overflow-hidden select-none`}>
          <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%)] z-10 bg-[length:100%_4px]"></div>
         <h3 className={`text-xl font-black uppercase mb-6 border-b-4 ${borderColor} pb-2 ${textColor}`}>{t.achievements}</h3>
         <div className="space-y-4">
           {data.highlights.map((h, i) => (
-             <div key={h.id} className={`${borderStyle} p-3 relative`}>
-               <div className={`absolute -top-3 -right-3 ${isTerminal ? 'bg-green-900' : isGlitch ? 'bg-red-900' : 'bg-emerald-900'} text-white w-6 h-6 flex items-center justify-center font-bold text-xs border-2 border-white`}>{i+1}</div>
-               <div className="font-bold uppercase text-sm mb-1 underline decoration-2">{h.title}</div>
-               <div className="text-xs leading-snug">{h.desc}</div>
+             <div key={h.id} className={`${borderStyle} p-3 relative flex gap-3`}>
+               {/* Emoji Badge */}
+               <div className={`shrink-0 w-10 h-10 ${isTerminal ? 'bg-green-900' : 'bg-emerald-900'} text-white flex items-center justify-center text-xl font-bold border-2 border-white`}>
+                 {h.emoji || (i+1)}
+               </div>
+               <div>
+                  <div className="font-bold uppercase text-sm mb-1 underline decoration-2">{h.title}</div>
+                  <div className="text-xs leading-snug">{h.desc}</div>
+               </div>
              </div>
           ))}
         </div>
@@ -455,7 +660,7 @@ const RenderRetro = ({ slide, data, themeId, t }) => {
 const RenderSwiss = ({ slide, data, themeId, t }) => {
   const isMono = themeId === 'monochrome';
   const isY2k = themeId === 'y2k';
-
+  // ... (bg variables same as before)
   let bgClass = isMono ? 'bg-black text-white' : isY2k ? 'bg-slate-300 text-blue-900' : 'bg-[#f2f2f2] text-[#1a1a1a]';
   let accentClass = isMono ? 'text-gray-400' : isY2k ? 'text-pink-500' : 'text-red-600';
   let borderClass = isMono ? 'border-white' : isY2k ? 'border-blue-900' : 'border-black';
@@ -493,6 +698,7 @@ const RenderSwiss = ({ slide, data, themeId, t }) => {
       </div>
   );
 
+  // HIGHLIGHTS WITH EMOJI UPDATE
   if (slide === 2) return (
       <div className={`h-full ${bgClass} font-sans flex flex-col select-none`}>
          <div className={`${isMono ? 'bg-gray-800' : isY2k ? 'bg-pink-500' : 'bg-red-600'} text-white p-6 pb-12 rounded-bl-[4rem]`}>
@@ -500,9 +706,13 @@ const RenderSwiss = ({ slide, data, themeId, t }) => {
          </div>
          <div className="flex-1 p-6 -mt-8 space-y-4">
            {data.highlights.map((h, i) => (
-             <div key={h.id} className={`${cardBg} p-5 shadow-xl border-l-8 ${borderClass}`}>
-               <h4 className="text-xl font-black uppercase mb-1">{h.title}</h4>
-               <p className="text-sm opacity-70 font-medium leading-tight">{h.desc}</p>
+             <div key={h.id} className={`${cardBg} p-5 shadow-xl border-l-8 ${borderClass} flex gap-4 items-start`}>
+               {/* Emoji Big & Bold */}
+               <div className="text-4xl">{h.emoji}</div>
+               <div>
+                  <h4 className="text-xl font-black uppercase mb-1">{h.title}</h4>
+                  <p className="text-sm opacity-70 font-medium leading-tight">{h.desc}</p>
+               </div>
              </div>
            ))}
          </div>
@@ -554,7 +764,7 @@ const RenderSwiss = ({ slide, data, themeId, t }) => {
 const RenderLoFi = ({ slide, data, themeId, t }) => {
   const isBotanical = themeId === 'botanical';
   const isBoho = themeId === 'boho';
-  
+  // ... (texture vars same)
   const paperTexture = isBotanical ? "bg-[#f1f8f1]" : isBoho ? "bg-[#f5efe6]" : "bg-[#fdfbf7]";
   const tapeStyle = "h-4 w-16 bg-yellow-200/80 absolute shadow-sm transform";
   
@@ -610,12 +820,16 @@ const RenderLoFi = ({ slide, data, themeId, t }) => {
       </div>
   );
 
+  // HIGHLIGHTS WITH EMOJI UPDATE
   if (slide === 2) return (
       <div className={`h-full ${paperTexture} p-6 font-serif relative overflow-hidden select-none`}>
          <h3 className={`text-5xl font-sans font-black ${isBotanical ? 'text-green-100' : 'text-stone-200'} absolute -right-4 top-10 rotate-90 z-0 select-none`}>{t.moments}</h3>
          <div className="relative z-10 space-y-6 mt-4">
            {data.highlights.map((h, i) => (
-             <div key={h.id} className={`bg-white p-4 shadow-sm border border-stone-200 ${i % 2 === 0 ? 'rotate-1' : '-rotate-1'}`}>
+             <div key={h.id} className={`bg-white p-4 shadow-sm border border-stone-200 ${i % 2 === 0 ? 'rotate-1' : '-rotate-1'} relative`}>
+               {/* Sticker Emoji */}
+               <div className="absolute -top-3 -right-3 text-3xl filter drop-shadow-md transform rotate-12">{h.emoji}</div>
+               
                <div className="flex items-center gap-2 mb-2 border-b border-stone-100 pb-2">
                  <div className={`w-2 h-2 rounded-full ${isBotanical ? 'bg-green-400' : 'bg-stone-300'}`}></div>
                  <h4 className="font-bold font-sans text-sm uppercase tracking-wide">{h.title}</h4>
@@ -672,7 +886,7 @@ const RenderLoFi = ({ slide, data, themeId, t }) => {
 // 4. CYBERPUNK NEON RENDERER
 const RenderNeon = ({ slide, data, themeId, t }) => {
   const isMidnight = themeId === 'midnight';
-  
+  // ... (variables same)
   const bgStyle = isMidnight ? "bg-indigo-950" : "bg-slate-950";
   const textPrimary = isMidnight ? "text-purple-400" : "text-cyan-400";
   const textSecondary = isMidnight ? "text-blue-300" : "text-fuchsia-500";
@@ -717,16 +931,20 @@ const RenderNeon = ({ slide, data, themeId, t }) => {
       </div>
   );
 
+  // HIGHLIGHTS WITH EMOJI UPDATE
   if (slide === 2) return (
       <div className={`h-full ${bgStyle} p-6 font-sans relative overflow-hidden flex flex-col`}>
          <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[length:20px_20px]"></div>
          <h3 className={`text-xl font-bold uppercase mb-8 ${textPrimary} ${glowText} flex items-center gap-2`}><Zap className="w-5 h-5" /> {t.coreMem}</h3>
          <div className="flex-1 space-y-6 z-10">
            {data.highlights.map((h, i) => (
-             <div key={h.id} className={`${borderStyle} p-4 rounded-lg relative`}>
-               <div className={`absolute -left-1 top-1/2 -translate-y-1/2 w-1 h-12 bg-gradient-to-b from-cyan-500 to-fuchsia-500 rounded-full shadow-[0_0_10px_rgba(0,255,255,0.5)]`}></div>
-               <div className={`font-bold uppercase text-sm mb-1 ${textSecondary} ${glowTextSecondary}`}>// {h.title}</div>
-               <div className={`text-sm leading-snug text-white opacity-90`}>{h.desc}</div>
+             <div key={h.id} className={`${borderStyle} p-4 rounded-lg relative flex gap-3 items-start`}>
+               {/* Neon Emoji */}
+               <div className={`text-2xl ${glowTextSecondary}`}>{h.emoji}</div>
+               <div>
+                  <div className={`font-bold uppercase text-sm mb-1 ${textSecondary} ${glowTextSecondary}`}>// {h.title}</div>
+                  <div className={`text-sm leading-snug text-white opacity-90`}>{h.desc}</div>
+               </div>
              </div>
            ))}
          </div>
@@ -831,7 +1049,8 @@ const RenderMinimal = ({ slide, data, themeId, t }) => {
          <div className="flex-1 space-y-8">
            {data.highlights.map((h, i) => (
              <div key={h.id} className="text-center">
-               <div className={`font-sans text-xs font-bold uppercase tracking-[0.2em] ${textSecondary} mb-2`}>0{i+1}.</div>
+               <div className="flex justify-center mb-2 text-2xl">{h.emoji}</div>
+               <div className={`font-sans text-xs font-bold uppercase tracking-[0.2em] ${textSecondary} mb-1`}>0{i+1}.</div>
                <h4 className={`text-lg font-normal uppercase tracking-wide mb-2 ${textPrimary}`}>{h.title}</h4>
                <p className={`text-sm leading-relaxed ${textSecondary} font-light italic px-4`}>{h.desc}</p>
              </div>
@@ -880,7 +1099,7 @@ const RenderMinimal = ({ slide, data, themeId, t }) => {
 const RenderGlass = ({ slide, data, themeId, t }) => {
   const isPastel = themeId === 'pastel';
   const isGradient = themeId === 'gradient';
-
+  // ... (bg variables same)
   let bgStyle = "bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500";
   let cardStyle = "backdrop-blur-xl bg-white/20 border border-white/30 shadow-lg text-white";
   let textColor = "text-white";
@@ -935,7 +1154,10 @@ const RenderGlass = ({ slide, data, themeId, t }) => {
       <div className="space-y-4 relative z-10">
         {data.highlights.map((h, i) => (
           <div key={h.id} className={`${cardStyle} p-5 rounded-2xl`}>
-            <h4 className="text-lg font-bold mb-1">{h.title}</h4>
+            <div className="flex justify-between items-center mb-1">
+                <h4 className="text-lg font-bold">{h.title}</h4>
+                <span className="text-xl">{h.emoji}</span>
+            </div>
             <p className={`text-sm ${textColor} opacity-90 leading-snug`}>{h.desc}</p>
           </div>
         ))}
@@ -1025,7 +1247,10 @@ const RenderBrutal = ({ slide, data, themeId, t }) => {
       <div className="space-y-6">
         {data.highlights.map((h, i) => (
           <div key={h.id} className={`${cardStyle} p-4`}>
-            <h4 className="text-xl font-black uppercase mb-1 bg-pink-300 inline-block px-1 border-2 border-black">{h.title}</h4>
+             <div className="flex justify-between">
+                <h4 className="text-xl font-black uppercase mb-1 bg-pink-300 inline-block px-1 border-2 border-black">{h.title}</h4>
+                <span className="text-2xl">{h.emoji}</span>
+             </div>
             <p className={`${textPrimary} font-bold leading-tight mt-2`}>{h.desc}</p>
           </div>
         ))}
@@ -1108,7 +1333,8 @@ const RenderVapor = ({ slide, data, themeId, t }) => {
        <h3 className="text-2xl text-pink-400 mb-6 relative z-10 uppercase">{t.memoriesExe}</h3>
        <div className="space-y-4 relative z-10">
          {data.highlights.map(h => (
-           <div key={h.id} className="bg-gradient-to-r from-cyan-900/80 to-purple-900/80 p-4 border-l-4 border-cyan-400">
+           <div key={h.id} className="bg-gradient-to-r from-cyan-900/80 to-purple-900/80 p-4 border-l-4 border-cyan-400 relative">
+             <div className="absolute top-2 right-2 text-2xl opacity-50">{h.emoji}</div>
              <h4 className="text-white font-bold text-lg">{h.title}</h4>
              <p className="text-pink-200 text-sm">{h.desc}</p>
            </div>
@@ -1185,6 +1411,7 @@ const RenderAcademia = ({ slide, data, t }) => {
         {data.highlights.map((h, i) => (
           <div key={h.id}>
             <span className="text-[#d4af37] text-xl font-bold mr-2">§ {i+1}</span>
+            <span className="mr-2 text-xl">{h.emoji}</span>
             <h4 className="inline text-lg font-bold">{h.title}</h4>
             <p className="text-[#8a7e68] mt-1 text-sm leading-relaxed pl-8">{h.desc}</p>
           </div>
@@ -1260,7 +1487,8 @@ const RenderPop = ({ slide, data, t }) => {
        <h3 className="text-5xl font-black text-black mb-6 italic drop-shadow-[2px_2px_0px_white]">{t.pow}</h3>
        <div className="space-y-4 relative z-10">
          {data.highlights.map(h => (
-           <div key={h.id} className="bg-white border-4 border-black p-4 shadow-[4px_4px_0px_black]">
+           <div key={h.id} className="bg-white border-4 border-black p-4 shadow-[4px_4px_0px_black] relative">
+             <div className="absolute -top-3 -right-3 text-3xl transform rotate-12">{h.emoji}</div>
              <h4 className="text-xl font-black uppercase">{h.title}</h4>
              <p className="text-sm font-bold">{h.desc}</p>
            </div>
@@ -1332,9 +1560,12 @@ const RenderBlueprint = ({ slide, data, t }) => {
         <div className="absolute top-0 left-0 bg-white text-[#003399] px-2 text-xs font-bold">{t.fig} 1.2 - {t.highlights}</div>
         <div className="space-y-4 mt-8">
           {data.highlights.map((h, i) => (
-            <div key={h.id} className="border-b border-white pb-2">
-              <div className="text-xs font-bold">ITEM {i+1}</div>
-              <div className="text-sm">{h.title}</div>
+            <div key={h.id} className="border-b border-white pb-2 flex justify-between">
+              <div>
+                <div className="text-xs font-bold">ITEM {i+1}</div>
+                <div className="text-sm">{h.title}</div>
+              </div>
+              <div className="text-xl">{h.emoji}</div>
             </div>
           ))}
         </div>
@@ -1364,15 +1595,17 @@ const RenderBlueprint = ({ slide, data, t }) => {
   return <RenderRetro slide={slide} data={data} themeId='retro' t={t} />; 
 };
 
+// ... (YearInReviewGenerator component remains same structure, just updating section input for highlights)
 
 export default function YearInReviewGenerator() {
+  // ... (state and effects same as before)
   const [data, setData] = useState(() => {
     try {
       const savedData = localStorage.getItem('yearInReviewData');
-      return savedData ? JSON.parse(savedData) : INITIAL_DATA;
+      return savedData ? JSON.parse(savedData) : TEMPLATES.id;
     } catch (e) {
       console.error("Failed to load from local storage", e);
-      return INITIAL_DATA;
+      return TEMPLATES.id;
     }
   });
   
@@ -1380,11 +1613,11 @@ export default function YearInReviewGenerator() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isCleanMode, setIsCleanMode] = useState(false);
   const [saveStatus, setSaveStatus] = useState('');
-  const [isDownloading, setIsDownloading] = useState(false); // Added missing state
+  const [isDownloading, setIsDownloading] = useState(false); 
   const [language, setLanguage] = useState('id'); // Default to Indonesian
 
   const t = TRANSLATIONS[language]; // Translation helper
-  const totalSlides = 4; 
+  const totalSlides = 4; // REDUCED TO 4 SLIDES
 
   const scrollContainerRef = useRef(null);
 
@@ -1396,10 +1629,17 @@ export default function YearInReviewGenerator() {
   };
 
   const toggleLanguage = () => {
-    setLanguage(prev => prev === 'en' ? 'id' : 'en');
+    const newLang = language === 'en' ? 'id' : 'en';
+    const currentDefault = TEMPLATES[language];
+    const isDefaultData = data.title === currentDefault.title && 
+                          data.stats[0].label === currentDefault.stats[0].label;
+
+    if (isDefaultData) {
+      setData(TEMPLATES[newLang]);
+    }
+    setLanguage(newLang);
   };
 
-  // --- Persistence ---
   useEffect(() => {
     try {
       localStorage.setItem('yearInReviewData', JSON.stringify(data));
@@ -1412,7 +1652,6 @@ export default function YearInReviewGenerator() {
     }
   }, [data]);
 
-  // --- Inject html2canvas ---
   useEffect(() => {
     const script = document.createElement('script');
     script.src = "https://html2canvas.hertzen.com/dist/html2canvas.min.js";
@@ -1424,7 +1663,6 @@ export default function YearInReviewGenerator() {
     }
   }, []);
 
-  // --- Handlers ---
   const handleInputChange = (field, value) => {
     setData(prev => ({ ...prev, [field]: value }));
   };
@@ -1432,7 +1670,17 @@ export default function YearInReviewGenerator() {
   const handleStatChange = (id, field, value) => {
     setData(prev => ({
       ...prev,
-      stats: prev.stats.map(s => s.id === id ? { ...s, [field]: value } : s)
+      stats: prev.stats.map(s => {
+        if (s.id !== id) return s;
+        const newStat = { ...s, [field]: value };
+        if (field === 'icon') {
+          const newLabel = DEFAULT_LABELS[language][value];
+          if (newLabel) {
+            newStat.label = newLabel;
+          }
+        }
+        return newStat;
+      })
     }));
   };
   
@@ -1465,7 +1713,7 @@ export default function YearInReviewGenerator() {
     if (data.highlights.length < 4) {
       setData(prev => ({
         ...prev,
-        highlights: [...prev.highlights, { id: Date.now(), title: 'New Highlight', desc: 'Description here.' }]
+        highlights: [...prev.highlights, { id: Date.now(), title: 'New Highlight', desc: 'Description here.', emoji: '✨' }]
       }));
     }
   };
@@ -1520,7 +1768,7 @@ export default function YearInReviewGenerator() {
 
   const resetData = () => {
     if (confirm("Are you sure you want to reset all data to the default template? This cannot be undone.")) {
-      setData(INITIAL_DATA);
+      setData(TEMPLATES[language]);
       localStorage.removeItem('yearInReviewData');
     }
   };
@@ -1552,7 +1800,6 @@ export default function YearInReviewGenerator() {
         backgroundColor: null, 
         useCORS: true 
       }).then(canvas => {
-        // Try Web Share API first
         canvas.toBlob(async (blob) => {
           if (blob) {
             const file = new File([blob], `year-in-review-slide-${currentSlide + 1}.png`, { type: 'image/png' });
@@ -1570,7 +1817,6 @@ export default function YearInReviewGenerator() {
                }
             }
           }
-          // Fallback to download
           const link = document.createElement('a');
           link.download = `year-in-review-slide-${currentSlide + 1}.png`;
           link.href = canvas.toDataURL();
@@ -1611,7 +1857,6 @@ export default function YearInReviewGenerator() {
               <h1 className="text-3xl font-black tracking-tight flex items-center gap-2 text-slate-900">
                 <RefreshCw className="text-indigo-600" /> {t.title}
               </h1>
-               {/* Privacy Note MOVED HERE */}
                <div className="mt-2 text-xs text-slate-400 bg-slate-50 p-2 rounded border border-slate-100 flex items-start gap-2">
                   <ShieldCheck className="w-3 h-3 mt-0.5 text-green-600 shrink-0" />
                   <span>{t.privacyText}</span>
@@ -1692,7 +1937,7 @@ export default function YearInReviewGenerator() {
             )}
           </section>
 
-          {/* HIGHLIGHTS SECTION */}
+          {/* HIGHLIGHTS SECTION WITH EMOJI PICKER */}
           <section className="mb-10">
             <div className="flex justify-between items-center mb-4">
                <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2"><Layout className="w-4 h-4" /> {t.highlights}</h3>
@@ -1708,7 +1953,20 @@ export default function YearInReviewGenerator() {
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
-                   <input type="text" value={item.title} onChange={(e) => handleHighlightChange(item.id, 'title', e.target.value)} className="w-full mb-2 text-sm font-bold border-b border-slate-100 pb-2 focus:border-indigo-500 outline-none pr-8" placeholder={t.highlightTitle}/>
+                   {/* Emoji Input Row */}
+                   <div className="flex gap-2 mb-2 items-center">
+                     <div className="w-10 flex-shrink-0">
+                       <input 
+                         type="text" 
+                         value={item.emoji || ''} 
+                         onChange={(e) => handleHighlightChange(item.id, 'emoji', e.target.value)} 
+                         className="w-full h-10 text-center text-xl border border-slate-200 rounded-lg focus:border-indigo-500 outline-none"
+                         placeholder="✨"
+                         maxLength={2}
+                       />
+                     </div>
+                     <input type="text" value={item.title} onChange={(e) => handleHighlightChange(item.id, 'title', e.target.value)} className="flex-1 text-sm font-bold border-b border-slate-100 pb-2 focus:border-indigo-500 outline-none pr-8" placeholder={t.highlightTitle}/>
+                   </div>
                   <textarea value={item.desc} onChange={(e) => handleHighlightChange(item.id, 'desc', e.target.value)} className="w-full text-xs text-slate-600 resize-none outline-none h-12" placeholder={t.desc}/>
                 </div>
               ))}
