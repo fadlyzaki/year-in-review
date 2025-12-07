@@ -98,33 +98,81 @@ const ICON_MAP = {
   social_linked: <Linkedin className="w-full h-full" />
 };
 
-// --- Default Labels for Icons ---
+// --- Default Labels for Icons (Smart Auto-Fill) ---
 const DEFAULT_LABELS = {
   en: {
-    coffee: "Coffees", book: "Books Read", activity: "Workouts", zap: "Moments",
-    heart: "Kindness", work: "Projects", music: "Minutes Listened", globe: "Countries",
-    terminal: "Lines of Code", feather: "Words Written", phone: "Screen Time",
-    camera: "Photos Taken", star: "Achievements", disc: "Albums", duolingo: "Streak Days",
-    language: "Languages", strava_cycle: "km Cycled", strava_run: "km Run",
-    gym: "Gym Sessions", travel: "Trips", gaming: "Hours Played", coding: "Commits",
-    git: "PRs Merged", design: "Designs", finance: "Savings", spotify: "Top Genre",
-    youtube: "Hours Watched", food: "New Foods", sleep: "Avg Sleep", location: "Places",
-    social_x: "Tweets", social_insta: "Posts", social_linked: "Connections"
+    coffee: "Coffees",
+    book: "Books Read",
+    activity: "Workouts",
+    zap: "Moments",
+    heart: "Kindness",
+    work: "Projects",
+    music: "Minutes Listened",
+    globe: "Countries",
+    terminal: "Lines of Code",
+    feather: "Words Written",
+    phone: "Screen Time",
+    camera: "Photos Taken",
+    star: "Achievements",
+    disc: "Albums",
+    duolingo: "Streak Days",
+    language: "Languages",
+    strava_cycle: "km Cycled",
+    strava_run: "km Run",
+    gym: "Gym Sessions",
+    travel: "Trips",
+    gaming: "Hours Played",
+    coding: "Commits",
+    git: "PRs Merged",
+    design: "Designs",
+    finance: "Savings",
+    spotify: "Top Genre",
+    youtube: "Hours Watched",
+    food: "New Foods",
+    sleep: "Avg Sleep",
+    location: "Places",
+    social_x: "Tweets",
+    social_insta: "Posts",
+    social_linked: "Connections"
   },
   id: {
-    coffee: "Kopi Diminum", book: "Buku Tamat", activity: "Olahraga", zap: "Momen Seru",
-    heart: "Kebaikan", work: "Proyek", music: "Menit Dengar", globe: "Negara",
-    terminal: "Baris Kode", feather: "Kata Ditulis", phone: "Durasi Layar",
-    camera: "Foto Diambil", star: "Pencapaian", disc: "Album", duolingo: "Hari Streak",
-    language: "Bahasa", strava_cycle: "km Sepeda", strava_run: "km Lari",
-    gym: "Sesi Gym", travel: "Perjalanan", gaming: "Jam Main", coding: "Total Commit",
-    git: "PR Merged", design: "Desain", finance: "Tabungan", spotify: "Genre Top",
-    youtube: "Jam Nonton", food: "Makanan Baru", sleep: "Rata-rata Tidur",
-    location: "Tempat", social_x: "Tweets", social_insta: "Postingan", social_linked: "Koneksi"
+    coffee: "Kopi Diminum",
+    book: "Buku Tamat",
+    activity: "Olahraga",
+    zap: "Momen Seru",
+    heart: "Kebaikan",
+    work: "Proyek",
+    music: "Menit Dengar",
+    globe: "Negara",
+    terminal: "Baris Kode",
+    feather: "Kata Ditulis",
+    phone: "Durasi Layar",
+    camera: "Foto Diambil",
+    star: "Pencapaian",
+    disc: "Album",
+    duolingo: "Hari Streak",
+    language: "Bahasa",
+    strava_cycle: "km Sepeda",
+    strava_run: "km Lari",
+    gym: "Sesi Gym",
+    travel: "Perjalanan",
+    gaming: "Jam Main",
+    coding: "Total Commit",
+    git: "PR Merged",
+    design: "Desain",
+    finance: "Tabungan",
+    spotify: "Genre Top",
+    youtube: "Jam Nonton",
+    food: "Makanan Baru",
+    sleep: "Rata-rata Tidur",
+    location: "Tempat",
+    social_x: "Tweets",
+    social_insta: "Postingan",
+    social_linked: "Koneksi"
   }
 };
 
-// --- Smart Summary Generator ---
+// --- Smart Summary Generator Logic ---
 const generateSmartSummary = (data, lang) => {
   const stats = data.stats;
   const highlights = data.highlights;
@@ -208,37 +256,10 @@ const generateSmartSummary = (data, lang) => {
   return options[Math.floor(Math.random() * options.length)];
 };
 
-// --- Quotes Library (Added back ID quotes) ---
-const QUOTES_EN = [
-  "A year defined not by the destination, but by the journey.",
-  "Small steps, consistent effort, and a few surprises along the way.",
-  "Growth is uncomfortable, but absolutely necessary.",
-  "Collecting moments, not things. 2025 was a vibe.",
-  "Grateful for the ups, the downs, and everything in between.",
-  "The year I finally started building my own path.",
-  "Work hard in silence, let your success be your noise.",
-  "Embrace the chaos. Trust the process.",
-  "Not a new me, just a better version.",
-  "Turning pages and writing new chapters."
-];
-
-const QUOTES_ID = [
-  "Tahun yang didefinisikan bukan oleh tujuan, tapi perjalanannya.",
-  "Langkah kecil, usaha konsisten, dan kejutan di sepanjang jalan.",
-  "Bertumbuh itu tidak nyaman, tapi mutlak diperlukan.",
-  "Mengoleksi momen, bukan barang. 2025 punya cerita.",
-  "Bersyukur untuk naik turunnya kehidupan tahun ini.",
-  "Tahun di mana aku mulai membangun jalanku sendiri.",
-  "Bekerja dalam diam, biarkan suksesmu yang berbicara.",
-  "Nikmati prosesnya, percaya pada hasilnya.",
-  "Bukan aku yang baru, tapi versi yang lebih baik.",
-  "Membuka lembaran baru dan menulis bab selanjutnya."
-];
-
 // --- Translations ---
 const TRANSLATIONS = {
   en: {
-    // UI - Modern & Editorial Tone
+    // UI
     title: "MY YEAR EDIT", 
     subtitle: "Curate your moments, design your story.",
     reset: "Start Over",
@@ -316,7 +337,7 @@ const TRANSLATIONS = {
     fig: "FIG"
   },
   id: {
-    // UI - Santai & Personal
+    // UI
     title: "EDISI TAHUNKU",
     subtitle: "Kurasi momenmu, desain ceritamu.",
     reset: "Ulang Awal",
@@ -575,7 +596,7 @@ const RenderSwiss = ({ slide, data, t }) => {
   let cardBg = 'bg-white';
 
   const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-bold uppercase tracking-widest text-black/20 z-20 pointer-events-none`}>{t.madeBy}</div>;
-  const darkWatermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-bold uppercase tracking-widest text-white/20 z-20 pointer-events-none`}>{t.madeBy}</div>;
+  const darkWatermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-bold uppercase tracking-widest text-black/20 z-20 pointer-events-none`}>{t.madeBy}</div>;
   
   if (slide === 0) return (
       <div className={`h-full ${bgClass} p-4 font-sans flex flex-col relative select-none`}>
@@ -593,12 +614,12 @@ const RenderSwiss = ({ slide, data, t }) => {
 
   if (slide === 1) return (
       <div className={`h-full bg-white text-black p-6 font-sans flex flex-col select-none`}>
-        <h3 className={`text-4xl font-black mb-8 border-b-2 border-red-600 pb-2`}>{t.keyPoints}</h3>
-        <div className="space-y-6">
+        <h3 className={`text-4xl font-black mb-6 border-b-2 border-red-600 pb-2`}>{t.keyPoints}</h3>
+        <div className="flex-1 flex flex-col justify-center gap-3">
           {data.stats.map((stat, idx) => (
-            <div key={stat.id} className="flex items-baseline justify-between group">
-              <div className="text-sm font-bold uppercase tracking-widest opacity-50 w-1/3">0{idx + 1} / {stat.label}</div>
-              <div className={`text-5xl font-black text-black group-hover:${accentClass} transition-colors`}>{stat.value}</div>
+            <div key={stat.id} className="flex items-baseline justify-between group border-b border-gray-100 pb-1 last:border-0">
+              <div className="text-xs font-bold uppercase tracking-widest opacity-50 w-1/3 truncate">0{idx + 1} / {stat.label}</div>
+              <div className={`text-4xl font-black text-black group-hover:${accentClass} transition-colors`}>{stat.value}</div>
             </div>
           ))}
         </div>
@@ -614,6 +635,7 @@ const RenderSwiss = ({ slide, data, t }) => {
          <div className="flex-1 p-6 -mt-8 space-y-4 min-h-0 overflow-y-auto scrollbar-hide">
            {data.highlights.map((h, i) => (
              <div key={h.id} className={`${cardBg} p-5 shadow-xl border-l-8 ${borderClass} flex gap-4 items-start`}>
+               {/* Emoji Big & Bold */}
                <div className="text-4xl shrink-0">{h.emoji}</div>
                <div className="min-w-0">
                   <h4 className="text-xl font-black uppercase mb-1 truncate">{h.title}</h4>
@@ -713,6 +735,7 @@ const RenderLoFi = ({ slide, data, t }) => {
       </div>
   );
 
+  // HIGHLIGHTS WITH EMOJI UPDATE
   if (slide === 2) return (
       <div className={`h-full ${paperTexture} p-6 font-serif relative overflow-hidden select-none flex flex-col`}>
          <h3 className={`text-5xl font-sans font-black text-stone-200 absolute -right-4 top-10 rotate-90 z-0 select-none`}>{t.moments}</h3>
@@ -829,8 +852,8 @@ const RenderNeon = ({ slide, data, t }) => {
            {data.highlights.map((h, i) => (
              <div key={h.id} className={`${borderStyle} p-4 rounded-lg relative flex gap-3 items-start`}>
                {/* Neon Emoji */}
-               <div className={`text-2xl ${glowTextSecondary}`}>{h.emoji}</div>
-               <div>
+               <div className={`text-2xl ${glowTextSecondary} shrink-0`}>{h.emoji}</div>
+               <div className="min-w-0">
                   <div className={`font-bold uppercase text-sm mb-1 ${textSecondary} ${glowTextSecondary} truncate`}>// {h.title}</div>
                   <div className={`text-sm leading-snug text-white opacity-90 line-clamp-2`}>{h.desc}</div>
                </div>
@@ -921,14 +944,14 @@ const RenderMinimal = ({ slide, data, t }) => {
 
   if (slide === 2) return (
       <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col select-none`}>
-         <h3 className={`text-xl font-normal uppercase tracking-widest text-center mb-12 ${textPrimary}`}>{t.highlights}</h3>
-         <div className="flex-1 space-y-8 min-h-0 overflow-y-auto scrollbar-hide">
+         <h3 className={`text-xl font-normal uppercase tracking-widest text-center mb-6 ${textPrimary}`}>{t.highlights}</h3>
+         <div className="flex-1 space-y-6 min-h-0 overflow-y-auto scrollbar-hide">
            {data.highlights.map((h, i) => (
              <div key={h.id} className="text-center">
-               <div className="flex justify-center mb-2 text-2xl">{h.emoji}</div>
-               <div className={`font-sans text-xs font-bold uppercase tracking-[0.2em] ${textSecondary} mb-1`}>0{i+1}.</div>
-               <h4 className={`text-lg font-normal uppercase tracking-wide mb-2 ${textPrimary} truncate`}>{h.title}</h4>
-               <p className={`text-sm leading-relaxed ${textSecondary} font-light italic px-4 line-clamp-2`}>{h.desc}</p>
+               <div className="flex justify-center mb-1 text-xl">{h.emoji}</div>
+               <div className={`font-sans text-[10px] font-bold uppercase tracking-[0.2em] ${textSecondary} mb-1`}>0{i+1}.</div>
+               <h4 className={`text-base font-normal uppercase tracking-wide mb-1 ${textPrimary} truncate`}>{h.title}</h4>
+               <p className={`text-xs leading-relaxed ${textSecondary} font-light italic px-4 line-clamp-2`}>{h.desc}</p>
              </div>
            ))}
          </div>
@@ -1092,11 +1115,23 @@ const RenderJournal = ({ slide, data, t }) => {
 };
 
 // 7. GLASSMORPHISM RENDERER (Handles: Glass, Pastel, Gradient)
-const RenderGlass = ({ slide, data, t }) => {
+const RenderGlass = ({ slide, data, themeId, t }) => {
+  const isPastel = themeId === 'pastel';
+  const isGradient = themeId === 'gradient';
+
   let bgStyle = "bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500";
   let cardStyle = "backdrop-blur-xl bg-white/20 border border-white/30 shadow-lg text-white";
   let textColor = "text-white";
   
+  if (isPastel) {
+    bgStyle = "bg-gradient-to-tr from-pink-200 via-yellow-100 to-blue-200";
+    cardStyle = "backdrop-blur-md bg-white/60 border border-white/50 shadow-sm text-slate-700";
+    textColor = "text-slate-700";
+  } else if (isGradient) {
+    bgStyle = "bg-gradient-to-bl from-blue-400 via-teal-300 to-green-400";
+    cardStyle = "backdrop-blur-2xl bg-black/10 border border-white/20 shadow-2xl text-white";
+  }
+
   const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-medium uppercase tracking-widest ${textColor} opacity-50 z-20 pointer-events-none`}>{t.madeBy}</div>;
 
   if (slide === 0) return (
@@ -1159,7 +1194,7 @@ const RenderGlass = ({ slide, data, t }) => {
     return (
       <div className={`h-full ${bgStyle} p-6 font-sans flex flex-col relative select-none overflow-hidden`}>
         <h3 className={`text-2xl font-bold ${textColor} mb-6 drop-shadow-md`}>{t.gallery}</h3>
-        <div className={`grid gap-3 flex-1 w-full grid-cols-1 ${data.photos.length > 1 ? 'grid-rows-2' : ''}`}>
+        <div className={`grid gap-3 flex-1 w-full ${gridClass} min-h-0`}>
           {data.photos.map((photo, i) => (
             <div 
               key={photo.id} 
@@ -1264,8 +1299,11 @@ const RenderBrutal = ({ slide, data, t }) => {
 
   return (
     <div className={`h-full ${bgStyle} p-8 font-sans flex flex-col justify-center items-center text-center relative select-none`}>
-      <div className={`${cardStyle} p-8 bg-blue-400 rotate-1`}>
-        <p className="text-2xl font-black text-white leading-tight">"{data.summary}"</p>
+      <div className={`${cardStyle} p-8 ${accent2} -rotate-1`}>
+         <p className="text-2xl font-black text-white leading-tight uppercase">"{data.summary}"</p>
+      </div>
+      <div className={`mt-8 ${accent1} border-4 border-black px-4 py-2 font-black text-black transform rotate-2`}>
+        {t.fin}
       </div>
       {watermark}
     </div>
@@ -1273,8 +1311,9 @@ const RenderBrutal = ({ slide, data, t }) => {
 };
 
 // 9. VAPORWAVE RENDERER (Handles: Vapor, Synth)
-const RenderVapor = ({ slide, data, t }) => {
-  const bgStyle = "bg-gradient-to-b from-fuchsia-900 to-purple-900";
+const RenderVapor = ({ slide, data, themeId, t }) => {
+  const isSynth = themeId === 'synth';
+  const bgStyle = isSynth ? "bg-gradient-to-b from-orange-500 via-red-500 to-purple-900" : "bg-gradient-to-b from-fuchsia-900 to-purple-900";
   const gridStyle = "bg-[linear-gradient(rgba(0,255,255,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.2)_1px,transparent_1px)] bg-[length:40px_40px] perspective-[500px]";
   const watermark = <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-mono text-cyan-400/50 z-20 pointer-events-none drop-shadow-[1px_1px_0px_rgba(255,0,255,0.5)]">{t.madeBy}</div>;
   
@@ -1403,12 +1442,21 @@ const RenderAcademia = ({ slide, data, t }) => {
     </div>
   );
 
-  if (slide === 3) return (
+  if (slide === 3) {
+    const photoCount = data.photos.length;
+    let gridClass = 'grid-rows-2'; 
+    if (photoCount >= 3) gridClass = 'grid-cols-2 grid-rows-2';
+    if (photoCount >= 5) gridClass = 'grid-cols-2 grid-rows-3';
+
+    return (
     <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col select-none`}>
        <h3 className="text-2xl text-[#d4af37] mb-6 italic text-center">{t.plates}</h3>
-       <div className="grid grid-cols-1 gap-6 h-full pb-8">
-          {data.photos.slice(0, 2).map((photo, i) => (
-             <div key={photo.id} className="border-[8px] border-[#e0d8c3] shadow-xl overflow-hidden h-40">
+       <div className={`grid gap-4 flex-1 w-full ${gridClass}`}>
+          {data.photos.map((photo, i) => (
+             <div 
+               key={photo.id} 
+               className={`border-[4px] border-[#e0d8c3] shadow-xl overflow-hidden ${photoCount === 3 && i === 0 ? 'row-span-2' : ''}`}
+             >
                 <img src={photo.url} alt="" className="w-full h-full object-cover sepia-[.6] contrast-125" />
              </div>
           ))}
@@ -1416,6 +1464,7 @@ const RenderAcademia = ({ slide, data, t }) => {
        {watermark}
     </div>
   );
+  }
 
   return (
     <div className={`h-full ${bgStyle} p-12 font-serif flex flex-col justify-center items-center text-center relative select-none`}>
@@ -1480,13 +1529,21 @@ const RenderPop = ({ slide, data, t }) => {
     </div>
   );
 
-  if (slide === 3) return (
-    <div className={`h-full bg-yellow-300 p-6 font-sans relative select-none`}>
+  if (slide === 3) {
+     const photoCount = data.photos.length;
+    let gridClass = 'grid-cols-1 grid-rows-2'; 
+    if (photoCount >= 3) gridClass = 'grid-cols-2 grid-rows-2';
+    if (photoCount >= 5) gridClass = 'grid-cols-2 grid-rows-3';
+     return (
+    <div className={`h-full bg-yellow-300 p-6 font-sans relative select-none flex flex-col`}>
        <div className="absolute inset-0 bg-[radial-gradient(circle,black_1px,transparent_1px)] bg-[length:10px_10px] opacity-10"></div>
        <h3 className="text-5xl font-black text-black mb-6 italic drop-shadow-[2px_2px_0px_white]">{t.snap}</h3>
-       <div className="grid grid-cols-1 gap-4 relative z-10">
+       <div className={`grid gap-4 flex-1 w-full relative z-10 ${gridClass}`}>
           {data.photos.map((photo, i) => (
-            <div key={photo.id} className="bg-white border-4 border-black p-2 shadow-[4px_4px_0px_black] h-40 overflow-hidden">
+            <div 
+              key={photo.id} 
+              className={`bg-white border-4 border-black p-1 shadow-[4px_4px_0px_black] overflow-hidden ${photoCount === 3 && i === 0 ? 'row-span-2' : ''}`}
+            >
               <img src={photo.url} alt="" className="w-full h-full object-cover grayscale contrast-125" />
             </div>
           ))}
@@ -1494,8 +1551,23 @@ const RenderPop = ({ slide, data, t }) => {
        {watermark}
     </div>
   );
+  }
 
-  return <RenderRetro slide={slide} data={data} themeId='retro' t={t} />; 
+  // FIXED: POP ART SUMMARY (Slide 5)
+  return (
+    <div className={`h-full bg-cyan-300 p-8 font-sans flex flex-col justify-center items-center text-center relative select-none overflow-hidden`}>
+       <div className="absolute inset-0 bg-[radial-gradient(circle,black_1px,transparent_1px)] bg-[length:10px_10px] opacity-20"></div>
+       <div className="bg-white border-4 border-black p-8 shadow-[8px_8px_0px_black] relative z-10 rotate-2">
+         <div className="absolute -top-4 -left-4 text-4xl transform -rotate-12">❝</div>
+         <p className="text-2xl font-black text-black leading-tight italic uppercase">"{data.summary}"</p>
+         <div className="absolute -bottom-4 -right-4 text-4xl transform -rotate-12">❞</div>
+       </div>
+       <div className="mt-8 bg-yellow-400 text-black border-4 border-black px-6 py-2 font-black uppercase transform -rotate-3 relative z-10 shadow-[4px_4px_0px_black]">
+         {t.fin}
+       </div>
+       {watermark}
+    </div>
+  );
 };
 
 // 12. BLUEPRINT RENDERER
@@ -1556,14 +1628,23 @@ const RenderBlueprint = ({ slide, data, t }) => {
     </div>
   );
 
-  if (slide === 3) return (
+  if (slide === 3) {
+    const photoCount = data.photos.length;
+    let gridClass = 'grid-rows-2'; 
+    if (photoCount > 2) gridClass = 'grid-cols-2 grid-rows-2';
+    if (photoCount >= 5) gridClass = 'grid-cols-2 grid-rows-3';
+     
+    return (
     <div className={`h-full ${bgStyle} p-8 font-mono flex flex-col relative select-none`}>
       <div className={`absolute inset-0 ${grid}`}></div>
-      <div className="border-4 border-white p-6 relative z-10 h-full">
+      <div className="border-4 border-white p-6 relative z-10 h-full flex flex-col">
         <div className="absolute top-0 left-0 bg-white text-[#003399] px-2 text-xs font-bold">{t.fig} 1.3 - {t.visuals}</div>
-        <div className="grid grid-cols-1 gap-4 mt-8 h-full pb-8">
+        <div className={`grid gap-4 mt-8 flex-1 w-full ${gridClass}`}>
           {data.photos.map((photo, i) => (
-             <div key={photo.id} className="border border-white h-32 overflow-hidden relative">
+             <div 
+               key={photo.id} 
+               className={`border border-white overflow-hidden relative ${photoCount === 3 && i === 0 ? 'row-span-2' : ''}`}
+             >
                 <img src={photo.url} alt="" className="w-full h-full object-cover opacity-50 grayscale" />
                 <div className="absolute top-0 left-0 bg-white text-[#003399] text-[8px] px-1">IMG_{i+1}</div>
              </div>
@@ -1573,8 +1654,18 @@ const RenderBlueprint = ({ slide, data, t }) => {
       {watermark}
     </div>
   );
+  }
 
-  return <RenderRetro slide={slide} data={data} themeId='retro' t={t} />; 
+  return (
+    <div className={`h-full ${bgStyle} p-8 font-mono flex flex-col justify-center relative select-none`}>
+      <div className={`absolute inset-0 ${grid}`}></div>
+      <div className="border-4 border-white p-6 relative z-10">
+        <div className="absolute top-0 left-0 bg-white text-[#003399] px-2 text-xs font-bold">{t.fig} 1.4 - {t.fin}</div>
+         <p className="text-xl leading-relaxed mt-4">"{data.summary}"</p>
+      </div>
+      {watermark}
+    </div>
+  );
 };
 
 
@@ -1594,10 +1685,10 @@ export default function YearInReviewGenerator() {
   const [isCleanMode, setIsCleanMode] = useState(false);
   const [saveStatus, setSaveStatus] = useState('');
   const [isDownloading, setIsDownloading] = useState(false); 
-  const [language, setLanguage] = useState('id'); 
+  const [language, setLanguage] = useState('id'); // Default to Indonesian
   const [showHelp, setShowHelp] = useState(false);
 
-  const t = TRANSLATIONS[language]; 
+  const t = TRANSLATIONS[language]; // Translation helper
   const totalSlides = 5; 
 
   const scrollContainerRef = useRef(null);
@@ -1613,7 +1704,8 @@ export default function YearInReviewGenerator() {
     const newLang = language === 'en' ? 'id' : 'en';
     const currentDefault = TEMPLATES[language];
     // Check if *core* data is default to switch templates. Photos/Highlights content might differ, so we check title/year as proxy.
-    const isDefaultData = data.title === currentDefault.title;
+    const isDefaultData = data.title === currentDefault.title && 
+                          data.stats[0].label === currentDefault.stats[0].label;
 
     if (isDefaultData) {
       setData(TEMPLATES[newLang]);
@@ -1755,6 +1847,7 @@ export default function YearInReviewGenerator() {
   };
 
   const generateQuote = () => {
+    // Use smart summary logic
     const smartQuote = generateSmartSummary(data, language);
     handleInputChange('summary', smartQuote);
   };
