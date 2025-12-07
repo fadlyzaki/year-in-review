@@ -98,77 +98,29 @@ const ICON_MAP = {
   social_linked: <Linkedin className="w-full h-full" />
 };
 
-// --- Default Labels for Icons (Smart Auto-Fill) ---
+// --- Default Labels for Icons ---
 const DEFAULT_LABELS = {
   en: {
-    coffee: "Coffees",
-    book: "Books Read",
-    activity: "Workouts",
-    zap: "Moments",
-    heart: "Kindness",
-    work: "Projects",
-    music: "Minutes Listened",
-    globe: "Countries",
-    terminal: "Lines of Code",
-    feather: "Words Written",
-    phone: "Screen Time",
-    camera: "Photos Taken",
-    star: "Achievements",
-    disc: "Albums",
-    duolingo: "Streak Days",
-    language: "Languages",
-    strava_cycle: "km Cycled",
-    strava_run: "km Run",
-    gym: "Gym Sessions",
-    travel: "Trips",
-    gaming: "Hours Played",
-    coding: "Commits",
-    git: "PRs Merged",
-    design: "Designs",
-    finance: "Savings",
-    spotify: "Top Genre",
-    youtube: "Hours Watched",
-    food: "New Foods",
-    sleep: "Avg Sleep",
-    location: "Places",
-    social_x: "Tweets",
-    social_insta: "Posts",
-    social_linked: "Connections"
+    coffee: "Coffees", book: "Books Read", activity: "Workouts", zap: "Moments",
+    heart: "Kindness", work: "Projects", music: "Minutes Listened", globe: "Countries",
+    terminal: "Lines of Code", feather: "Words Written", phone: "Screen Time",
+    camera: "Photos Taken", star: "Achievements", disc: "Albums", duolingo: "Streak Days",
+    language: "Languages", strava_cycle: "km Cycled", strava_run: "km Run",
+    gym: "Gym Sessions", travel: "Trips", gaming: "Hours Played", coding: "Commits",
+    git: "PRs Merged", design: "Designs", finance: "Savings", spotify: "Top Genre",
+    youtube: "Hours Watched", food: "New Foods", sleep: "Avg Sleep", location: "Places",
+    social_x: "Tweets", social_insta: "Posts", social_linked: "Connections"
   },
   id: {
-    coffee: "Kopi Diminum",
-    book: "Buku Tamat",
-    activity: "Olahraga",
-    zap: "Momen Seru",
-    heart: "Kebaikan",
-    work: "Proyek",
-    music: "Menit Dengar",
-    globe: "Negara",
-    terminal: "Baris Kode",
-    feather: "Kata Ditulis",
-    phone: "Durasi Layar",
-    camera: "Foto Diambil",
-    star: "Pencapaian",
-    disc: "Album",
-    duolingo: "Hari Streak",
-    language: "Bahasa",
-    strava_cycle: "km Sepeda",
-    strava_run: "km Lari",
-    gym: "Sesi Gym",
-    travel: "Perjalanan",
-    gaming: "Jam Main",
-    coding: "Total Commit",
-    git: "PR Merged",
-    design: "Desain",
-    finance: "Tabungan",
-    spotify: "Genre Top",
-    youtube: "Jam Nonton",
-    food: "Makanan Baru",
-    sleep: "Rata-rata Tidur",
-    location: "Tempat",
-    social_x: "Tweets",
-    social_insta: "Postingan",
-    social_linked: "Koneksi"
+    coffee: "Kopi Diminum", book: "Buku Tamat", activity: "Olahraga", zap: "Momen Seru",
+    heart: "Kebaikan", work: "Proyek", music: "Menit Dengar", globe: "Negara",
+    terminal: "Baris Kode", feather: "Kata Ditulis", phone: "Durasi Layar",
+    camera: "Foto Diambil", star: "Pencapaian", disc: "Album", duolingo: "Hari Streak",
+    language: "Bahasa", strava_cycle: "km Sepeda", strava_run: "km Lari",
+    gym: "Sesi Gym", travel: "Perjalanan", gaming: "Jam Main", coding: "Total Commit",
+    git: "PR Merged", design: "Desain", finance: "Tabungan", spotify: "Genre Top",
+    youtube: "Jam Nonton", food: "Makanan Baru", sleep: "Rata-rata Tidur",
+    location: "Tempat", social_x: "Tweets", social_insta: "Postingan", social_linked: "Koneksi"
   }
 };
 
@@ -256,6 +208,33 @@ const generateSmartSummary = (data, lang) => {
   return options[Math.floor(Math.random() * options.length)];
 };
 
+// --- Quotes Library (Added back ID quotes) ---
+const QUOTES_EN = [
+  "A year defined not by the destination, but by the journey.",
+  "Small steps, consistent effort, and a few surprises along the way.",
+  "Growth is uncomfortable, but absolutely necessary.",
+  "Collecting moments, not things. 2025 was a vibe.",
+  "Grateful for the ups, the downs, and everything in between.",
+  "The year I finally started building my own path.",
+  "Work hard in silence, let your success be your noise.",
+  "Embrace the chaos. Trust the process.",
+  "Not a new me, just a better version.",
+  "Turning pages and writing new chapters."
+];
+
+const QUOTES_ID = [
+  "Tahun yang didefinisikan bukan oleh tujuan, tapi perjalanannya.",
+  "Langkah kecil, usaha konsisten, dan kejutan di sepanjang jalan.",
+  "Bertumbuh itu tidak nyaman, tapi mutlak diperlukan.",
+  "Mengoleksi momen, bukan barang. 2025 punya cerita.",
+  "Bersyukur untuk naik turunnya kehidupan tahun ini.",
+  "Tahun di mana aku mulai membangun jalanku sendiri.",
+  "Bekerja dalam diam, biarkan suksesmu yang berbicara.",
+  "Nikmati prosesnya, percaya pada hasilnya.",
+  "Bukan aku yang baru, tapi versi yang lebih baik.",
+  "Membuka lembaran baru dan menulis bab selanjutnya."
+];
+
 // --- Translations ---
 const TRANSLATIONS = {
   en: {
@@ -286,8 +265,6 @@ const TRANSLATIONS = {
     exitScreenshot: "Exit Capture Mode",
     screenshotHint: "Tap 'Save Image' to download & share to stories",
     madeBy: "made with year-in-review-generator",
-    songPlaceholder: "Song Title",
-    artistPlaceholder: "Artist Name",
     // Help Modal
     helpTitle: "How to use",
     helpDesc: "Create your own aesthetic year-in-review in minutes.",
@@ -366,8 +343,6 @@ const TRANSLATIONS = {
     exitScreenshot: "Keluar Mode Foto",
     screenshotHint: "Ketuk 'Simpan Gambar' untuk share ke story",
     madeBy: "dibuat dengan year-in-review-generator",
-    songPlaceholder: "Judul Lagu",
-    artistPlaceholder: "Nama Artis",
     // Help Modal
     helpTitle: "Cara Pakai",
     helpDesc: "Bikin rekap tahunan estetikmu dalam hitungan menit.",
@@ -380,6 +355,7 @@ const TRANSLATIONS = {
     pressStart: "TEKAN MULAI",
     playerStats: "STATISTIK_PEMAIN",
     achievements: "PENCAPAIAN",
+    audioLogs: "LOG_AUDIO",
     memoryDump: "MEMORI_DUMP",
     endTrans: "TRANSMISI SELESAI",
     annualReport: "LAPORAN TAHUNAN",
@@ -420,54 +396,21 @@ const TRANSLATIONS = {
 };
 
 const THEMES = [
-  // 1. Retro Group
   { id: 'retro', name: '8-Bit Retro', vibe: 'Nostalgic, Console', color: 'bg-emerald-600' },
-  { id: 'terminal', name: 'Hacker Terminal', vibe: 'Matrix, Code', color: 'bg-green-900' },
-  { id: 'glitch', name: 'System Error', vibe: 'Distorted, Cyber', color: 'bg-red-700' },
-  // ... (Other themes same)
-  // 2. Swiss Group
   { id: 'swiss', name: 'Swiss Grid', vibe: 'Bold, Typographic', color: 'bg-red-600' },
-  { id: 'monochrome', name: 'Mono Lux', vibe: 'Black & White', color: 'bg-black' },
-  { id: 'y2k', name: 'Y2K Chrome', vibe: '2000s, Liquid', color: 'bg-blue-700' },
-
-  // 3. LoFi Group
   { id: 'lofi', name: 'Lo-Fi Scrapbook', vibe: 'Cozy, Polaroid', color: 'bg-stone-400' },
-  { id: 'botanical', name: 'Botanical', vibe: 'Nature, Organic', color: 'bg-green-700' },
-  { id: 'boho', name: 'Boho Earth', vibe: 'Warm, Clay', color: 'bg-orange-800' },
-
-  // 4. Neon Group
   { id: 'neon', name: 'Cyberpunk Neon', vibe: 'Glowing, Dark', color: 'bg-fuchsia-500' },
-  { id: 'midnight', name: 'Midnight', vibe: 'Deep Space, Stars', color: 'bg-indigo-950' },
-
-  // 5. Minimal Group
   { id: 'minimal', name: 'Modern Minimalist', vibe: 'Clean, Editorial', color: 'bg-slate-800' },
-  { id: 'corporate', name: 'Tech Corp', vibe: 'Professional, Blue', color: 'bg-blue-600' },
-  { id: 'warm', name: 'Warm Beige', vibe: 'Soft, Neutral', color: 'bg-[#e5e0d8]' },
-
-  // 6. Journal Group
   { id: 'journal', name: 'Hand-Drawn', vibe: 'Sketchy, Notebook', color: 'bg-amber-600' },
-  { id: 'newspaper', name: 'The Daily News', vibe: 'Vintage Press', color: 'bg-gray-400' },
-
-  // 7. Glass Group
   { id: 'glass', name: 'Glassmorphism', vibe: 'Frosted, Gradient', color: 'bg-indigo-400' },
-  { id: 'pastel', name: 'Pastel Dream', vibe: 'Soft, Candy', color: 'bg-pink-300' },
-  { id: 'aura', name: 'Aura Blur', vibe: 'Abstract, Haze', color: 'bg-violet-400' },
-
-  // 8. Brutal Group
   { id: 'brutal', name: 'Neo-Brutalism', vibe: 'Raw, Contrast', color: 'bg-yellow-400' },
-  { id: 'bauhaus', name: 'Bauhaus', vibe: 'Geometric, Art', color: 'bg-blue-500' },
-
-  // 9. Vapor Group
   { id: 'vapor', name: 'Vaporwave', vibe: 'Retro-future, Pink', color: 'bg-pink-500' },
-  { id: 'synth', name: 'Synthwave', vibe: 'Sunset, Grid', color: 'bg-purple-700' },
-
-  // 10. Others
   { id: 'academia', name: 'Dark Academia', vibe: 'Classic, Serif', color: 'bg-stone-700' },
-  { id: 'blueprint', name: 'Blueprint', vibe: 'Technical, Blue', color: 'bg-blue-800' },
-  { id: 'pop', name: 'Pop Art', vibe: 'Comic, Halftone', color: 'bg-cyan-400' }
+  { id: 'pop', name: 'Pop Art', vibe: 'Comic, Halftone', color: 'bg-cyan-400' },
+  { id: 'blueprint', name: 'Blueprint', vibe: 'Technical, Blue', color: 'bg-blue-800' }
 ];
 
-// --- Initial Data (Templates - Music Removed) ---
+// --- Initial Data ---
 const TEMPLATES = {
   en: {
     year: '2025',
@@ -518,26 +461,11 @@ const TEMPLATES = {
 // --- RENDERERS ---
 
 // 1. RETRO RENDERER
-const RenderRetro = ({ slide, data, themeId, t }) => {
-  const isTerminal = themeId === 'terminal';
-  const isGlitch = themeId === 'glitch';
-
+const RenderRetro = ({ slide, data, t }) => {
   let bgColor = "bg-emerald-100";
   let textColor = "text-emerald-900";
   let borderColor = "border-emerald-900";
   let watermarkColor = "text-emerald-900/30";
-
-  if (isTerminal) {
-    bgColor = "bg-black";
-    textColor = "text-green-500";
-    borderColor = "border-green-500";
-    watermarkColor = "text-green-500/30";
-  } else if (isGlitch) {
-    bgColor = "bg-zinc-900";
-    textColor = "text-red-500";
-    borderColor = "border-red-500";
-    watermarkColor = "text-red-500/30";
-  }
 
   const borderStyle = `border-4 ${borderColor} ${bgColor} ${textColor} shadow-[8px_8px_0px_0px_rgba(0,0,0,0.2)]`;
   const watermark = <div className={`absolute bottom-1 left-1/2 -translate-x-1/2 text-[6px] font-mono uppercase ${watermarkColor} z-20 pointer-events-none`}>{t.madeBy}</div>;
@@ -548,11 +476,11 @@ const RenderRetro = ({ slide, data, themeId, t }) => {
         <div className={`text-xs uppercase tracking-widest border-b-2 ${borderColor} pb-2 mb-4 ${textColor}`}>SYSTEM_LOG_v2.0</div>
         <div className={`${borderStyle} p-4 mb-4`}>
           <div className="text-6xl font-black mb-2 tracking-tighter">{data.year}</div>
-          <div className={`h-4 ${isTerminal ? 'bg-green-500' : isGlitch ? 'bg-red-500' : 'bg-emerald-900'} w-full mb-2 animate-pulse`}></div>
+          <div className={`h-4 bg-emerald-900 w-full mb-2 animate-pulse`}></div>
           <div className="text-xl font-bold uppercase">{data.title}</div>
         </div>
         <div className={`flex-1 flex items-center justify-center ${textColor}`}>
-             <div className={`text-sm ${isTerminal ? 'bg-green-900/20' : 'bg-black/5'} p-4 font-bold w-full`}>{`> ${data.subtitle}`}<span className="animate-pulse">_</span></div>
+             <div className={`text-sm bg-emerald-900/20 p-4 font-bold w-full`}>{`> ${data.subtitle}`}<span className="animate-pulse">_</span></div>
         </div>
         <div className={`text-[10px] uppercase text-center mt-4 ${textColor}`}>{t.pressStart}</div>
         {watermark}
@@ -562,11 +490,11 @@ const RenderRetro = ({ slide, data, themeId, t }) => {
   if (slide === 1) return (
       <div className={`h-full ${bgColor} p-6 font-mono flex flex-col relative overflow-hidden select-none`}>
          <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%)] z-10 bg-[length:100%_4px]"></div>
-        <h3 className={`text-xl font-black uppercase mb-6 ${isTerminal ? 'bg-green-900 text-green-100' : isGlitch ? 'bg-red-900 text-red-100' : 'bg-emerald-900 text-emerald-100'} inline-block px-2 py-1 self-start`}>{t.playerStats}</h3>
+        <h3 className={`text-xl font-black uppercase mb-6 bg-emerald-900 text-emerald-100 inline-block px-2 py-1 self-start`}>{t.playerStats}</h3>
         <div className="grid grid-cols-2 gap-4">
           {data.stats.map(stat => (
             <div key={stat.id} className={`${borderStyle} p-3 flex flex-col items-center justify-center aspect-square`}>
-              <div className={`w-8 h-8 mb-2 ${isTerminal ? 'text-green-600' : isGlitch ? 'text-red-600' : 'text-emerald-700'}`}>{ICON_MAP[stat.icon]}</div>
+              <div className={`w-8 h-8 mb-2 text-emerald-700`}>{ICON_MAP[stat.icon]}</div>
               <div className="text-2xl font-black">{stat.value}</div>
               <div className="text-[10px] uppercase tracking-wider">{stat.label}</div>
             </div>
@@ -584,7 +512,7 @@ const RenderRetro = ({ slide, data, themeId, t }) => {
           {data.highlights.map((h, i) => (
              <div key={h.id} className={`${borderStyle} p-3 relative flex gap-3`}>
                {/* Emoji Badge */}
-               <div className={`shrink-0 w-10 h-10 ${isTerminal ? 'bg-green-900' : 'bg-emerald-900'} text-white flex items-center justify-center text-xl font-bold border-2 border-white`}>
+               <div className={`shrink-0 w-10 h-10 bg-emerald-900 text-white flex items-center justify-center text-xl font-bold border-2 border-white`}>
                  {h.emoji || (i+1)}
                </div>
                <div className="min-w-0 flex-1">
@@ -608,17 +536,16 @@ const RenderRetro = ({ slide, data, themeId, t }) => {
     return (
       <div className={`h-full ${bgColor} p-4 font-mono relative overflow-hidden select-none flex flex-col`}>
          <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%)] z-10 bg-[length:100%_4px]"></div>
-         <h3 className={`text-xl font-black uppercase mb-4 ${isTerminal ? 'bg-green-900 text-green-100' : 'bg-emerald-900 text-emerald-100'} inline-block px-2 py-1 self-start`}>{t.memoryDump}</h3>
+         <h3 className={`text-xl font-black uppercase mb-4 bg-emerald-900 text-emerald-100 inline-block px-2 py-1 self-start`}>{t.memoryDump}</h3>
          
-         {/* Fix: Added min-h-0 and adjusted padding */}
          <div className={`grid gap-2 flex-1 w-full ${gridClass} min-h-0`}>
             {data.photos.map((photo, i) => (
               <div 
                 key={photo.id} 
                 className={`${borderStyle} p-1 overflow-hidden relative ${photoCount === 3 && i === 0 ? 'row-span-2' : ''}`}
               >
-                 <img src={photo.url} alt="" className={`w-full h-full object-cover ${isTerminal ? 'filter grayscale contrast-150 brightness-75 sepia hue-rotate-90 saturate-200' : 'filter grayscale contrast-125'}`} />
-                 <div className={`absolute bottom-1 right-1 ${isTerminal ? 'bg-green-900' : 'bg-emerald-900'} text-white text-[8px] px-1`}>IMG_0{i+1}.JPG</div>
+                 <img src={photo.url} alt="" className={`w-full h-full object-cover filter grayscale contrast-125`} />
+                 <div className={`absolute bottom-1 right-1 bg-emerald-900 text-white text-[8px] px-1`}>IMG_0{i+1}.JPG</div>
               </div>
             ))}
          </div>
@@ -628,35 +555,32 @@ const RenderRetro = ({ slide, data, themeId, t }) => {
   }
 
   return (
-    <div className={`h-full ${isTerminal ? 'bg-green-900' : isGlitch ? 'bg-zinc-900' : 'bg-emerald-900'} p-8 font-mono flex flex-col items-center justify-center ${isTerminal ? 'text-green-100' : isGlitch ? 'text-red-100' : 'text-emerald-100'} text-center relative overflow-hidden select-none`}>
+    <div className={`h-full bg-emerald-900 p-8 font-mono flex flex-col items-center justify-center text-emerald-100 text-center relative overflow-hidden select-none`}>
        <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.5)_50%)] z-10 bg-[length:100%_4px]"></div>
        <Terminal className="w-16 h-16 mb-6 animate-bounce" />
-       <div className={`border-2 ${isTerminal ? 'border-green-100 bg-green-800' : isGlitch ? 'border-red-500 bg-red-950' : 'border-emerald-100 bg-emerald-800'} p-4 shadow-[8px_8px_0px_0px_rgba(255,255,255,0.2)]`}>
+       <div className={`border-2 border-emerald-100 bg-emerald-800 p-4 shadow-[8px_8px_0px_0px_rgba(255,255,255,0.2)]`}>
           <p className="text-lg font-bold leading-relaxed">"{data.summary}"</p>
        </div>
        <div className="mt-8 text-xs animate-pulse">{t.endTrans}</div>
-       <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-mono uppercase ${isTerminal ? 'text-green-400/30' : 'text-emerald-500/30'} z-20 pointer-events-none`}>{t.madeBy}</div>
+       <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-mono uppercase text-emerald-500/30 z-20 pointer-events-none`}>{t.madeBy}</div>
     </div>
   );
 };
 
 // 2. SWISS RENDERER
-const RenderSwiss = ({ slide, data, themeId, t }) => {
-  const isMono = themeId === 'monochrome';
-  const isY2k = themeId === 'y2k';
+const RenderSwiss = ({ slide, data, t }) => {
+  let bgClass = 'bg-[#f2f2f2] text-[#1a1a1a]';
+  let accentClass = 'text-red-600';
+  let borderClass = 'border-black';
+  let cardBg = 'bg-white';
 
-  let bgClass = isMono ? 'bg-black text-white' : isY2k ? 'bg-slate-300 text-blue-900' : 'bg-[#f2f2f2] text-[#1a1a1a]';
-  let accentClass = isMono ? 'text-gray-400' : isY2k ? 'text-pink-500' : 'text-red-600';
-  let borderClass = isMono ? 'border-white' : isY2k ? 'border-blue-900' : 'border-black';
-  let cardBg = isMono ? 'bg-stone-900' : 'bg-white';
-
-  const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-bold uppercase tracking-widest ${isMono ? 'text-white/30' : 'text-black/20'} z-20 pointer-events-none`}>{t.madeBy}</div>;
-  const darkWatermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-bold uppercase tracking-widest ${isMono ? 'text-black/20' : 'text-white/20'} z-20 pointer-events-none`}>{t.madeBy}</div>;
+  const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-bold uppercase tracking-widest text-black/20 z-20 pointer-events-none`}>{t.madeBy}</div>;
+  const darkWatermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-bold uppercase tracking-widest text-white/20 z-20 pointer-events-none`}>{t.madeBy}</div>;
   
   if (slide === 0) return (
       <div className={`h-full ${bgClass} p-4 font-sans flex flex-col relative select-none`}>
-        <div className={`absolute top-0 left-1/3 w-px h-full ${isMono ? 'bg-white/30' : isY2k ? 'bg-blue-900/30' : 'bg-red-600'} opacity-30`}></div>
-        <div className={`absolute top-2/3 left-0 w-full h-px ${isMono ? 'bg-white/30' : isY2k ? 'bg-blue-900/30' : 'bg-red-600'} opacity-30`}></div>
+        <div className={`absolute top-0 left-1/3 w-px h-full bg-red-600 opacity-30`}></div>
+        <div className={`absolute top-2/3 left-0 w-full h-px bg-red-600 opacity-30`}></div>
         <div className="text-8xl font-black tracking-tighter leading-none mb-4 z-10">{data.year.substring(0,2)}<br/><span className={accentClass}>{data.year.substring(2)}</span>.</div>
         <div className={`z-10 ${cardBg} p-4 border ${borderClass} shadow-lg transform rotate-1 mt-4`}>
           <h2 className="text-3xl font-bold uppercase leading-none tracking-tight">{data.title}</h2>
@@ -668,13 +592,13 @@ const RenderSwiss = ({ slide, data, themeId, t }) => {
   );
 
   if (slide === 1) return (
-      <div className={`h-full ${isMono ? 'bg-white text-black' : isY2k ? 'bg-blue-900 text-white' : 'bg-[#1a1a1a] text-[#f2f2f2]'} p-6 font-sans flex flex-col select-none`}>
-        <h3 className={`text-4xl font-black mb-8 border-b-2 ${isMono ? 'border-black' : isY2k ? 'border-pink-500' : 'border-red-600'} pb-2`}>{t.keyPoints}</h3>
+      <div className={`h-full bg-white text-black p-6 font-sans flex flex-col select-none`}>
+        <h3 className={`text-4xl font-black mb-8 border-b-2 border-red-600 pb-2`}>{t.keyPoints}</h3>
         <div className="space-y-6">
           {data.stats.map((stat, idx) => (
             <div key={stat.id} className="flex items-baseline justify-between group">
               <div className="text-sm font-bold uppercase tracking-widest opacity-50 w-1/3">0{idx + 1} / {stat.label}</div>
-              <div className={`text-5xl font-black ${isMono ? 'text-black' : 'text-white'} group-hover:${accentClass} transition-colors`}>{stat.value}</div>
+              <div className={`text-5xl font-black text-black group-hover:${accentClass} transition-colors`}>{stat.value}</div>
             </div>
           ))}
         </div>
@@ -684,13 +608,12 @@ const RenderSwiss = ({ slide, data, themeId, t }) => {
 
   if (slide === 2) return (
       <div className={`h-full ${bgClass} font-sans flex flex-col select-none`}>
-         <div className={`${isMono ? 'bg-gray-800' : isY2k ? 'bg-pink-500' : 'bg-red-600'} text-white p-6 pb-12 rounded-bl-[4rem]`}>
+         <div className={`bg-red-600 text-white p-6 pb-12 rounded-bl-[4rem]`}>
            <h3 className="text-4xl font-black leading-none">{t.keyPoints}</h3>
          </div>
          <div className="flex-1 p-6 -mt-8 space-y-4 min-h-0 overflow-y-auto scrollbar-hide">
            {data.highlights.map((h, i) => (
              <div key={h.id} className={`${cardBg} p-5 shadow-xl border-l-8 ${borderClass} flex gap-4 items-start`}>
-               {/* Emoji Big & Bold */}
                <div className="text-4xl shrink-0">{h.emoji}</div>
                <div className="min-w-0">
                   <h4 className="text-xl font-black uppercase mb-1 truncate">{h.title}</h4>
@@ -711,16 +634,16 @@ const RenderSwiss = ({ slide, data, themeId, t }) => {
 
     return (
       <div className={`h-full ${bgClass} font-sans flex flex-col relative select-none`}>
-         <div className={`absolute top-1/2 left-0 w-full h-px ${isMono ? 'bg-white' : 'bg-red-600'} z-20 opacity-30`}></div>
-         <div className={`absolute top-0 left-1/2 w-px h-full ${isMono ? 'bg-white' : 'bg-red-600'} z-20 opacity-30`}></div>
+         <div className={`absolute top-1/2 left-0 w-full h-px bg-red-600 z-20 opacity-30`}></div>
+         <div className={`absolute top-0 left-1/2 w-px h-full bg-red-600 z-20 opacity-30`}></div>
          
          <div className={`grid h-full w-full ${gridClass}`}>
            {data.photos.map((photo, i) => (
              <div 
               key={photo.id} 
-              className={`overflow-hidden border ${isMono ? 'border-black' : 'border-white'} relative group ${photoCount === 3 && i === 0 ? 'row-span-2' : ''} ${i % 2 === 0 ? 'bg-black' : 'bg-gray-500'}`}
+              className={`overflow-hidden border border-black relative group ${photoCount === 3 && i === 0 ? 'row-span-2' : ''} ${i % 2 === 0 ? 'bg-black' : 'bg-gray-500'}`}
              >
-                <img src={photo.url} alt="" className={`w-full h-full object-cover filter ${isMono ? 'grayscale contrast-125' : ''} hover:grayscale-0 transition-all duration-500 opacity-90`} />
+                <img src={photo.url} alt="" className={`w-full h-full object-cover filter grayscale contrast-125 hover:grayscale-0 transition-all duration-500 opacity-90`} />
                 <div className="absolute top-2 left-2 bg-white text-black text-[10px] font-bold px-2 py-1">{t.fig}. {String.fromCharCode(65+i)}</div>
              </div>
            ))}
@@ -734,49 +657,34 @@ const RenderSwiss = ({ slide, data, themeId, t }) => {
     <div className={`h-full ${cardBg} p-6 font-sans flex flex-col justify-center items-center text-center relative border-[16px] ${borderClass} select-none`}>
        <div className={`absolute top-0 left-1/2 w-px h-full ${accentClass} opacity-30`}></div>
        <div className={`absolute top-1/2 left-0 w-full h-px ${accentClass} opacity-30`}></div>
-       <div className={`z-10 ${isMono ? 'bg-white text-black' : 'bg-[#1a1a1a] text-white'} p-6 transform -rotate-2 shadow-2xl`}>
+       <div className={`z-10 bg-white text-black p-6 transform -rotate-2 shadow-2xl`}>
          <p className="text-2xl font-black uppercase leading-tight italic">"{data.summary}"</p>
        </div>
-       <div className={`z-10 mt-8 ${isMono ? 'bg-black' : isY2k ? 'bg-pink-500' : 'bg-red-600'} text-white px-4 py-1 text-sm font-bold uppercase tracking-widest`}>{t.endReport}</div>
+       <div className={`z-10 mt-8 bg-red-600 text-white px-4 py-1 text-sm font-bold uppercase tracking-widest`}>{t.endReport}</div>
        {watermark}
     </div>
   );
 };
 
 // 3. LO-FI RENDERER
-const RenderLoFi = ({ slide, data, themeId, t }) => {
-  // ... existing variables ...
-  const isBotanical = themeId === 'botanical';
-  const isBoho = themeId === 'boho';
-  
-  const paperTexture = isBotanical ? "bg-[#f1f8f1]" : isBoho ? "bg-[#f5efe6]" : "bg-[#fdfbf7]";
+const RenderLoFi = ({ slide, data, t }) => {
+  const paperTexture = "bg-[#fdfbf7]";
   const tapeStyle = "h-4 w-16 bg-yellow-200/80 absolute shadow-sm transform";
   
   let textColor = "text-stone-800";
   let secondaryColor = "text-stone-500";
   let accentColor = "text-pink-500";
-  const penColor = isBotanical ? "text-green-900" : isBoho ? "text-amber-900" : "text-stone-800";
-
-  if (isBotanical) {
-    textColor = "text-green-900";
-    secondaryColor = "text-green-700";
-    accentColor = "text-emerald-600";
-  } else if (isBoho) {
-    textColor = "text-amber-900";
-    secondaryColor = "text-amber-700";
-    accentColor = "text-orange-600";
-  }
 
   const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-handwriting ${secondaryColor} mix-blend-multiply z-20 pointer-events-none`}>{t.madeBy}</div>;
   
   if (slide === 0) return (
       <div className={`h-full ${paperTexture} p-6 font-serif flex flex-col justify-center items-center relative ${textColor} select-none`}>
-        <div className={`${tapeStyle} -top-2 left-1/3 -rotate-3 ${isBotanical ? 'bg-green-200/80' : ''}`}></div>
+        <div className={`${tapeStyle} -top-2 left-1/3 -rotate-3`}></div>
         <div className={`${tapeStyle} bottom-10 right-10 bg-pink-200/80 rotate-12`}></div>
         <div className="border border-stone-300 bg-white p-6 shadow-md rotate-2 mb-8 w-full aspect-[4/3] flex flex-col items-center justify-center">
           <div className={`text-sm font-sans ${secondaryColor} mb-2 uppercase tracking-widest`}>{t.recap}</div>
           <h1 className="text-6xl italic font-black mb-1">{data.year}</h1>
-          <div className={`w-12 h-1 ${isBotanical ? 'bg-green-800' : 'bg-stone-800'} rounded-full`}></div>
+          <div className={`w-12 h-1 bg-stone-800 rounded-full`}></div>
         </div>
         <div className="text-center relative">
           <h2 className="text-3xl font-bold mb-2 font-sans tracking-tight">{data.title}</h2>
@@ -805,10 +713,9 @@ const RenderLoFi = ({ slide, data, themeId, t }) => {
       </div>
   );
 
-  // HIGHLIGHTS WITH EMOJI UPDATE
   if (slide === 2) return (
       <div className={`h-full ${paperTexture} p-6 font-serif relative overflow-hidden select-none flex flex-col`}>
-         <h3 className={`text-5xl font-sans font-black ${isBotanical ? 'text-green-100' : 'text-stone-200'} absolute -right-4 top-10 rotate-90 z-0 select-none`}>{t.moments}</h3>
+         <h3 className={`text-5xl font-sans font-black text-stone-200 absolute -right-4 top-10 rotate-90 z-0 select-none`}>{t.moments}</h3>
          <div className="relative z-10 space-y-6 mt-4 flex-1 min-h-0 overflow-y-auto scrollbar-hide pt-4">
            {data.highlights.map((h, i) => (
              <div key={h.id} className={`bg-white p-4 shadow-sm border border-stone-200 ${i % 2 === 0 ? 'rotate-1' : '-rotate-1'} relative`}>
@@ -816,7 +723,7 @@ const RenderLoFi = ({ slide, data, themeId, t }) => {
                <div className="absolute -top-3 -right-3 text-3xl filter drop-shadow-md transform rotate-12">{h.emoji}</div>
                
                <div className="flex items-center gap-2 mb-2 border-b border-stone-100 pb-2">
-                 <div className={`w-2 h-2 rounded-full ${isBotanical ? 'bg-green-400' : 'bg-stone-300'}`}></div>
+                 <div className={`w-2 h-2 rounded-full bg-stone-300`}></div>
                  <h4 className="font-bold font-sans text-sm uppercase tracking-wide truncate">{h.title}</h4>
                </div>
                <p className={`${secondaryColor} italic leading-snug line-clamp-2`}>{h.desc}</p>
@@ -869,16 +776,13 @@ const RenderLoFi = ({ slide, data, themeId, t }) => {
 };
 
 // 4. CYBERPUNK NEON RENDERER
-const RenderNeon = ({ slide, data, themeId, t }) => {
-  // ... existing variables ...
-  const isMidnight = themeId === 'midnight';
-  
-  const bgStyle = isMidnight ? "bg-indigo-950" : "bg-slate-950";
-  const textPrimary = isMidnight ? "text-purple-400" : "text-cyan-400";
-  const textSecondary = isMidnight ? "text-blue-300" : "text-fuchsia-500";
-  const borderStyle = `border-2 ${isMidnight ? 'border-purple-500/50 shadow-[0_0_10px_rgba(168,85,247,0.3)]' : 'border-cyan-500/50 shadow-[0_0_10px_rgba(0,255,255,0.3)]'} bg-slate-900/50 backdrop-blur-md`;
-  const glowText = isMidnight ? "drop-shadow-[0_0_5px_rgba(168,85,247,0.7)]" : "drop-shadow-[0_0_5px_rgba(0,255,255,0.7)]";
-  const glowTextSecondary = isMidnight ? "drop-shadow-[0_0_5px_rgba(147,197,253,0.7)]" : "drop-shadow-[0_0_5px_rgba(217,70,239,0.7)]";
+const RenderNeon = ({ slide, data, t }) => {
+  const bgStyle = "bg-slate-950";
+  const textPrimary = "text-cyan-400";
+  const textSecondary = "text-fuchsia-500";
+  const borderStyle = `border-2 border-cyan-500/50 shadow-[0_0_10px_rgba(0,255,255,0.3)] bg-slate-900/50 backdrop-blur-md`;
+  const glowText = "drop-shadow-[0_0_5px_rgba(0,255,255,0.7)]";
+  const glowTextSecondary = "drop-shadow-[0_0_5px_rgba(217,70,239,0.7)]";
   const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] uppercase tracking-[0.2em] ${textPrimary} z-20 pointer-events-none font-bold`}>{t.madeBy}</div>;
 
   if (slide === 0) return (
@@ -955,9 +859,9 @@ const RenderNeon = ({ slide, data, themeId, t }) => {
            {data.photos.map((photo, i) => (
               <div 
                 key={photo.id} 
-                className={`relative rounded-xl overflow-hidden border ${isMidnight ? 'border-purple-500/50' : 'border-cyan-500/50'} shadow-[0_0_15px_rgba(0,255,255,0.2)] group ${photoCount === 3 && i === 0 ? 'row-span-2' : ''}`}
+                className={`relative rounded-xl overflow-hidden border border-cyan-500/50 shadow-[0_0_15px_rgba(0,255,255,0.2)] group ${photoCount === 3 && i === 0 ? 'row-span-2' : ''}`}
               >
-                <div className={`absolute inset-0 ${isMidnight ? 'bg-purple-900/20' : 'bg-cyan-900/20'} z-10 group-hover:bg-transparent transition-colors`}></div>
+                <div className={`absolute inset-0 bg-cyan-900/20 z-10 group-hover:bg-transparent transition-colors`}></div>
                 <img src={photo.url} alt="" className="w-full h-full object-cover" />
                 <div className="absolute bottom-2 left-2 text-[10px] text-cyan-400 font-mono z-20">IMG_{i+1}.RAW</div>
              </div>
@@ -982,23 +886,10 @@ const RenderNeon = ({ slide, data, themeId, t }) => {
 };
 
 // 5. MODERN MINIMALIST RENDERER
-const RenderMinimal = ({ slide, data, themeId, t }) => {
-  const isCorporate = themeId === 'corporate';
-  const isWarm = themeId === 'warm';
-
+const RenderMinimal = ({ slide, data, t }) => {
   let bgStyle = "bg-stone-50";
   let textPrimary = "text-stone-900";
   let textSecondary = "text-stone-500";
-
-  if (isCorporate) {
-    bgStyle = "bg-slate-100";
-    textPrimary = "text-blue-900";
-    textSecondary = "text-blue-600";
-  } else if (isWarm) {
-    bgStyle = "bg-[#f5f0e6]";
-    textPrimary = "text-[#5c4d3c]";
-    textSecondary = "text-[#8a7e68]";
-  }
 
   const watermark = <div className={`absolute bottom-4 left-1/2 -translate-x-1/2 text-[6px] uppercase tracking-[0.2em] ${textSecondary} opacity-50 z-20 pointer-events-none`}>{t.madeBy}</div>;
 
@@ -1006,7 +897,7 @@ const RenderMinimal = ({ slide, data, themeId, t }) => {
       <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col justify-center items-center text-center relative select-none`}>
         <div className={`absolute top-8 font-sans text-xs font-bold uppercase tracking-[0.2em] ${textSecondary}`}>{t.annualReport}</div>
         <h1 className={`text-8xl font-light tracking-tight leading-none mb-4 ${textPrimary}`}>{data.year}</h1>
-        <div className={`w-16 h-px ${isCorporate ? 'bg-blue-300' : 'bg-stone-300'} mb-8`}></div>
+        <div className={`w-16 h-px bg-stone-300 mb-8`}></div>
         <h2 className={`text-2xl font-normal uppercase tracking-widest ${textPrimary} mb-2`}>{data.title}</h2>
         <p className={`text-lg ${textSecondary} font-light italic`}>{data.subtitle}</p>
         {watermark}
@@ -1016,7 +907,7 @@ const RenderMinimal = ({ slide, data, themeId, t }) => {
   if (slide === 1) return (
       <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col select-none`}>
         <h3 className={`text-xl font-normal uppercase tracking-widest text-center mb-12 ${textPrimary}`}>{t.keyFigures}</h3>
-        <div className={`grid grid-cols-2 gap-px ${isCorporate ? 'bg-blue-200 border-blue-200' : 'bg-stone-200 border-stone-200'} border`}>
+        <div className={`grid grid-cols-2 gap-px bg-stone-200 border-stone-200 border`}>
           {data.stats.map((stat, idx) => (
             <div key={stat.id} className={`bg-white p-6 flex flex-col items-center justify-center aspect-square`}>
               <div className={`text-4xl font-light ${textPrimary} mb-2`}>{stat.value}</div>
@@ -1071,8 +962,8 @@ const RenderMinimal = ({ slide, data, themeId, t }) => {
 
   return (
     <div className={`h-full ${bgStyle} p-12 font-serif flex flex-col justify-center items-center text-center relative select-none`}>
-       <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-px h-20 ${isCorporate ? 'bg-blue-300' : 'bg-stone-300'}`}></div>
-       <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-20 ${isCorporate ? 'bg-blue-300' : 'bg-stone-300'}`}></div>
+       <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-px h-20 bg-stone-300`}></div>
+       <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-20 bg-stone-300`}></div>
        <p className={`text-2xl leading-relaxed font-light italic ${textPrimary} mb-8`}>"{data.summary}"</p>
        <div className={`font-sans text-xs font-bold uppercase tracking-[0.2em] ${textSecondary}`}>{t.fin}</div>
        {watermark}
@@ -1081,55 +972,48 @@ const RenderMinimal = ({ slide, data, themeId, t }) => {
 };
 
 // 6. HAND-DRAWN JOURNAL RENDERER
-const RenderJournal = ({ slide, data, themeId, t }) => {
-  const isNewspaper = themeId === 'newspaper';
-  
-  const paperTexture = isNewspaper ? "bg-stone-200" : "bg-[#fcfaf2] bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]";
+const RenderJournal = ({ slide, data, t }) => {
+  const paperTexture = "bg-[#fcfaf2] bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]";
   const tapeStyle = "h-4 w-16 bg-yellow-200/80 absolute shadow-sm transform";
-  const penColor = isNewspaper ? "text-slate-900" : "text-amber-900";
-  const pencilColor = isNewspaper ? "text-slate-600" : "text-slate-500";
-  const highlightColor = isNewspaper ? "bg-slate-300/50" : "bg-yellow-200/50";
-  const sketchBorder = isNewspaper ? "border-2 border-slate-900" : "border-2 border-dashed border-amber-900/50";
-  const fontStyle = isNewspaper ? "font-serif" : "font-handwriting";
-  const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] ${fontStyle} ${pencilColor} z-20 pointer-events-none`}>{t.madeBy}</div>;
+  const penColor = "text-amber-900";
+  const pencilColor = "text-slate-500";
+  const highlightColor = "bg-yellow-200/50";
+  const sketchBorder = "border-2 border-dashed border-amber-900/50";
+  const watermark = <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-handwriting text-amber-900/20 z-20 pointer-events-none">{t.madeBy}</div>;
   
   if (slide === 0) return (
       <div className={`h-full ${paperTexture} p-6 font-serif flex flex-col justify-center items-center relative select-none`}>
-        {!isNewspaper && (
-          <>
-            <Star className={`absolute top-10 left-10 w-8 h-8 ${pencilColor} opacity-50 animate-spin-slow`} />
-            <Heart className={`absolute bottom-16 right-10 w-6 h-6 ${pencilColor} opacity-50`} />
-          </>
-        )}
-        <div className={`relative z-10 text-center ${isNewspaper ? '' : 'transform -rotate-1'}`}>
-          <div className={`${fontStyle} text-2xl ${pencilColor} mb-2`}>{isNewspaper ? 'EXTRA! EXTRA!' : 'My Year in Review...'}</div>
+        <Star className={`absolute top-10 left-10 w-8 h-8 ${pencilColor} opacity-50 animate-spin-slow`} />
+        <Heart className={`absolute bottom-16 right-10 w-6 h-6 ${pencilColor} opacity-50`} />
+        <div className={`relative z-10 text-center transform -rotate-1`}>
+          <div className={`font-handwriting text-2xl ${pencilColor} mb-2`}>My Year in Review...</div>
           <div className="relative inline-block">
             <span className={`absolute inset-0 ${highlightColor} transform -skew-y-2 rounded-sm`}></span>
             <h1 className={`relative text-7xl font-black ${penColor} tracking-tighter leading-none mb-2`}>{data.year}</h1>
           </div>
         </div>
         <div className={`mt-8 text-center relative z-10`}>
-          <h2 className={`text-3xl font-bold ${penColor} mb-2 ${fontStyle} ${isNewspaper ? 'uppercase tracking-widest' : 'underline decoration-wavy decoration-amber-500/50'}`}>{data.title}</h2>
-          <p className={`text-lg ${pencilColor} ${fontStyle} italic`}>"{data.subtitle}"</p>
+          <h2 className={`text-3xl font-bold ${penColor} mb-2 font-handwriting underline decoration-wavy decoration-amber-500/50`}>{data.title}</h2>
+          <p className={`text-lg ${pencilColor} font-handwriting italic`}>"{data.subtitle}"</p>
         </div>
-        {!isNewspaper && <div className={`absolute bottom-8 font-handwriting text-sm ${pencilColor}`}>( drawings by me )</div>}
+        <div className={`absolute bottom-8 font-handwriting text-sm ${pencilColor}`}>( drawings by me )</div>
         {watermark}
       </div>
   );
 
   if (slide === 1) return (
       <div className={`h-full ${paperTexture} p-8 font-serif flex flex-col relative select-none`}>
-        <h3 className={`text-2xl font-bold text-center mb-8 ${penColor} ${fontStyle} ${isNewspaper ? 'border-b-2 border-black pb-2' : 'underline decoration-2 decoration-amber-500/30'}`}>{t.someNumbers}</h3>
+        <h3 className={`text-2xl font-bold text-center mb-8 ${penColor} font-handwriting underline decoration-2 decoration-amber-500/30`}>Some Numbers I Tracked</h3>
         <div className="grid grid-cols-2 gap-6">
           {data.stats.map((stat, idx) => (
-            <div key={stat.id} className={`p-4 flex flex-col items-center justify-center aspect-square relative ${!isNewspaper && (idx%2 ? 'rotate-1' : '-rotate-1')}`}>
-              <div className={`absolute inset-0 ${sketchBorder} ${!isNewspaper && 'rounded-lg'}`}></div>
+            <div key={stat.id} className={`p-4 flex flex-col items-center justify-center aspect-square relative ${idx%2 ? 'rotate-1' : '-rotate-1'}`}>
+              <div className={`absolute inset-0 ${sketchBorder} rounded-lg`}></div>
               <div className="w-10 h-10 mb-2 relative flex items-center justify-center">
-                 {!isNewspaper && <div className="absolute inset-0 border-2 border-amber-900/30 rounded-full transform rotate-3"></div>}
+                 <div className="absolute inset-0 border-2 border-amber-900/30 rounded-full transform rotate-3"></div>
                  <div className={`relative z-10 ${penColor}`}>{ICON_MAP[stat.icon]}</div>
               </div>
-              <div className={`text-3xl font-black ${penColor} ${fontStyle}`}>{stat.value}</div>
-              <div className={`text-sm ${pencilColor} ${fontStyle} text-center`}>{stat.label}</div>
+              <div className={`text-3xl font-black ${penColor} font-handwriting`}>{stat.value}</div>
+              <div className={`text-sm ${pencilColor} font-handwriting text-center`}>{stat.label}</div>
             </div>
           ))}
         </div>
@@ -1139,24 +1023,24 @@ const RenderJournal = ({ slide, data, themeId, t }) => {
 
   if (slide === 2) return (
       <div className={`h-full ${paperTexture} p-6 font-serif relative overflow-hidden flex flex-col select-none`}>
-         <h3 className={`text-2xl font-bold text-center mb-8 ${penColor} ${fontStyle}`}>
+         <h3 className={`text-2xl font-bold text-center mb-8 ${penColor} font-handwriting`}>
            <span className="relative inline-block px-2">
              <span className={`absolute inset-0 ${highlightColor} transform skew-x-6 rounded-sm`}></span>
-             <span className="relative">{t.bigMoments}</span>
+             <span className="relative">Big Moments!</span>
            </span>
          </h3>
          <div className="flex-1 space-y-6 relative z-10 min-h-0 overflow-y-auto scrollbar-hide pt-2">
            {data.highlights.map((h, i) => (
-             <div key={h.id} className={`p-4 relative ${!isNewspaper && (i%2 ? 'rotate-1' : '-rotate-1')}`}>
-               <div className={`absolute inset-0 ${sketchBorder} ${!isNewspaper && 'rounded-md'} bg-white/50`}></div>
+             <div key={h.id} className={`p-4 relative ${i%2 ? 'rotate-1' : '-rotate-1'}`}>
+               <div className={`absolute inset-0 ${sketchBorder} rounded-md bg-white/50`}></div>
                <div className="relative z-10 flex items-start gap-3">
-                 <div className={`${fontStyle} text-lg font-bold ${pencilColor}`}>#{i+1}</div>
-                 <div>
-                  <div className="flex items-center gap-2 mb-1">
+                 <div className={`font-handwriting text-lg font-bold ${pencilColor}`}>#{i+1}</div>
+                 <div className="flex-1 min-w-0">
+                  <div className="flex justify-between">
+                     <h4 className={`font-bold ${penColor} font-handwriting text-lg mb-1 truncate`}>{h.title}</h4>
                      <span className="text-xl">{h.emoji}</span>
-                     <h4 className={`font-bold ${penColor} ${fontStyle} text-lg`}>{h.title}</h4>
                   </div>
-                  <p className={`text-sm leading-snug ${pencilColor} ${fontStyle} line-clamp-2`}>{h.desc}</p>
+                  <p className={`text-sm leading-snug ${pencilColor} font-handwriting line-clamp-2`}>{h.desc}</p>
                  </div>
                </div>
              </div>
@@ -1176,17 +1060,17 @@ const RenderJournal = ({ slide, data, themeId, t }) => {
            {data.photos.map((photo, i) => (
              <div 
               key={photo.id} 
-              className={`bg-white p-2 pb-6 shadow-md border ${isNewspaper ? 'border-black' : 'border-stone-200'} relative ${itemWidth} ${!isNewspaper && (i % 2 === 0 ? 'rotate-3' : '-rotate-2')} ${i % 3 === 0 ? 'z-10' : ''}`}
+              className={`bg-white p-2 pb-6 shadow-md border border-stone-200 relative ${itemWidth} ${i % 2 === 0 ? 'rotate-3' : '-rotate-2'} ${i % 3 === 0 ? 'z-10' : ''}`}
               style={{ zIndex: i }}
              >
-                {!isNewspaper && <div className={`${tapeStyle} -top-2 left-1/2 -translate-x-1/2 ${i%2===0 ? 'bg-blue-200/60' : 'bg-yellow-200/60'}`}></div>}
-                <div className={`aspect-square ${isNewspaper ? 'grayscale' : 'bg-stone-100'} overflow-hidden ${!isNewspaper && 'filter sepia-[.2]'}`}>
+                <div className={`${tapeStyle} -top-2 left-1/2 -translate-x-1/2 ${i%2===0 ? 'bg-blue-200/60' : 'bg-yellow-200/60'}`}></div>
+                <div className="aspect-square bg-stone-100 overflow-hidden filter sepia-[.2]">
                    <img src={photo.url} alt="" className="w-full h-full object-cover" />
                 </div>
              </div>
            ))}
          </div>
-         {!isNewspaper && <Star className={`absolute bottom-8 right-8 w-6 h-6 ${pencilColor} animate-pulse`} />}
+         <Star className={`absolute bottom-8 right-8 w-6 h-6 ${penColor} animate-pulse`} />
          {watermark}
       </div>
     );
@@ -1194,37 +1078,25 @@ const RenderJournal = ({ slide, data, themeId, t }) => {
 
   return (
     <div className={`h-full ${paperTexture} p-8 font-serif flex flex-col justify-center items-center text-center relative select-none`}>
-      <div className={`bg-white p-8 shadow-xl ${!isNewspaper && 'rotate-1'} border-8 border-white relative`}>
-         {!isNewspaper && <div className="absolute top-0 left-0 w-0 h-0 border-t-[20px] border-l-[20px] border-t-stone-200 border-l-transparent"></div>}
-         <p className={`text-xl leading-relaxed italic ${penColor} mb-4 ${fontStyle}`}>{data.summary}</p>
+      <div className="bg-white p-8 shadow-xl rotate-1 border-8 border-white relative">
+         <div className="absolute top-0 left-0 w-0 h-0 border-t-[20px] border-l-[20px] border-t-stone-200 border-l-transparent"></div>
+         <p className={`text-xl leading-relaxed italic ${penColor} mb-4`}>{data.summary}</p>
          <div className={`flex justify-center gap-1 ${pencilColor}`}>
            <Star className="w-4 h-4 fill-current" /><Star className="w-4 h-4 fill-current" /><Star className="w-4 h-4 fill-current" />
          </div>
       </div>
-      <div className={`mt-12 ${fontStyle} ${pencilColor} ${!isNewspaper && 'transform -rotate-6'}`}>{t.seeYou}</div>
+      <div className={`mt-12 font-handwriting ${pencilColor} transform -rotate-6`}>See you next year...</div>
       {watermark}
     </div>
   );
 };
 
 // 7. GLASSMORPHISM RENDERER (Handles: Glass, Pastel, Gradient)
-const RenderGlass = ({ slide, data, themeId, t }) => {
-  const isPastel = themeId === 'pastel';
-  const isGradient = themeId === 'gradient';
-
+const RenderGlass = ({ slide, data, t }) => {
   let bgStyle = "bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500";
   let cardStyle = "backdrop-blur-xl bg-white/20 border border-white/30 shadow-lg text-white";
   let textColor = "text-white";
   
-  if (isPastel) {
-    bgStyle = "bg-gradient-to-tr from-pink-200 via-yellow-100 to-blue-200";
-    cardStyle = "backdrop-blur-md bg-white/60 border border-white/50 shadow-sm text-slate-700";
-    textColor = "text-slate-700";
-  } else if (isGradient) {
-    bgStyle = "bg-gradient-to-bl from-blue-400 via-teal-300 to-green-400";
-    cardStyle = "backdrop-blur-2xl bg-black/10 border border-white/20 shadow-2xl text-white";
-  }
-
   const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-medium uppercase tracking-widest ${textColor} opacity-50 z-20 pointer-events-none`}>{t.madeBy}</div>;
 
   if (slide === 0) return (
@@ -1270,7 +1142,7 @@ const RenderGlass = ({ slide, data, themeId, t }) => {
                 <h4 className="text-lg font-bold">{h.title}</h4>
                 <span className="text-xl">{h.emoji}</span>
             </div>
-            <p className={`text-sm ${textColor} opacity-90 leading-snug`}>{h.desc}</p>
+            <p className={`text-sm ${textColor} opacity-90 leading-snug line-clamp-2`}>{h.desc}</p>
           </div>
         ))}
       </div>
@@ -1313,23 +1185,22 @@ const RenderGlass = ({ slide, data, themeId, t }) => {
 };
 
 // 8. NEO-BRUTALISM RENDERER (Handles: Brutal, Bauhaus)
-const RenderBrutal = ({ slide, data, themeId, t }) => {
-  const isBauhaus = themeId === 'bauhaus';
-  const bgStyle = isBauhaus ? "bg-[#f0f0f0]" : "bg-[#FFFDF5]";
-  const cardStyle = isBauhaus ? "bg-white border-4 border-blue-600 shadow-[6px_6px_0px_0px_rgba(220,38,38,1)]" : "bg-white border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]";
-  const textPrimary = isBauhaus ? "text-blue-900" : "text-black";
-  const accent1 = isBauhaus ? "bg-yellow-400" : "bg-yellow-400";
-  const accent2 = isBauhaus ? "bg-red-600" : "bg-purple-400";
+const RenderBrutal = ({ slide, data, t }) => {
+  const bgStyle = "bg-[#FFFDF5]";
+  const cardStyle = "bg-white border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]";
+  const textPrimary = "text-black";
+  const accent1 = "bg-yellow-400";
+  const accent2 = "bg-purple-400";
   
-  const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-black uppercase tracking-tighter ${isBauhaus ? 'bg-blue-600 text-white' : 'bg-black text-white'} px-2 py-1 transform -rotate-2 z-20 pointer-events-none`}>{t.madeBy}</div>;
+  const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-black uppercase tracking-tighter bg-black text-white px-2 py-1 transform -rotate-2 z-20 pointer-events-none`}>{t.madeBy}</div>;
 
   if (slide === 0) return (
     <div className={`h-full ${bgStyle} p-6 font-sans flex flex-col justify-center items-center relative select-none`}>
-      <div className={`absolute top-10 right-10 w-16 h-16 ${accent1} rounded-full border-4 ${isBauhaus ? 'border-blue-600' : 'border-black'}`}></div>
+      <div className={`absolute top-10 right-10 w-16 h-16 ${accent1} rounded-full border-4 border-black`}></div>
       <div className={`${cardStyle} p-8 w-full rotate-2 mb-8`}>
         <h1 className={`text-8xl font-black ${textPrimary} leading-[0.8]`}>{data.year}</h1>
       </div>
-      <div className={`${accent2} border-4 ${isBauhaus ? 'border-blue-600' : 'border-black'} p-4 -rotate-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`}>
+      <div className={`${accent2} border-4 border-black p-4 -rotate-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`}>
         <h2 className="text-3xl font-black text-white uppercase">{data.title}</h2>
       </div>
       <p className="mt-8 font-bold text-xl text-center max-w-xs">{data.subtitle}</p>
@@ -1402,9 +1273,8 @@ const RenderBrutal = ({ slide, data, themeId, t }) => {
 };
 
 // 9. VAPORWAVE RENDERER (Handles: Vapor, Synth)
-const RenderVapor = ({ slide, data, themeId, t }) => {
-  const isSynth = themeId === 'synth';
-  const bgStyle = isSynth ? "bg-gradient-to-b from-orange-500 via-red-500 to-purple-900" : "bg-gradient-to-b from-fuchsia-900 to-purple-900";
+const RenderVapor = ({ slide, data, t }) => {
+  const bgStyle = "bg-gradient-to-b from-fuchsia-900 to-purple-900";
   const gridStyle = "bg-[linear-gradient(rgba(0,255,255,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.2)_1px,transparent_1px)] bg-[length:40px_40px] perspective-[500px]";
   const watermark = <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-mono text-cyan-400/50 z-20 pointer-events-none drop-shadow-[1px_1px_0px_rgba(255,0,255,0.5)]">{t.madeBy}</div>;
   
@@ -1724,10 +1594,10 @@ export default function YearInReviewGenerator() {
   const [isCleanMode, setIsCleanMode] = useState(false);
   const [saveStatus, setSaveStatus] = useState('');
   const [isDownloading, setIsDownloading] = useState(false); 
-  const [language, setLanguage] = useState('id'); // Default to Indonesian
+  const [language, setLanguage] = useState('id'); 
   const [showHelp, setShowHelp] = useState(false);
 
-  const t = TRANSLATIONS[language]; // Translation helper
+  const t = TRANSLATIONS[language]; 
   const totalSlides = 5; 
 
   const scrollContainerRef = useRef(null);
@@ -1742,8 +1612,8 @@ export default function YearInReviewGenerator() {
   const toggleLanguage = () => {
     const newLang = language === 'en' ? 'id' : 'en';
     const currentDefault = TEMPLATES[language];
-    const isDefaultData = data.title === currentDefault.title && 
-                          data.stats[0].label === currentDefault.stats[0].label;
+    // Check if *core* data is default to switch templates. Photos/Highlights content might differ, so we check title/year as proxy.
+    const isDefaultData = data.title === currentDefault.title;
 
     if (isDefaultData) {
       setData(TEMPLATES[newLang]);
@@ -1940,15 +1810,15 @@ export default function YearInReviewGenerator() {
   const renderContent = () => {
     const props = { slide: currentSlide, data, themeId: currentTheme, t };
     switch(currentTheme) {
-      case 'retro': case 'terminal': case 'glitch': return <RenderRetro {...props} />;
-      case 'swiss': case 'monochrome': case 'y2k': return <RenderSwiss {...props} />;
-      case 'lofi': case 'botanical': case 'boho': return <RenderLoFi {...props} />;
-      case 'neon': case 'midnight': return <RenderNeon {...props} />;
-      case 'minimal': case 'corporate': case 'warm': return <RenderMinimal {...props} />;
-      case 'journal': case 'newspaper': return <RenderJournal {...props} />;
-      case 'glass': case 'pastel': case 'gradient': case 'aura': return <RenderGlass {...props} />;
-      case 'brutal': case 'bauhaus': return <RenderBrutal {...props} />;
-      case 'vapor': case 'synth': return <RenderVapor {...props} />;
+      case 'retro': return <RenderRetro {...props} />;
+      case 'swiss': return <RenderSwiss {...props} />;
+      case 'lofi': return <RenderLoFi {...props} />;
+      case 'neon': return <RenderNeon {...props} />;
+      case 'minimal': return <RenderMinimal {...props} />;
+      case 'journal': return <RenderJournal {...props} />;
+      case 'glass': return <RenderGlass {...props} />;
+      case 'brutal': return <RenderBrutal {...props} />;
+      case 'vapor': return <RenderVapor {...props} />;
       case 'academia': return <RenderAcademia {...props} />;
       case 'pop': return <RenderPop {...props} />;
       case 'blueprint': return <RenderBlueprint {...props} />;
@@ -2004,6 +1874,7 @@ export default function YearInReviewGenerator() {
                 <RefreshCw className="text-indigo-600" /> {t.title}
               </h1>
                <p className="text-slate-500 mt-2 font-medium">{t.subtitle}</p>
+               {/* Privacy Note */}
                <div className="mt-2 text-xs text-slate-400 bg-slate-50 p-2 rounded border border-slate-100 flex items-start gap-2">
                   <ShieldCheck className="w-3 h-3 mt-0.5 text-green-600 shrink-0" />
                   <span>{t.privacyText}</span>
