@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import ReactGA from "react-ga4"; // Import GA4
 import { 
   ChevronLeft, 
-  ChevronRight,       
+  ChevronRight, 
   Coffee, 
   Book, 
   Activity, 
@@ -52,11 +52,10 @@ import {
   Twitter,
   Instagram,
   Linkedin,
-  ShieldCheck,
-  SmilePlus // New icon for empty state
+  ShieldCheck
 } from 'lucide-react';
 
-// ... (ICON_MAP remains same)
+// --- Icon Mapping ---
 const ICON_MAP = {
   // General
   coffee: <Coffee className="w-full h-full" />,
@@ -96,7 +95,7 @@ const ICON_MAP = {
   social_linked: <Linkedin className="w-full h-full" />
 };
 
-// ... (DEFAULT_LABELS, QUOTES_EN, QUOTES_ID remain same)
+// --- Default Labels for Icons (Smart Auto-Fill) ---
 const DEFAULT_LABELS = {
   en: {
     coffee: "Coffees",
@@ -170,32 +169,7 @@ const DEFAULT_LABELS = {
   }
 };
 
-const QUOTES_EN = [
-  "A year defined not by the destination, but by the journey.",
-  "Small steps, consistent effort, and a few surprises along the way.",
-  "Growth is uncomfortable, but absolutely necessary.",
-  "Collecting moments, not things. 2025 was a vibe.",
-  "Grateful for the ups, the downs, and everything in between.",
-  "The year I finally started building my own path.",
-  "Work hard in silence, let your success be your noise.",
-  "Embrace the chaos. Trust the process.",
-  "Not a new me, just a better version.",
-  "Turning pages and writing new chapters."
-];
-
-const QUOTES_ID = [
-  "Tahun yang didefinisikan bukan oleh tujuan, tapi perjalanannya.",
-  "Langkah kecil, usaha konsisten, dan kejutan di sepanjang jalan.",
-  "Bertumbuh itu tidak nyaman, tapi mutlak diperlukan.",
-  "Mengoleksi momen, bukan barang. 2025 punya cerita.",
-  "Bersyukur untuk naik turunnya kehidupan tahun ini.",
-  "Tahun di mana aku mulai membangun jalanku sendiri.",
-  "Bekerja dalam diam, biarkan suksesmu yang berbicara.",
-  "Nikmati prosesnya, percaya pada hasilnya.",
-  "Bukan aku yang baru, tapi versi yang lebih baik.",
-  "Membuka lembaran baru dan menulis bab selanjutnya."
-];
-
+// --- Smart Summary Generator ---
 const generateSmartSummary = (data, lang) => {
   const stats = data.stats;
   const highlights = data.highlights;
@@ -279,7 +253,7 @@ const generateSmartSummary = (data, lang) => {
   return options[Math.floor(Math.random() * options.length)];
 };
 
-// ... (TRANSLATIONS & THEMES remain same)
+// --- Translations ---
 const TRANSLATIONS = {
   en: {
     // UI - Modern & Editorial Tone
@@ -299,7 +273,7 @@ const TRANSLATIONS = {
     gallery: "4. Photo Dump",
     change: "Swap",
     add: "Add",
-    summary: "6. The Outro",
+    summary: "5. The Outro",
     autoGen: "Magic Write",
     privacyTitle: "100% Private",
     privacyText: "Your data stays on your device. Nothing is sent to any server.",
@@ -332,11 +306,9 @@ const TRANSLATIONS = {
     visualLogs: "VISUAL_LOGS",
     endLine: "END_OF_LINE_",
     keyFigures: "Key Figures",
-    soundtrack: "The Soundtrack",
     fin: "Fin.",
     someNumbers: "By The Numbers",
     bigMoments: "Big Moments",
-    myPlaylist: "On Repeat",
     scrapbook: "Scrapbook",
     recap: "RECAP",
     myStats: "MY STATS",
@@ -349,12 +321,10 @@ const TRANSLATIONS = {
     volume: "VOL",
     indexRerum: "INDEX RERUM",
     chronicles: "CHRONICLES",
-    harmonia: "HARMONIA",
     plates: "PLATES",
     finis: "— FINIS —",
     wow: "WOW!",
     pow: "POW!",
-    boom: "BOOM!",
     snap: "SNAP!",
     fig: "FIG"
   },
@@ -376,7 +346,7 @@ const TRANSLATIONS = {
     gallery: "4. Dump Foto", 
     change: "Ganti",
     add: "Tambah",
-    summary: "6. Pesan & Kesan",
+    summary: "5. Pesan & Kesan",
     autoGen: "Tulis Ajaib",
     privacyTitle: "100% Privat",
     privacyText: "Data kamu aman di perangkat ini. Tidak ada yang dikirim ke server.",
@@ -390,16 +360,13 @@ const TRANSLATIONS = {
     pressStart: "TEKAN MULAI",
     playerStats: "STATISTIK_PEMAIN",
     achievements: "PENCAPAIAN",
-    audioLogs: "LOG_AUDIO",
     memoryDump: "MEMORI_DUMP",
     endTrans: "TRANSMISI SELESAI",
     annualReport: "LAPORAN TAHUNAN",
     keyPoints: "POIN UTAMA",
-    topTracks: "LAGU TERATAS",
     endReport: "LAPORAN SELESAI",
     collection: "Koleksi",
     moments: "MOMEN",
-    mixtape: "MIXTAPE",
     seeYou: "Sampai jumpa...",
     systemBoot: ":: SISTEM_MULAI ::",
     neuralStats: "STAT_NEURAL",
@@ -407,11 +374,9 @@ const TRANSLATIONS = {
     visualLogs: "LOG_VISUAL",
     endLine: "AKHIR_BARIS_",
     keyFigures: "Angka Kunci",
-    soundtrack: "Soundtrack",
     fin: "Selesai.",
     someNumbers: "Dalam Angka",
     bigMoments: "Momen Besar",
-    myPlaylist: "Diulang-ulang",
     scrapbook: "Buku Kliping",
     recap: "REKAP",
     myStats: "STATISTIKKU",
@@ -419,28 +384,26 @@ const TRANSLATIONS = {
     pics: "FOTO",
     aesthetics: "E S T E T I K A",
     memoriesExe: "memori.exe",
-    audioExe: "audio.exe",
     visuals: "V I S U A L",
     volume: "JILID",
     indexRerum: "INDEKS",
     chronicles: "KRONIK",
-    harmonia: "HARMONIA",
     plates: "PELAT",
     finis: "— TAMAT —",
     wow: "WAH!",
     pow: "DUAR!",
-    boom: "BOOM!",
     snap: "JEPRET!",
     fig: "GBR"
   }
 };
 
+// --- Theme Definitions (24 VIBES) ---
 const THEMES = [
   // 1. Retro Group
   { id: 'retro', name: '8-Bit Retro', vibe: 'Nostalgic, Console', color: 'bg-emerald-600' },
   { id: 'terminal', name: 'Hacker Terminal', vibe: 'Matrix, Code', color: 'bg-green-900' },
   { id: 'glitch', name: 'System Error', vibe: 'Distorted, Cyber', color: 'bg-red-700' },
-  // ... (Other themes remain same)
+  
   // 2. Swiss Group
   { id: 'swiss', name: 'Swiss Grid', vibe: 'Bold, Typographic', color: 'bg-red-600' },
   { id: 'monochrome', name: 'Mono Lux', vibe: 'Black & White', color: 'bg-black' },
@@ -483,7 +446,7 @@ const THEMES = [
   { id: 'pop', name: 'Pop Art', vibe: 'Comic, Halftone', color: 'bg-cyan-400' }
 ];
 
-// --- Initial Data (Templates - Updated with Emojis) ---
+// --- Initial Data (Templates - Music Removed) ---
 const TEMPLATES = {
   en: {
     year: '2025',
@@ -535,7 +498,6 @@ const TEMPLATES = {
 
 // 1. RETRO RENDERER
 const RenderRetro = ({ slide, data, themeId, t }) => {
-  // ... (previous setup variables)
   const isTerminal = themeId === 'terminal';
   const isGlitch = themeId === 'glitch';
 
@@ -593,7 +555,6 @@ const RenderRetro = ({ slide, data, themeId, t }) => {
       </div>
   );
 
-  // HIGHLIGHTS WITH EMOJI UPDATE
   if (slide === 2) return (
       <div className={`h-full ${bgColor} p-6 font-mono relative overflow-hidden select-none`}>
          <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%)] z-10 bg-[length:100%_4px]"></div>
@@ -627,6 +588,7 @@ const RenderRetro = ({ slide, data, themeId, t }) => {
          <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%)] z-10 bg-[length:100%_4px]"></div>
          <h3 className={`text-xl font-black uppercase mb-4 ${isTerminal ? 'bg-green-900 text-green-100' : 'bg-emerald-900 text-emerald-100'} inline-block px-2 py-1 self-start`}>{t.memoryDump}</h3>
          
+         {/* Fix: Added min-h-0 and adjusted padding */}
          <div className={`grid gap-2 flex-1 w-full ${gridClass} min-h-0`}>
             {data.photos.map((photo, i) => (
               <div 
@@ -660,7 +622,7 @@ const RenderRetro = ({ slide, data, themeId, t }) => {
 const RenderSwiss = ({ slide, data, themeId, t }) => {
   const isMono = themeId === 'monochrome';
   const isY2k = themeId === 'y2k';
-  // ... (bg variables same as before)
+
   let bgClass = isMono ? 'bg-black text-white' : isY2k ? 'bg-slate-300 text-blue-900' : 'bg-[#f2f2f2] text-[#1a1a1a]';
   let accentClass = isMono ? 'text-gray-400' : isY2k ? 'text-pink-500' : 'text-red-600';
   let borderClass = isMono ? 'border-white' : isY2k ? 'border-blue-900' : 'border-black';
@@ -698,7 +660,6 @@ const RenderSwiss = ({ slide, data, themeId, t }) => {
       </div>
   );
 
-  // HIGHLIGHTS WITH EMOJI UPDATE
   if (slide === 2) return (
       <div className={`h-full ${bgClass} font-sans flex flex-col select-none`}>
          <div className={`${isMono ? 'bg-gray-800' : isY2k ? 'bg-pink-500' : 'bg-red-600'} text-white p-6 pb-12 rounded-bl-[4rem]`}>
@@ -764,7 +725,7 @@ const RenderSwiss = ({ slide, data, themeId, t }) => {
 const RenderLoFi = ({ slide, data, themeId, t }) => {
   const isBotanical = themeId === 'botanical';
   const isBoho = themeId === 'boho';
-  // ... (texture vars same)
+  
   const paperTexture = isBotanical ? "bg-[#f1f8f1]" : isBoho ? "bg-[#f5efe6]" : "bg-[#fdfbf7]";
   const tapeStyle = "h-4 w-16 bg-yellow-200/80 absolute shadow-sm transform";
   
@@ -820,7 +781,6 @@ const RenderLoFi = ({ slide, data, themeId, t }) => {
       </div>
   );
 
-  // HIGHLIGHTS WITH EMOJI UPDATE
   if (slide === 2) return (
       <div className={`h-full ${paperTexture} p-6 font-serif relative overflow-hidden select-none`}>
          <h3 className={`text-5xl font-sans font-black ${isBotanical ? 'text-green-100' : 'text-stone-200'} absolute -right-4 top-10 rotate-90 z-0 select-none`}>{t.moments}</h3>
@@ -886,7 +846,7 @@ const RenderLoFi = ({ slide, data, themeId, t }) => {
 // 4. CYBERPUNK NEON RENDERER
 const RenderNeon = ({ slide, data, themeId, t }) => {
   const isMidnight = themeId === 'midnight';
-  // ... (variables same)
+  
   const bgStyle = isMidnight ? "bg-indigo-950" : "bg-slate-950";
   const textPrimary = isMidnight ? "text-purple-400" : "text-cyan-400";
   const textSecondary = isMidnight ? "text-blue-300" : "text-fuchsia-500";
@@ -931,7 +891,6 @@ const RenderNeon = ({ slide, data, themeId, t }) => {
       </div>
   );
 
-  // HIGHLIGHTS WITH EMOJI UPDATE
   if (slide === 2) return (
       <div className={`h-full ${bgStyle} p-6 font-sans relative overflow-hidden flex flex-col`}>
          <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[length:20px_20px]"></div>
@@ -1099,7 +1058,7 @@ const RenderMinimal = ({ slide, data, themeId, t }) => {
 const RenderGlass = ({ slide, data, themeId, t }) => {
   const isPastel = themeId === 'pastel';
   const isGradient = themeId === 'gradient';
-  // ... (bg variables same)
+
   let bgStyle = "bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500";
   let cardStyle = "backdrop-blur-xl bg-white/20 border border-white/30 shadow-lg text-white";
   let textColor = "text-white";
@@ -1175,7 +1134,7 @@ const RenderGlass = ({ slide, data, themeId, t }) => {
     return (
       <div className={`h-full ${bgStyle} p-6 font-sans flex flex-col relative select-none overflow-hidden`}>
         <h3 className={`text-2xl font-bold ${textColor} mb-6 drop-shadow-md`}>{t.gallery}</h3>
-        <div className={`grid gap-3 flex-1 w-full ${gridClass}`}>
+        <div className={`grid gap-3 flex-1 w-full grid-cols-1 ${data.photos.length > 1 ? 'grid-rows-2' : ''}`}>
           {data.photos.map((photo, i) => (
             <div 
               key={photo.id} 
@@ -1411,7 +1370,6 @@ const RenderAcademia = ({ slide, data, t }) => {
         {data.highlights.map((h, i) => (
           <div key={h.id}>
             <span className="text-[#d4af37] text-xl font-bold mr-2">§ {i+1}</span>
-            <span className="mr-2 text-xl">{h.emoji}</span>
             <h4 className="inline text-lg font-bold">{h.title}</h4>
             <p className="text-[#8a7e68] mt-1 text-sm leading-relaxed pl-8">{h.desc}</p>
           </div>
@@ -1487,8 +1445,7 @@ const RenderPop = ({ slide, data, t }) => {
        <h3 className="text-5xl font-black text-black mb-6 italic drop-shadow-[2px_2px_0px_white]">{t.pow}</h3>
        <div className="space-y-4 relative z-10">
          {data.highlights.map(h => (
-           <div key={h.id} className="bg-white border-4 border-black p-4 shadow-[4px_4px_0px_black] relative">
-             <div className="absolute -top-3 -right-3 text-3xl transform rotate-12">{h.emoji}</div>
+           <div key={h.id} className="bg-white border-4 border-black p-4 shadow-[4px_4px_0px_black]">
              <h4 className="text-xl font-black uppercase">{h.title}</h4>
              <p className="text-sm font-bold">{h.desc}</p>
            </div>
@@ -1560,12 +1517,9 @@ const RenderBlueprint = ({ slide, data, t }) => {
         <div className="absolute top-0 left-0 bg-white text-[#003399] px-2 text-xs font-bold">{t.fig} 1.2 - {t.highlights}</div>
         <div className="space-y-4 mt-8">
           {data.highlights.map((h, i) => (
-            <div key={h.id} className="border-b border-white pb-2 flex justify-between">
-              <div>
-                <div className="text-xs font-bold">ITEM {i+1}</div>
-                <div className="text-sm">{h.title}</div>
-              </div>
-              <div className="text-xl">{h.emoji}</div>
+            <div key={h.id} className="border-b border-white pb-2">
+              <div className="text-xs font-bold">ITEM {i+1}</div>
+              <div className="text-sm">{h.title}</div>
             </div>
           ))}
         </div>
@@ -1595,17 +1549,15 @@ const RenderBlueprint = ({ slide, data, t }) => {
   return <RenderRetro slide={slide} data={data} themeId='retro' t={t} />; 
 };
 
-// ... (YearInReviewGenerator component remains same structure, just updating section input for highlights)
 
 export default function YearInReviewGenerator() {
-  // ... (state and effects same as before)
   const [data, setData] = useState(() => {
     try {
       const savedData = localStorage.getItem('yearInReviewData');
-      return savedData ? JSON.parse(savedData) : TEMPLATES.id;
+      return savedData ? JSON.parse(savedData) : TEMPLATES.id; 
     } catch (e) {
       console.error("Failed to load from local storage", e);
-      return TEMPLATES.id;
+      return TEMPLATES.id; 
     }
   });
   
@@ -1617,7 +1569,7 @@ export default function YearInReviewGenerator() {
   const [language, setLanguage] = useState('id'); // Default to Indonesian
 
   const t = TRANSLATIONS[language]; // Translation helper
-  const totalSlides = 4; // REDUCED TO 4 SLIDES
+  const totalSlides = 5; 
 
   const scrollContainerRef = useRef(null);
 
@@ -1907,7 +1859,6 @@ export default function YearInReviewGenerator() {
           <section className="mb-10">
             <div className="flex justify-between items-center mb-4">
                <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2"><Activity className="w-4 h-4" /> {t.numbers}</h3>
-               <span className="text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded-full">{data.stats.length} / 6</span>
             </div>
             <div className="grid grid-cols-2 gap-4 mb-4">
               {data.stats.map((stat) => (
@@ -1937,11 +1888,10 @@ export default function YearInReviewGenerator() {
             )}
           </section>
 
-          {/* HIGHLIGHTS SECTION WITH EMOJI PICKER */}
+          {/* HIGHLIGHTS SECTION */}
           <section className="mb-10">
             <div className="flex justify-between items-center mb-4">
                <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2"><Layout className="w-4 h-4" /> {t.highlights}</h3>
-               <span className="text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded-full">{data.highlights.length} / 4</span>
             </div>
             <div className="space-y-4 mb-4">
               {data.highlights.map((item) => (
@@ -1953,7 +1903,6 @@ export default function YearInReviewGenerator() {
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
-                   {/* Emoji Input Row */}
                    <div className="flex gap-2 mb-2 items-center">
                      <div className="w-10 flex-shrink-0">
                        <input 
@@ -1982,7 +1931,6 @@ export default function YearInReviewGenerator() {
           <section className="mb-10">
              <div className="flex justify-between items-center mb-4">
                 <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2"><ImageIcon className="w-4 h-4" /> {t.gallery}</h3>
-                <span className="text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded-full">{data.photos.length} / 6</span>
              </div>
              
              <div className="grid grid-cols-3 gap-4 mb-4">
@@ -2094,11 +2042,10 @@ export default function YearInReviewGenerator() {
             {/* PHONE FRAME */}
             <div className={`relative w-[340px] max-w-full h-[600px] bg-black rounded-[3rem] border-[10px] border-slate-800 shadow-2xl overflow-hidden ring-1 ring-white/10 transition-transform duration-500 ${isCleanMode ? 'scale-110' : 'scale-100'}`}>
               <div id="preview-capture-area" className="w-full h-full bg-white relative flex flex-col">
-                  {/* Story Progress Bars - Kept in Clean Mode (often desired), but can be hidden if preferred. 
-                      Let's hide them in clean mode for a pure 'card' look, or keep them for 'story' look. 
-                      Keeping them makes it look like a genuine story screenshot. */}
+                  {/* Story Progress Bars - Kept in Clean Mode */}
                   <div className="absolute top-0 left-0 right-0 p-3 pt-5 z-50 flex gap-1.5 pointer-events-none">
-                  {[0, 1, 2, 3, 4].map(idx => (
+                  {/* Dynamic Progress Bar based on totalSlides */}
+                  {Array.from({ length: totalSlides }).map((_, idx) => (
                       <div key={idx} className="h-1 flex-1 bg-black/10 rounded-full overflow-hidden backdrop-blur-sm">
                       <div 
                           className={`h-full transition-all duration-300 ${
