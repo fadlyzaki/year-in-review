@@ -1900,15 +1900,40 @@ export default function YearInReviewGenerator() {
 
       {/* --- FULL SCREEN PREVIEW OVERLAY --- */}
       {isFullScreen && (
-        <div className="fixed inset-0 z-[200] bg-black flex items-center justify-center p-0">
+        <div className="fixed inset-0 z-[200] bg-black flex items-center justify-center p-4"> {/* Changed p-0 to p-4 for safe area? Or keep p-0 */}
+           
+           {/* Close Button */}
            <button 
              onClick={() => setIsFullScreen(false)}
-             className="absolute top-4 right-4 z-50 p-2 bg-black/50 text-white rounded-full hover:bg-black/80 backdrop-blur-md"
+             className="absolute top-4 right-4 z-50 p-3 bg-slate-800/50 text-white rounded-full hover:bg-slate-700/80 backdrop-blur-md transition-all"
+             title={t.exitScreenshot}
            >
              <X className="w-6 h-6" />
            </button>
+
+           {/* Previous Button */}
+           <button 
+             onClick={(e) => { e.stopPropagation(); prevSlide(); }}
+             className="absolute left-4 top-1/2 -translate-y-1/2 z-50 p-3 bg-slate-800/50 text-white rounded-full hover:bg-slate-700/80 backdrop-blur-md transition-all hidden md:flex"
+             title="Previous Slide"
+           >
+             <ChevronLeft className="w-8 h-8" />
+           </button>
+
+           {/* Next Button */}
+           <button 
+             onClick={(e) => { e.stopPropagation(); nextSlide(); }}
+             className="absolute right-4 top-1/2 -translate-y-1/2 z-50 p-3 bg-slate-800/50 text-white rounded-full hover:bg-slate-700/80 backdrop-blur-md transition-all hidden md:flex"
+             title="Next Slide"
+           >
+             <ChevronRight className="w-8 h-8" />
+           </button>
            
-           <div className="h-full aspect-[9/16] relative max-w-full">
+           {/* Mobile Touch Zones for Nav (invisible) */}
+           <div className="absolute inset-y-0 left-0 w-1/4 z-40 md:hidden" onClick={(e) => { e.stopPropagation(); prevSlide(); }} />
+           <div className="absolute inset-y-0 right-0 w-1/4 z-40 md:hidden" onClick={(e) => { e.stopPropagation(); nextSlide(); }} />
+
+           <div className="h-full aspect-[9/16] relative max-w-full shadow-2xl overflow-hidden">
               {renderContent()}
            </div>
         </div>
