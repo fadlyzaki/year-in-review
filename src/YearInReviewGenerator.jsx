@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import ReactGA from "react-ga4"; // Import GA4
 import { 
   ChevronLeft, 
   ChevronRight, 
@@ -55,7 +54,8 @@ import {
   ShieldCheck,
   SmilePlus,
   HelpCircle,
-  X 
+  X,
+  Maximize
 } from 'lucide-react';
 
 // --- Icon Mapping ---
@@ -98,81 +98,33 @@ const ICON_MAP = {
   social_linked: <Linkedin className="w-full h-full" />
 };
 
-// --- Default Labels for Icons (Smart Auto-Fill) ---
+// --- Default Labels for Icons ---
 const DEFAULT_LABELS = {
   en: {
-    coffee: "Coffees",
-    book: "Books Read",
-    activity: "Workouts",
-    zap: "Moments",
-    heart: "Kindness",
-    work: "Projects",
-    music: "Minutes Listened",
-    globe: "Countries",
-    terminal: "Lines of Code",
-    feather: "Words Written",
-    phone: "Screen Time",
-    camera: "Photos Taken",
-    star: "Achievements",
-    disc: "Albums",
-    duolingo: "Streak Days",
-    language: "Languages",
-    strava_cycle: "km Cycled",
-    strava_run: "km Run",
-    gym: "Gym Sessions",
-    travel: "Trips",
-    gaming: "Hours Played",
-    coding: "Commits",
-    git: "PRs Merged",
-    design: "Designs",
-    finance: "Savings",
-    spotify: "Top Genre",
-    youtube: "Hours Watched",
-    food: "New Foods",
-    sleep: "Avg Sleep",
-    location: "Places",
-    social_x: "Tweets",
-    social_insta: "Posts",
-    social_linked: "Connections"
+    coffee: "Coffees", book: "Books Read", activity: "Workouts", zap: "Moments",
+    heart: "Kindness", work: "Projects", music: "Minutes Listened", globe: "Countries",
+    terminal: "Lines of Code", feather: "Words Written", phone: "Screen Time",
+    camera: "Photos Taken", star: "Achievements", disc: "Albums", duolingo: "Streak Days",
+    language: "Languages", strava_cycle: "km Cycled", strava_run: "km Run",
+    gym: "Gym Sessions", travel: "Trips", gaming: "Hours Played", coding: "Commits",
+    git: "PRs Merged", design: "Designs", finance: "Savings", spotify: "Top Genre",
+    youtube: "Hours Watched", food: "New Foods", sleep: "Avg Sleep", location: "Places",
+    social_x: "Tweets", social_insta: "Posts", social_linked: "Connections"
   },
   id: {
-    coffee: "Kopi Diminum",
-    book: "Buku Tamat",
-    activity: "Olahraga",
-    zap: "Momen Seru",
-    heart: "Kebaikan",
-    work: "Proyek",
-    music: "Menit Dengar",
-    globe: "Negara",
-    terminal: "Baris Kode",
-    feather: "Kata Ditulis",
-    phone: "Durasi Layar",
-    camera: "Foto Diambil",
-    star: "Pencapaian",
-    disc: "Album",
-    duolingo: "Hari Streak",
-    language: "Bahasa",
-    strava_cycle: "km Sepeda",
-    strava_run: "km Lari",
-    gym: "Sesi Gym",
-    travel: "Perjalanan",
-    gaming: "Jam Main",
-    coding: "Total Commit",
-    git: "PR Merged",
-    design: "Desain",
-    finance: "Tabungan",
-    spotify: "Genre Top",
-    youtube: "Jam Nonton",
-    food: "Makanan Baru",
-    sleep: "Rata-rata Tidur",
-    location: "Tempat",
-    social_x: "Tweets",
-    social_insta: "Postingan",
-    social_linked: "Koneksi"
+    coffee: "Kopi Diminum", book: "Buku Tamat", activity: "Olahraga", zap: "Momen Seru",
+    heart: "Kebaikan", work: "Proyek", music: "Menit Dengar", globe: "Negara",
+    terminal: "Baris Kode", feather: "Kata Ditulis", phone: "Durasi Layar",
+    camera: "Foto Diambil", star: "Pencapaian", disc: "Album", duolingo: "Hari Streak",
+    language: "Bahasa", strava_cycle: "km Sepeda", strava_run: "km Lari",
+    gym: "Sesi Gym", travel: "Perjalanan", gaming: "Jam Main", coding: "Total Commit",
+    git: "PR Merged", design: "Desain", finance: "Tabungan", spotify: "Genre Top",
+    youtube: "Jam Nonton", food: "Makanan Baru", sleep: "Rata-rata Tidur",
+    location: "Tempat", social_x: "Tweets", social_insta: "Postingan", social_linked: "Koneksi"
   }
 };
 
-// --- Smart Summary Generator Logic ---
+// --- Smart Summary Generator ---
 const generateSmartSummary = (data, lang) => {
   const stats = data.stats;
   const highlights = data.highlights;
@@ -256,6 +208,33 @@ const generateSmartSummary = (data, lang) => {
   return options[Math.floor(Math.random() * options.length)];
 };
 
+// --- Quotes Library ---
+const QUOTES_EN = [
+  "A year defined not by the destination, but by the journey.",
+  "Small steps, consistent effort, and a few surprises along the way.",
+  "Growth is uncomfortable, but absolutely necessary.",
+  "Collecting moments, not things. 2025 was a vibe.",
+  "Grateful for the ups, the downs, and everything in between.",
+  "The year I finally started building my own path.",
+  "Work hard in silence, let your success be your noise.",
+  "Embrace the chaos. Trust the process.",
+  "Not a new me, just a better version.",
+  "Turning pages and writing new chapters."
+];
+
+const QUOTES_ID = [
+  "Tahun yang didefinisikan bukan oleh tujuan, tapi perjalanannya.",
+  "Langkah kecil, usaha konsisten, dan kejutan di sepanjang jalan.",
+  "Bertumbuh itu tidak nyaman, tapi mutlak diperlukan.",
+  "Mengoleksi momen, bukan barang. 2025 punya cerita.",
+  "Bersyukur untuk naik turunnya kehidupan tahun ini.",
+  "Tahun di mana aku mulai membangun jalanku sendiri.",
+  "Bekerja dalam diam, biarkan suksesmu yang berbicara.",
+  "Nikmati prosesnya, percaya pada hasilnya.",
+  "Bukan aku yang baru, tapi versi yang lebih baik.",
+  "Membuka lembaran baru dan menulis bab selanjutnya."
+];
+
 // --- Translations ---
 const TRANSLATIONS = {
   en: {
@@ -281,20 +260,18 @@ const TRANSLATIONS = {
     privacyTitle: "100% Private",
     privacyText: "Your data stays on your device. Nothing is sent to any server.",
     preview: "Preview Story",
-    saveSlide: "Save Image",
+    saveSlide: "Screenshot Mode",
     saving: "Saving...",
-    exitScreenshot: "Exit Capture Mode",
-    screenshotHint: "Tap 'Save Image' to download & share to stories",
+    exitScreenshot: "Close Preview",
+    screenshotHint: "Tap 'Screenshot Mode' to view full screen & capture",
     madeBy: "made with year-in-review-generator",
-    songPlaceholder: "Song Title",
-    artistPlaceholder: "Artist Name",
     // Help Modal
     helpTitle: "How to use",
     helpDesc: "Create your own aesthetic year-in-review in minutes.",
     step1: "Fill in your stats & memories",
     step2: "Upload your favorite photos",
     step3: "Choose a visual theme",
-    step4: "Save & share to stories",
+    step4: "Open Screenshot Mode & capture!",
     close: "Got it, let's go!",
     // Themes
     pressStart: "PRESS START",
@@ -321,7 +298,7 @@ const TRANSLATIONS = {
     someNumbers: "By The Numbers",
     bigMoments: "Big Moments",
     scrapbook: "Scrapbook",
-    recap: "RECAP",
+    recap: "REKAP",
     myStats: "MY STATS",
     wins: "WINS",
     pics: "PICS",
@@ -336,7 +313,7 @@ const TRANSLATIONS = {
     wow: "WOW!",
     pow: "POW!",
     snap: "SNAP!",
-    fig: "FIG"
+    fig: "GBR"
   },
   id: {
     // UI - Santai & Personal
@@ -361,20 +338,18 @@ const TRANSLATIONS = {
     privacyTitle: "100% Privat",
     privacyText: "Data kamu aman di perangkat ini. Tidak ada yang dikirim ke server.",
     preview: "Pratinjau",
-    saveSlide: "Simpan Gambar",
+    saveSlide: "Mode Screenshot",
     saving: "Menyimpan...",
-    exitScreenshot: "Keluar Mode Foto",
-    screenshotHint: "Ketuk 'Simpan Gambar' untuk share ke story",
+    exitScreenshot: "Tutup Preview",
+    screenshotHint: "Ketuk 'Mode Screenshot' untuk layar penuh & capture",
     madeBy: "dibuat dengan year-in-review-generator",
-    songPlaceholder: "Judul Lagu",
-    artistPlaceholder: "Nama Artis",
     // Help Modal
     helpTitle: "Cara Pakai",
     helpDesc: "Bikin rekap tahunan estetikmu dalam hitungan menit.",
     step1: "Isi statistik & kenanganmu",
     step2: "Upload foto-foto favoritmu",
     step3: "Pilih tema visual yang cocok",
-    step4: "Simpan & bagikan ke story",
+    step4: "Buka Mode Screenshot & capture!",
     close: "Siap, gas!",
     // Themes
     pressStart: "TEKAN MULAI",
@@ -406,7 +381,7 @@ const TRANSLATIONS = {
     wins: "MENANG",
     pics: "FOTO",
     aesthetics: "E S T E T I K A",
-    memoriesExe: "memori.exe",
+    memoriesExe: "memories.exe",
     visuals: "V I S U A L",
     volume: "JILID",
     indexRerum: "INDEKS",
@@ -428,13 +403,14 @@ const THEMES = [
   { id: 'minimal', name: 'Modern Minimalist', vibe: 'Clean, Editorial', color: 'bg-slate-800' },
   { id: 'journal', name: 'Hand-Drawn', vibe: 'Sketchy, Notebook', color: 'bg-amber-600' },
   { id: 'glass', name: 'Glassmorphism', vibe: 'Frosted, Gradient', color: 'bg-indigo-400' },
+  { id: 'brutal', name: 'Neo-Brutalism', vibe: 'Raw, Contrast', color: 'bg-yellow-400' },
   { id: 'vapor', name: 'Vaporwave', vibe: 'Retro-future, Pink', color: 'bg-pink-500' },
   { id: 'academia', name: 'Dark Academia', vibe: 'Classic, Serif', color: 'bg-stone-700' },
   { id: 'pop', name: 'Pop Art', vibe: 'Comic, Halftone', color: 'bg-cyan-400' },
   { id: 'blueprint', name: 'Blueprint', vibe: 'Technical, Blue', color: 'bg-blue-800' }
 ];
 
-// --- Initial Data (Templates - Music Removed) ---
+// --- Initial Data ---
 const TEMPLATES = {
   en: {
     year: '2025',
@@ -599,7 +575,7 @@ const RenderSwiss = ({ slide, data, t }) => {
   let cardBg = 'bg-white';
 
   const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-bold uppercase tracking-widest text-black/20 z-20 pointer-events-none`}>{t.madeBy}</div>;
-  const darkWatermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-bold uppercase tracking-widest text-black/20 z-20 pointer-events-none`}>{t.madeBy}</div>;
+  const darkWatermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-bold uppercase tracking-widest text-white/20 z-20 pointer-events-none`}>{t.madeBy}</div>;
   
   if (slide === 0) return (
       <div className={`h-full ${bgClass} p-4 font-sans flex flex-col relative select-none`}>
@@ -617,12 +593,13 @@ const RenderSwiss = ({ slide, data, t }) => {
 
   if (slide === 1) return (
       <div className={`h-full bg-white text-black p-6 font-sans flex flex-col select-none`}>
-        <h3 className={`text-4xl font-black mb-6 border-b-2 border-red-600 pb-2`}>{t.keyPoints}</h3>
-        <div className="flex-1 flex flex-col justify-center gap-3">
+        <h3 className={`text-4xl font-black mb-8 border-b-2 border-red-600 pb-2`}>{t.keyPoints}</h3>
+        {/* CHANGED: Use grid to fit more items without cutoff */}
+        <div className="grid grid-cols-2 gap-x-4 gap-y-6">
           {data.stats.map((stat, idx) => (
-            <div key={stat.id} className="flex items-baseline justify-between group border-b border-gray-100 pb-1 last:border-0">
-              <div className="text-xs font-bold uppercase tracking-widest opacity-50 w-1/3 truncate">0{idx + 1} / {stat.label}</div>
-              <div className={`text-4xl font-black text-black group-hover:${accentClass} transition-colors`}>{stat.value}</div>
+            <div key={stat.id} className="flex flex-col group">
+              <div className="text-xs font-bold uppercase tracking-widest opacity-50 mb-1">0{idx + 1} / {stat.label}</div>
+              <div className={`text-4xl font-black text-black group-hover:${accentClass} transition-colors truncate`}>{stat.value}</div>
             </div>
           ))}
         </div>
@@ -638,7 +615,6 @@ const RenderSwiss = ({ slide, data, t }) => {
          <div className="flex-1 p-6 -mt-8 space-y-4 min-h-0 overflow-y-auto scrollbar-hide">
            {data.highlights.map((h, i) => (
              <div key={h.id} className={`${cardBg} p-5 shadow-xl border-l-8 ${borderClass} flex gap-4 items-start`}>
-               {/* Emoji Big & Bold */}
                <div className="text-4xl shrink-0">{h.emoji}</div>
                <div className="min-w-0">
                   <h4 className="text-xl font-black uppercase mb-1 truncate">{h.title}</h4>
@@ -889,7 +865,7 @@ const RenderNeon = ({ slide, data, t }) => {
                 <div className={`absolute inset-0 bg-cyan-900/20 z-10 group-hover:bg-transparent transition-colors`}></div>
                 <img src={photo.url} alt="" className="w-full h-full object-cover" />
                 <div className="absolute bottom-2 left-2 text-[10px] text-cyan-400 font-mono z-20">IMG_{i+1}.RAW</div>
-             </div>
+              </div>
            ))}
          </div>
          {watermark}
@@ -946,14 +922,19 @@ const RenderMinimal = ({ slide, data, t }) => {
 
   if (slide === 2) return (
       <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col select-none`}>
-         <h3 className={`text-xl font-normal uppercase tracking-widest text-center mb-6 ${textPrimary}`}>{t.highlights}</h3>
-         <div className="flex-1 space-y-6 min-h-0 overflow-y-auto scrollbar-hide">
-           {data.highlights.map((h, i) => (
-             <div key={h.id} className="text-center">
-               <div className="flex justify-center mb-1 text-xl">{h.emoji}</div>
-               <div className={`font-sans text-[10px] font-bold uppercase tracking-[0.2em] ${textSecondary} mb-1`}>0{i+1}.</div>
-               <h4 className={`text-base font-normal uppercase tracking-wide mb-1 ${textPrimary} truncate`}>{h.title}</h4>
-               <p className={`text-xs leading-relaxed ${textSecondary} font-light italic px-4 line-clamp-2`}>{h.desc}</p>
+         <h3 className={`text-xl font-normal uppercase tracking-widest text-center mb-8 ${textPrimary}`}>{t.highlights}</h3>
+         {/* Redesigned to fit max 4 highlights cleanly in a list format */}
+         <div className="flex-1 flex flex-col justify-center gap-6 min-h-0">
+           {data.highlights.slice(0, 4).map((h, i) => (
+             <div key={h.id} className="flex items-start gap-4 group">
+               <div className={`font-sans text-xs font-bold uppercase tracking-widest ${textSecondary} w-6 shrink-0 text-right pt-1`}>0{i+1}.</div>
+               <div className="flex-1 min-w-0 text-left border-l border-stone-300 pl-4">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-lg">{h.emoji}</span>
+                    <h4 className={`text-sm font-bold uppercase tracking-wide ${textPrimary} truncate`}>{h.title}</h4>
+                  </div>
+                  <p className={`text-xs leading-relaxed ${textSecondary} font-light italic line-clamp-2`}>{h.desc}</p>
+               </div>
              </div>
            ))}
          </div>
@@ -1004,6 +985,8 @@ const RenderJournal = ({ slide, data, t }) => {
   const pencilColor = "text-slate-500";
   const highlightColor = "bg-yellow-200/50";
   const sketchBorder = "border-2 border-dashed border-amber-900/50";
+  // FIX: Added accentColor definition
+  const accentColor = "text-amber-600";
   const watermark = <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-handwriting text-amber-900/20 z-20 pointer-events-none">{t.madeBy}</div>;
   
   if (slide === 0) return (
@@ -1062,8 +1045,8 @@ const RenderJournal = ({ slide, data, t }) => {
                  <div className={`font-handwriting text-lg font-bold ${pencilColor}`}>#{i+1}</div>
                  <div className="flex-1 min-w-0">
                   <div className="flex justify-between">
-                     <h4 className={`font-bold ${penColor} font-handwriting text-lg mb-1 truncate`}>{h.title}</h4>
-                     <span className="text-xl">{h.emoji}</span>
+                      <h4 className={`font-bold ${penColor} font-handwriting text-lg mb-1 truncate`}>{h.title}</h4>
+                      <span className="text-xl">{h.emoji}</span>
                   </div>
                   <p className={`text-sm leading-snug ${pencilColor} font-handwriting line-clamp-2`}>{h.desc}</p>
                  </div>
@@ -1095,7 +1078,7 @@ const RenderJournal = ({ slide, data, t }) => {
              </div>
            ))}
          </div>
-         <Star className={`absolute bottom-8 right-8 w-6 h-6 ${penColor} animate-pulse`} />
+         <Star className={`absolute bottom-8 right-8 w-6 h-6 ${accentColor} animate-pulse`} />
          {watermark}
       </div>
     );
@@ -1105,12 +1088,12 @@ const RenderJournal = ({ slide, data, t }) => {
     <div className={`h-full ${paperTexture} p-8 font-serif flex flex-col justify-center items-center text-center relative select-none`}>
       <div className="bg-white p-8 shadow-xl rotate-1 border-8 border-white relative">
          <div className="absolute top-0 left-0 w-0 h-0 border-t-[20px] border-l-[20px] border-t-stone-200 border-l-transparent"></div>
-         <p className={`text-xl leading-relaxed italic ${penColor} mb-4`}>{data.summary}</p>
-         <div className={`flex justify-center gap-1 ${pencilColor}`}>
+         <p className={`text-xl leading-relaxed italic ${textColor} mb-4`}>{data.summary}</p>
+         <div className={`flex justify-center gap-1 ${secondaryColor}`}>
            <Star className="w-4 h-4 fill-current" /><Star className="w-4 h-4 fill-current" /><Star className="w-4 h-4 fill-current" />
          </div>
       </div>
-      <div className={`mt-12 font-handwriting ${pencilColor} transform -rotate-6`}>See you next year...</div>
+      <div className={`mt-12 font-handwriting ${secondaryColor} transform -rotate-6`}>{t.seeYou}</div>
       {watermark}
     </div>
   );
@@ -1221,6 +1204,93 @@ const RenderGlass = ({ slide, data, themeId, t }) => {
   );
 };
 
+// 8. NEO-BRUTALISM RENDERER (Handles: Brutal, Bauhaus)
+const RenderBrutal = ({ slide, data, t }) => {
+  const bgStyle = "bg-[#FFFDF5]";
+  const cardStyle = "bg-white border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]";
+  const textPrimary = "text-black";
+  const accent1 = "bg-yellow-400";
+  const accent2 = "bg-purple-400";
+  
+  const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-black uppercase tracking-tighter bg-black text-white px-2 py-1 transform -rotate-2 z-20 pointer-events-none`}>{t.madeBy}</div>;
+
+  if (slide === 0) return (
+    <div className={`h-full ${bgStyle} p-6 font-sans flex flex-col justify-center items-center relative select-none`}>
+      <div className={`absolute top-10 right-10 w-16 h-16 ${accent1} rounded-full border-4 border-black`}></div>
+      <div className={`${cardStyle} p-8 w-full rotate-2 mb-8`}>
+        <h1 className={`text-8xl font-black ${textPrimary} leading-[0.8]`}>{data.year}</h1>
+      </div>
+      <div className={`${accent2} border-4 border-black p-4 -rotate-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`}>
+        <h2 className="text-3xl font-black text-white uppercase">{data.title}</h2>
+      </div>
+      <p className="mt-8 font-bold text-xl text-center max-w-xs">{data.subtitle}</p>
+      {watermark}
+    </div>
+  );
+
+  if (slide === 1) return (
+    <div className={`h-full ${bgStyle} p-6 font-sans relative select-none`}>
+      <h3 className={`text-4xl font-black ${textPrimary} mb-8 underline decoration-wavy decoration-4 decoration-purple-500`}>{t.myStats}_</h3>
+      <div className="grid grid-cols-2 gap-6">
+        {data.stats.map((stat, i) => (
+          <div key={stat.id} className={`${cardStyle} p-4 flex flex-col items-center justify-center aspect-square hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all`}>
+            <div className={`w-10 h-10 mb-2 ${textPrimary}`}>{ICON_MAP[stat.icon]}</div>
+            <div className={`text-4xl font-black ${textPrimary}`}>{stat.value}</div>
+            <div className="text-xs font-bold uppercase bg-yellow-300 px-2 border-2 border-black">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+      {watermark}
+    </div>
+  );
+
+  if (slide === 2) return (
+    <div className={`h-full ${bgStyle} p-6 font-sans relative select-none flex flex-col`}>
+      <h3 className={`text-4xl font-black ${textPrimary} mb-8 bg-green-400 border-4 border-black inline-block p-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] shrink-0`}>{t.wins}</h3>
+      <div className="space-y-6 flex-1 min-h-0 overflow-y-auto scrollbar-hide">
+        {data.highlights.map((h, i) => (
+          <div key={h.id} className={`${cardStyle} p-4`}>
+             <div className="flex justify-between">
+                <h4 className="text-xl font-black uppercase mb-1 bg-pink-300 inline-block px-1 border-2 border-black truncate max-w-[80%]">{h.title}</h4>
+                <span className="text-2xl">{h.emoji}</span>
+             </div>
+            <p className={`${textPrimary} font-bold leading-tight mt-2 line-clamp-2`}>{h.desc}</p>
+          </div>
+        ))}
+      </div>
+      {watermark}
+    </div>
+  );
+
+  if (slide === 3) {
+     const photoCount = data.photos.length;
+    let gridClass = 'grid-cols-1 grid-rows-2'; 
+    if (photoCount >= 3) gridClass = 'grid-cols-2 grid-rows-2';
+    if (photoCount >= 5) gridClass = 'grid-cols-2 grid-rows-3';
+     return (
+      <div className={`h-full ${bgStyle} p-6 font-sans relative select-none flex flex-col`}>
+        <h3 className={`text-4xl font-black ${textPrimary} mb-6 italic`}>{t.pics}</h3>
+        <div className={`grid gap-4 flex-1 w-full ${gridClass}`}>
+          {data.photos.map((photo, i) => (
+            <div key={photo.id} className={`${cardStyle} p-0 overflow-hidden relative ${photoCount === 3 && i === 0 ? 'row-span-2' : ''}`}>
+               <img src={photo.url} alt="" className="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition-all" />
+            </div>
+          ))}
+        </div>
+        {watermark}
+      </div>
+    );
+  }
+
+  return (
+    <div className={`h-full ${bgStyle} p-8 font-sans flex flex-col justify-center items-center text-center relative select-none`}>
+      <div className={`${cardStyle} p-8 bg-blue-400 rotate-1`}>
+        <p className="text-2xl font-black text-white leading-tight">"{data.summary}"</p>
+      </div>
+      {watermark}
+    </div>
+  );
+};
 
 
 // 9. VAPORWAVE RENDERER (Handles: Vapor, Synth)
@@ -1602,12 +1672,12 @@ export default function YearInReviewGenerator() {
   const [currentTheme, setCurrentTheme] = useState('retro'); 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isCleanMode, setIsCleanMode] = useState(false);
+  const [isFullScreen, setIsFullScreen] = useState(false);
   const [saveStatus, setSaveStatus] = useState('');
-  const [isDownloading, setIsDownloading] = useState(false); 
-  const [language, setLanguage] = useState('id'); // Default to Indonesian
+  const [language, setLanguage] = useState('id'); 
   const [showHelp, setShowHelp] = useState(false);
 
-  const t = TRANSLATIONS[language]; // Translation helper
+  const t = TRANSLATIONS[language]; 
   const totalSlides = 5; 
 
   const scrollContainerRef = useRef(null);
@@ -1623,8 +1693,7 @@ export default function YearInReviewGenerator() {
     const newLang = language === 'en' ? 'id' : 'en';
     const currentDefault = TEMPLATES[language];
     // Check if *core* data is default to switch templates. Photos/Highlights content might differ, so we check title/year as proxy.
-    const isDefaultData = data.title === currentDefault.title && 
-                          data.stats[0].label === currentDefault.stats[0].label;
+    const isDefaultData = data.title === currentDefault.title;
 
     if (isDefaultData) {
       setData(TEMPLATES[newLang]);
@@ -1643,17 +1712,6 @@ export default function YearInReviewGenerator() {
       setSaveStatus('Error saving');
     }
   }, [data]);
-
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "https://html2canvas.hertzen.com/dist/html2canvas.min.js";
-    script.async = true;
-    script.onload = () => console.log("html2canvas loaded");
-    document.body.appendChild(script);
-    return () => {
-      document.body.removeChild(script);
-    }
-  }, []);
 
   const handleInputChange = (field, value) => {
     setData(prev => ({ ...prev, [field]: value }));
@@ -1766,7 +1824,6 @@ export default function YearInReviewGenerator() {
   };
 
   const generateQuote = () => {
-    // Use smart summary logic
     const smartQuote = generateSmartSummary(data, language);
     handleInputChange('summary', smartQuote);
   };
@@ -1783,42 +1840,6 @@ export default function YearInReviewGenerator() {
     setIsCleanMode(!isCleanMode);
   };
 
-  const handleDownload = () => {
-    const element = document.getElementById('preview-capture-area'); 
-    if (window.html2canvas && element) {
-      setIsDownloading(true);
-      window.html2canvas(element, {
-        scale: 2, 
-        backgroundColor: null, 
-        useCORS: true 
-      }).then(canvas => {
-        canvas.toBlob(async (blob) => {
-          if (blob) {
-            const file = new File([blob], `year-in-review-slide-${currentSlide + 1}.png`, { type: 'image/png' });
-            if (navigator.canShare && navigator.canShare({ files: [file] })) {
-               try {
-                 await navigator.share({
-                   files: [file],
-                   title: 'My 2025 Year in Review',
-                   text: 'Created with YearInReview Generator'
-                 });
-                 setIsDownloading(false);
-                 return;
-               } catch (err) {
-                 console.log("Share failed, falling back to download", err);
-               }
-            }
-          }
-          const link = document.createElement('a');
-          link.download = `year-in-review-slide-${currentSlide + 1}.png`;
-          link.href = canvas.toDataURL();
-          link.click();
-          setIsDownloading(false);
-        });
-      });
-    }
-  };
-
   const renderContent = () => {
     const props = { slide: currentSlide, data, themeId: currentTheme, t };
     switch(currentTheme) {
@@ -1829,6 +1850,7 @@ export default function YearInReviewGenerator() {
       case 'minimal': return <RenderMinimal {...props} />;
       case 'journal': return <RenderJournal {...props} />;
       case 'glass': return <RenderGlass {...props} />;
+      case 'brutal': return <RenderBrutal {...props} />;
       case 'vapor': return <RenderVapor {...props} />;
       case 'academia': return <RenderAcademia {...props} />;
       case 'pop': return <RenderPop {...props} />;
@@ -1872,6 +1894,22 @@ export default function YearInReviewGenerator() {
               <button onClick={() => setShowHelp(false)} className="w-full mt-8 bg-slate-900 text-white font-bold py-3 rounded-xl hover:bg-slate-800 transition-colors">
                  {t.close}
               </button>
+           </div>
+        </div>
+      )}
+
+      {/* --- FULL SCREEN PREVIEW OVERLAY --- */}
+      {isFullScreen && (
+        <div className="fixed inset-0 z-[200] bg-black flex items-center justify-center p-0">
+           <button 
+             onClick={() => setIsFullScreen(false)}
+             className="absolute top-4 right-4 z-50 p-2 bg-black/50 text-white rounded-full hover:bg-black/80 backdrop-blur-md"
+           >
+             <X className="w-6 h-6" />
+           </button>
+           
+           <div className="h-full aspect-[9/16] relative max-w-full">
+              {renderContent()}
            </div>
         </div>
       )}
@@ -2116,10 +2154,10 @@ export default function YearInReviewGenerator() {
                     <Play className="w-3 h-3 text-indigo-400 fill-current" /> {t.preview}
                 </div>
                 <button 
-                  onClick={handleDownload} disabled={isDownloading} 
+                  onClick={() => setIsFullScreen(true)}
                   className="flex items-center gap-2 px-3 py-1.5 bg-indigo-600 text-white rounded-full text-xs font-bold uppercase tracking-wider hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-500/20"
                 >
-                   {isDownloading ? <><RefreshCw className="w-3 h-3 animate-spin" /> {t.saving}</> : <><Download className="w-3 h-3" /> {t.saveSlide}</>}
+                   <Maximize className="w-3 h-3" /> {t.saveSlide}
                 </button>
             </div>
 
