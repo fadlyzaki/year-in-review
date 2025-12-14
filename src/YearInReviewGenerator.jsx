@@ -6,8 +6,7 @@ import {
   Image as ImageIcon, Upload, Plus, Trash2, Wand2, Save, RotateCcw, 
   Flame, Languages, Bike, Footprints, Dumbbell, Plane, Gamepad2, Code, 
   PenTool, DollarSign, Headphones, Video, Utensils, Moon, MapPin, 
-  GitBranch, Twitter, Instagram, Linkedin, ShieldCheck, HelpCircle, X, 
-  
+  GitBranch, Twitter, Instagram, Linkedin, ShieldCheck, HelpCircle, X, EyeOff
 } from 'lucide-react';
 
 /**
@@ -107,7 +106,10 @@ const TEMPLATES = {
       { id: 2, title: 'Travel Goal', desc: 'Visited Japan.', emoji: '🌸' },
       { id: 3, title: 'New Hobby', desc: 'Learned photography.', emoji: '📸' }
     ],
-    photos: []
+    photos: [
+      { id: 1, url: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=500', caption: 'Big Wins' },
+      { id: 2, url: 'https://images.unsplash.com/photo-1516724562728-afc824a36e84?auto=format&fit=crop&q=80&w=500', caption: 'Vibes' }
+    ]
   },
   id: {
     year: '2025', title: 'Tahun Bertumbuh', subtitle: 'Membangun Pondasi',
@@ -123,7 +125,10 @@ const TEMPLATES = {
       { id: 2, title: 'Liburan Impian', desc: 'Mengunjungi Jepang.', emoji: '🌸' },
       { id: 3, title: 'Hobi Baru', desc: 'Belajar fotografi.', emoji: '📸' }
     ],
-    photos: []
+    photos: [
+      { id: 1, url: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=500', caption: 'Big Wins' },
+      { id: 2, url: 'https://images.unsplash.com/photo-1516724562728-afc824a36e84?auto=format&fit=crop&q=80&w=500', caption: 'Vibes' }
+    ]
   }
 };
 
@@ -140,14 +145,21 @@ const TRANSLATIONS = {
     helpTitle: "How to use", helpDesc: "Create your own aesthetic year-in-review.",
     step1: "Fill in stats & memories", step2: "Upload photos", step3: "Choose theme", step4: "Open Screenshot Mode",
     close: "Got it!", madeBy: "made with year-in-review-generator",
-    // Theme texts
+    
+    // Theme specific
     pressStart: "PRESS START", playerStats: "PLAYER_STATS", achievements: "ACHIEVEMENTS", memoryDump: "MEMORY_DUMP", endTrans: "END_OF_TRANSMISSION",
     annualReport: "ANNUAL REPORT", keyPoints: "KEY POINTS", endReport: "END REPORT", fig: "FIG",
     collection: "The Collection", moments: "MOMENTS", seeYou: "See you next year...",
     systemBoot: ":: SYSTEM_BOOT ::", neuralStats: "NEURAL_STATS", coreMem: "CORE_MEMORY", visualLogs: "VISUAL_LOGS", endLine: "END_OF_LINE_",
     keyFigures: "Key Figures", fin: "Fin.", wow: "WOW!", pow: "POW!", snap: "SNAP!",
     aesthetics: "A E S T H E T I C S", memoriesExe: "memories.exe", visuals: "V I S U A L S",
-    volume: "VOL", indexRerum: "INDEX RERUM", chronicles: "CHRONICLES", plates: "PLATES", finis: "— FINIS —"
+    volume: "VOL", indexRerum: "INDEX RERUM", chronicles: "CHRONICLES", plates: "PLATES", finis: "— FINIS —",
+    
+    // FIX: Added missing keys for Brutal/Glass themes
+    myStats: "MY STATS",
+    wins: "BIG WINS",
+    pics: "EVIDENCE",
+    recap: "RECAP"
   },
   id: {
     title: "EDISI TAHUNKU", subtitle: "Kurasi momenmu, desain ceritamu.",
@@ -161,14 +173,21 @@ const TRANSLATIONS = {
     helpTitle: "Cara Pakai", helpDesc: "Bikin rekap tahunan estetikmu.",
     step1: "Isi statistik & kenangan", step2: "Upload foto", step3: "Pilih tema", step4: "Buka Mode Screenshot",
     close: "Siap, gas!", madeBy: "dibuat dengan year-in-review-generator",
-    // Theme texts
+    
+    // Theme specific
     pressStart: "TEKAN MULAI", playerStats: "STATISTIK_PEMAIN", achievements: "PENCAPAIAN", memoryDump: "MEMORI_DUMP", endTrans: "TRANSMISI SELESAI",
     annualReport: "LAPORAN TAHUNAN", keyPoints: "POIN UTAMA", endReport: "LAPORAN SELESAI", fig: "GBR",
     collection: "Koleksi", moments: "MOMEN", seeYou: "Sampai jumpa...",
     systemBoot: ":: SISTEM_MULAI ::", neuralStats: "STAT_NEURAL", coreMem: "MEMORI_INTI", visualLogs: "LOG_VISUAL", endLine: "AKHIR_BARIS_",
     keyFigures: "Angka Kunci", fin: "Selesai.", wow: "WAH!", pow: "DUAR!", snap: "JEPRET!",
     aesthetics: "E S T E T I K A", memoriesExe: "memori.exe", visuals: "V I S U A L",
-    volume: "JILID", indexRerum: "INDEKS", chronicles: "KRONIK", plates: "PELAT", finis: "— TAMAT —"
+    volume: "JILID", indexRerum: "INDEKS", chronicles: "KRONIK", plates: "PELAT", finis: "— TAMAT —",
+    
+    // FIX: Added missing keys for Brutal/Glass themes
+    myStats: "STATISTIK",
+    wins: "PENCAPAIAN",
+    pics: "DOKUMENTASI",
+    recap: "REKAP"
   }
 };
 
@@ -179,8 +198,7 @@ const TRANSLATIONS = {
  */
 
 const getPhotoGridClasses = (count) => {
-  if (count <= 1) return "grid-cols-1 grid-rows-1";
-  if (count === 2) return "grid-cols-1 grid-rows-2";
+  if (count <= 2) return "grid-cols-1 grid-rows-2";
   if (count === 3) return "grid-cols-2 grid-rows-2";
   if (count === 4) return "grid-cols-2 grid-rows-2";
   return "grid-cols-2 grid-rows-3"; // 5 or 6 photos
@@ -338,7 +356,7 @@ const RenderSwiss = ({ slide, data, t }) => {
   if (slide === 1) return (
       <div className={`h-full bg-white text-black p-6 font-sans flex flex-col select-none`}>
         <h3 className={`text-4xl font-black mb-8 border-b-2 border-red-600 pb-2`}>{t.keyPoints}</h3>
-        <div className="grid grid-cols-2 gap-x-4 gap-y-6">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-6 flex-1 min-h-0 overflow-y-auto scrollbar-hide content-start">
           {data.stats.map((stat, idx) => (
             <div key={stat.id} className="flex flex-col group">
               <div className="text-xs font-bold uppercase tracking-widest opacity-50 mb-1">0{idx + 1} / {stat.label}</div>
@@ -391,7 +409,7 @@ const RenderLoFi = ({ slide, data, t }) => {
   const paperTexture = "bg-[#fdfbf7]";
   const secondaryColor = "text-stone-500";
   const watermark = <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-handwriting ${secondaryColor} mix-blend-multiply z-20 pointer-events-none`}>{t.madeBy}</div>;
-  
+   
   if (slide === 0) return (
       <div className={`h-full ${paperTexture} p-6 font-serif flex flex-col justify-center items-center relative text-stone-800 select-none`}>
         <div className="border border-stone-300 bg-white p-6 shadow-md rotate-2 mb-8 w-full aspect-[4/3] flex flex-col items-center justify-center">
@@ -412,7 +430,7 @@ const RenderLoFi = ({ slide, data, t }) => {
         <div className="text-center mb-8 relative inline-block self-center">
            <span className="relative z-10 text-2xl font-bold italic bg-white/50 px-4 py-1 transform -rotate-1 inline-block border border-stone-200 shadow-sm">{t.collection}</span>
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4 flex-1 min-h-0 overflow-y-auto scrollbar-hide content-start">
           {data.stats.map((stat, idx) => (
             <div key={stat.id} className={`bg-white p-3 shadow-md border border-stone-100 flex flex-col items-center justify-center aspect-square ${idx % 2 === 0 ? '-rotate-2' : 'rotate-2'}`}>
               <div className="w-8 h-3 bg-blue-200/50 absolute -top-1.5 opacity-80"></div>
@@ -484,7 +502,7 @@ const RenderNeon = ({ slide, data, t }) => {
       <div className={`h-full ${bgStyle} p-6 font-sans flex flex-col relative overflow-hidden select-none`}>
         <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[length:20px_20px]"></div>
         <h3 className={`text-xl font-bold uppercase mb-8 ${textSecondary} flex items-center gap-2 ${glowTextSecondary}`}><Activity className="w-5 h-5 animate-pulse" /> {t.neuralStats}</h3>
-        <div className="grid grid-cols-2 gap-4 z-10">
+        <div className="grid grid-cols-2 gap-4 z-10 flex-1 min-h-0 overflow-y-auto scrollbar-hide content-start">
           {data.stats.map((stat, idx) => (
             <div key={stat.id} className={`${borderStyle} p-4 flex flex-col items-center justify-center aspect-square rounded-lg relative overflow-hidden group`}>
               <div className={`absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-fuchsia-500/10 opacity-0 group-hover:opacity-100 transition-opacity`}></div>
@@ -542,7 +560,7 @@ const RenderMinimal = ({ slide, data, t }) => {
     const textPrimary = "text-stone-900";
     const textSecondary = "text-stone-500";
     const watermark = <div className={`absolute bottom-4 left-1/2 -translate-x-1/2 text-[6px] uppercase tracking-[0.2em] text-stone-400 opacity-50 z-20 pointer-events-none`}>{t.madeBy}</div>;
-    
+     
     if(slide===0) return <div className={`h-full ${bgStyle} flex flex-col justify-center items-center text-center font-serif`}>
         <h1 className="text-8xl font-light mb-4">{data.year}</h1><h2>{data.title}</h2><p className={`text-lg ${textSecondary} font-light italic mt-4`}>{data.subtitle}</p>{watermark}
     </div>;
@@ -550,7 +568,7 @@ const RenderMinimal = ({ slide, data, t }) => {
     if (slide === 1) return (
       <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col select-none`}>
         <h3 className={`text-xl font-normal uppercase tracking-widest text-center mb-12 ${textPrimary}`}>{t.keyFigures}</h3>
-        <div className={`grid grid-cols-2 gap-px bg-stone-200 border-stone-200 border`}>
+        <div className={`grid grid-cols-2 gap-px bg-stone-200 border-stone-200 border flex-1 min-h-0 overflow-y-auto scrollbar-hide content-start`}>
           {data.stats.map((stat, idx) => (
             <div key={stat.id} className={`bg-white p-6 flex flex-col items-center justify-center aspect-square`}>
               <div className={`text-4xl font-light ${textPrimary} mb-2`}>{stat.value}</div>
@@ -607,7 +625,7 @@ const RenderJournal = ({ slide, data, t }) => {
   const sketchBorder = "border-2 border-dashed border-amber-900/50";
   const accentColor = "text-amber-600"; 
   const watermark = <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-handwriting text-amber-900/20 z-20 pointer-events-none">{t.madeBy}</div>;
-  
+   
   if(slide===0) return <div className={`h-full ${paperTexture} flex flex-col justify-center items-center text-center font-serif ${penColor}`}>
       <h1 className="text-7xl font-black mb-2">{data.year}</h1>
       <h2 className="text-2xl mb-4 underline decoration-wavy decoration-amber-500/50">{data.title}</h2>
@@ -618,7 +636,7 @@ const RenderJournal = ({ slide, data, t }) => {
   if (slide === 1) return (
       <div className={`h-full ${paperTexture} p-8 font-serif flex flex-col relative select-none`}>
         <h3 className={`text-2xl font-bold text-center mb-8 ${penColor} font-handwriting underline decoration-2 decoration-amber-500/30`}>{t.playerStats}</h3>
-        <div className="grid grid-cols-2 gap-4 flex-1 min-h-0">
+        <div className="grid grid-cols-2 gap-4 flex-1 min-h-0 overflow-y-auto scrollbar-hide content-start">
           {data.stats.map((stat, idx) => (
             <div key={stat.id} className={`p-4 flex flex-col items-center justify-center aspect-square relative ${idx%2 ? 'rotate-1' : '-rotate-1'}`}>
               <div className={`absolute inset-0 ${sketchBorder} rounded-lg`}></div>
@@ -685,8 +703,7 @@ const RenderJournal = ({ slide, data, t }) => {
   return <div className={`h-full ${paperTexture} flex items-center justify-center p-8 text-center font-serif italic text-xl ${penColor}`}>"{data.summary}"{watermark}</div>;
 };
 
-// --- 7. Glass, 8. Brutal, 9. Vapor, 10. Academia, 11. Pop, 12. Blueprint (FIXED PHOTO GRIDS) ---
-
+// --- 7. Glass ---
 const RenderGlass = ({ slide, data, t }) => {
     const bgStyle = "bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500";
     const cardStyle = "backdrop-blur-xl bg-white/20 border border-white/30 shadow-lg text-white";
@@ -701,7 +718,7 @@ const RenderGlass = ({ slide, data, t }) => {
         <div className={`h-full ${bgStyle} p-6 font-sans flex flex-col relative select-none overflow-hidden`}>
           <div className="absolute top-[20%] right-[-10%] w-[200px] h-[200px] bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
           <h3 className={`text-2xl font-bold text-white mb-8 drop-shadow-md`}>{t.myStats}</h3>
-          <div className="grid grid-cols-2 gap-4 relative z-10">
+          <div className="grid grid-cols-2 gap-4 relative z-10 flex-1 min-h-0 overflow-y-auto scrollbar-hide content-start">
             {data.stats.map(stat => (
               <div key={stat.id} className={`${cardStyle} p-4 rounded-2xl flex flex-col items-center justify-center aspect-square`}>
                 <div className={`w-8 h-8 mb-2 text-white drop-shadow`}>{ICON_MAP[stat.icon]}</div>
@@ -713,7 +730,7 @@ const RenderGlass = ({ slide, data, t }) => {
           {watermark}
         </div>
       );
-    
+     
       if (slide === 2) return (
         <div className={`h-full ${bgStyle} p-6 font-sans relative select-none overflow-hidden`}>
           <h3 className={`text-2xl font-bold text-white mb-8 drop-shadow-md`}>{t.highlights}</h3>
@@ -751,25 +768,32 @@ const RenderGlass = ({ slide, data, t }) => {
     return <div className={`h-full ${bgStyle} flex items-center justify-center p-8`}><div className={`${cardStyle} p-8 rounded-3xl text-center`}>"{data.summary}"</div>{watermark}</div>;
 };
 
+// --- 8. Brutal (Fixed Summary) ---
 const RenderBrutal = ({ slide, data, t }) => {
     const bgStyle = "bg-[#FFFDF5]";
     const cardStyle = "bg-white border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]";
     const watermark = <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-black bg-black text-white px-2 z-20 pointer-events-none">{t.madeBy}</div>;
     const textPrimary = "text-black";
 
-    if(slide===0) return <div className={`h-full ${bgStyle} flex flex-col justify-center items-center p-6`}>
-        <div className={`${cardStyle} p-8 mb-8 rotate-2`}><h1 className="text-8xl font-black leading-[0.8]">{data.year}</h1></div>
-        <div className="bg-yellow-400 border-4 border-black p-4 shadow-[4px_4px_0px_black] -rotate-1">
-             <h2 className="text-3xl font-black uppercase">{data.title}</h2>
+    // Slide 0: Intro
+    if(slide === 0) return (
+        <div className={`h-full ${bgStyle} flex flex-col justify-center items-center p-6`}>
+            <div className={`${cardStyle} p-8 mb-8 rotate-2`}>
+                <h1 className="text-8xl font-black leading-[0.8]">{data.year}</h1>
+            </div>
+            <div className="bg-yellow-400 border-4 border-black p-4 shadow-[4px_4px_0px_black] -rotate-1">
+                 <h2 className="text-3xl font-black uppercase">{data.title}</h2>
+            </div>
+            <p className="mt-4 font-bold">{data.subtitle}</p>
+            {watermark}
         </div>
-        <p className="mt-4 font-bold">{data.subtitle}</p>
-        {watermark}
-    </div>;
+    );
 
+    // Slide 1: Stats
     if (slide === 1) return (
-        <div className={`h-full ${bgStyle} p-6 font-sans relative select-none`}>
+        <div className={`h-full ${bgStyle} p-6 font-sans relative select-none flex flex-col`}>
           <h3 className={`text-4xl font-black ${textPrimary} mb-8 underline decoration-wavy decoration-4 decoration-purple-500`}>{t.myStats}_</h3>
-          <div className="grid grid-cols-2 gap-6 flex-1 min-h-0">
+          <div className="grid grid-cols-2 gap-6 flex-1 min-h-0 overflow-y-auto scrollbar-hide content-start">
             {data.stats.map((stat, i) => (
               <div key={stat.id} className={`${cardStyle} p-4 flex flex-col items-center justify-center aspect-square hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all`}>
                 <div className={`w-10 h-10 mb-2 ${textPrimary}`}>{ICON_MAP[stat.icon]}</div>
@@ -780,9 +804,10 @@ const RenderBrutal = ({ slide, data, t }) => {
           </div>
           {watermark}
         </div>
-      );
-    
-      if (slide === 2) return (
+    );
+     
+    // Slide 2: Highlights
+    if (slide === 2) return (
         <div className={`h-full ${bgStyle} p-6 font-sans relative select-none flex flex-col`}>
           <h3 className={`text-4xl font-black ${textPrimary} mb-8 bg-green-400 border-4 border-black inline-block p-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] shrink-0`}>{t.wins}</h3>
           <div className="space-y-6 flex-1 min-h-0 overflow-y-auto scrollbar-hide">
@@ -798,8 +823,9 @@ const RenderBrutal = ({ slide, data, t }) => {
           </div>
           {watermark}
         </div>
-      );
+    );
 
+    // Slide 3: Photos
     if (slide === 3) {
         const gridClass = getPhotoGridClasses(data.photos.length);
         return (
@@ -816,9 +842,20 @@ const RenderBrutal = ({ slide, data, t }) => {
             </div>
         );
     }
-    return <div className={`h-full ${bgStyle} flex items-center justify-center p-8`}><div className={`${cardStyle} p-8 bg-blue-400 rotate-1 text-center font-black text-white text-2xl`}>"{data.summary}"</div>{watermark}</div>;
+
+    // Slide 4: Summary (The Fix is here)
+    // Removed ${cardStyle} to prevent 'bg-white' from hiding the white text
+    return (
+        <div className={`h-full ${bgStyle} flex items-center justify-center p-8`}>
+            <div className="bg-blue-400 border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] p-8 rotate-1 text-center font-black text-white text-2xl">
+                "{data.summary || "No summary available"}"
+            </div>
+            {watermark}
+        </div>
+    );
 };
 
+// --- 9. Vapor ---
 const RenderVapor = ({ slide, data, t }) => {
     const bgStyle = "bg-gradient-to-b from-fuchsia-900 to-purple-900";
     const gridStyle = "bg-[linear-gradient(rgba(0,255,255,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.2)_1px,transparent_1px)] bg-[length:40px_40px] perspective-[500px]";
@@ -835,7 +872,7 @@ const RenderVapor = ({ slide, data, t }) => {
         <div className={`h-full ${bgStyle} p-6 font-mono relative select-none overflow-hidden`}>
            <div className={`absolute inset-0 ${gridStyle} opacity-30`}></div>
            <h3 className="text-2xl text-cyan-400 mb-6 relative z-10 italic">{t.aesthetics}</h3>
-           <div className="grid grid-cols-2 gap-4 relative z-10 flex-1 min-h-0">
+           <div className="grid grid-cols-2 gap-4 relative z-10 flex-1 min-h-0 overflow-y-auto scrollbar-hide content-start">
              {data.stats.map(stat => (
                <div key={stat.id} className="bg-black/40 border border-pink-500 p-4 backdrop-blur-sm shadow-[4px_4px_0px_rgba(0,255,255,0.5)]">
                  <div className="text-pink-400 w-8 h-8 mb-2">{ICON_MAP[stat.icon]}</div>
@@ -847,7 +884,7 @@ const RenderVapor = ({ slide, data, t }) => {
            {watermark}
         </div>
       );
-    
+     
       if (slide === 2) return (
         <div className={`h-full ${bgStyle} p-6 font-mono relative select-none overflow-hidden flex flex-col`}>
            <div className={`absolute inset-0 ${gridStyle} opacity-30`}></div>
@@ -885,6 +922,7 @@ const RenderVapor = ({ slide, data, t }) => {
     return <div className={`h-full ${bgStyle} flex items-center justify-center p-8`}><div className="border-4 border-white p-6 bg-black/50 backdrop-blur-sm shadow-[8px_8px_0px_cyan] text-center text-pink-300">"{data.summary}"</div>{watermark}</div>;
 };
 
+// --- 10. Academia ---
 const RenderAcademia = ({ slide, data, t }) => {
     const bgStyle = "bg-[#2c241b] text-[#e0d8c3]";
     const watermark = <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-[6px] font-serif uppercase tracking-[0.2em] text-[#e0d8c3]/20 z-20 pointer-events-none">{t.madeBy}</div>;
@@ -900,7 +938,7 @@ const RenderAcademia = ({ slide, data, t }) => {
     if (slide === 1) return (
         <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col select-none`}>
           <h3 className="text-2xl text-[#d4af37] border-b border-[#5c4d3c] pb-2 mb-8 italic">{t.indexRerum}</h3>
-          <div className="space-y-6">
+          <div className="space-y-6 flex-1 min-h-0 overflow-y-auto scrollbar-hide">
             {data.stats.map(stat => (
               <div key={stat.id} className="flex items-center justify-between">
                 <span className="text-[#8a7e68] uppercase text-xs tracking-widest">{stat.label}</span>
@@ -911,7 +949,7 @@ const RenderAcademia = ({ slide, data, t }) => {
           {watermark}
         </div>
       );
-    
+     
       if (slide === 2) return (
         <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col select-none`}>
           <h3 className="text-2xl text-[#d4af37] border-b border-[#5c4d3c] pb-2 mb-8 italic shrink-0">{t.chronicles}</h3>
@@ -948,6 +986,7 @@ const RenderAcademia = ({ slide, data, t }) => {
     return <div className={`h-full ${bgStyle} flex items-center justify-center p-12 text-center italic text-xl text-[#d4af37]`}>"{data.summary}"{watermark}</div>;
 };
 
+// --- 11. Pop ---
 const RenderPop = ({ slide, data, t }) => {
     const bgStyle = "bg-yellow-300";
     const watermark = <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[6px] font-black uppercase bg-white/50 text-black/50 px-1 z-20 pointer-events-none">{t.madeBy}</div>;
@@ -965,7 +1004,7 @@ const RenderPop = ({ slide, data, t }) => {
         <div className={`h-full bg-yellow-300 p-6 font-sans relative select-none`}>
            <div className="absolute inset-0 bg-[radial-gradient(circle,black_1px,transparent_1px)] bg-[length:10px_10px] opacity-10"></div>
            <h3 className="text-5xl font-black text-black mb-6 italic drop-shadow-[2px_2px_0px_white]">{t.wow}</h3>
-           <div className="grid grid-cols-2 gap-4 relative z-10 flex-1 min-h-0">
+           <div className="grid grid-cols-2 gap-4 relative z-10 flex-1 min-h-0 overflow-y-auto scrollbar-hide content-start">
              {data.stats.map(stat => (
                <div key={stat.id} className="bg-white border-4 border-black p-2 shadow-[4px_4px_0px_black] rounded-full aspect-square flex flex-col items-center justify-center">
                  <div className="text-3xl font-black">{stat.value}</div>
@@ -976,7 +1015,7 @@ const RenderPop = ({ slide, data, t }) => {
            {watermark}
         </div>
       );
-    
+     
       if (slide === 2) return (
         <div className={`h-full bg-cyan-300 p-6 font-sans relative select-none flex flex-col`}>
            <div className="absolute inset-0 bg-[radial-gradient(circle,black_1px,transparent_1px)] bg-[length:10px_10px] opacity-10"></div>
@@ -1014,6 +1053,7 @@ const RenderPop = ({ slide, data, t }) => {
     return <div className={`h-full bg-cyan-300 flex items-center justify-center p-8`}><div className="bg-white border-4 border-black p-8 shadow-[8px_8px_0px_black] rotate-1 text-2xl font-black text-center">"{data.summary}"</div>{watermark}</div>;
 };
 
+// --- 12. Blueprint ---
 const RenderBlueprint = ({ slide, data, t }) => {
     const bgStyle = "bg-[#003399] text-white";
     const grid = "bg-[linear-gradient(rgba(255,255,255,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.2)_1px,transparent_1px)] bg-[length:20px_20px]";
@@ -1029,9 +1069,9 @@ const RenderBlueprint = ({ slide, data, t }) => {
     if (slide === 1) return (
         <div className={`h-full ${bgStyle} p-8 font-mono flex flex-col relative select-none`}>
           <div className={`absolute inset-0 ${grid}`}></div>
-          <div className="border-4 border-white p-6 relative z-10 h-full">
+          <div className="border-4 border-white p-6 relative z-10 h-full flex flex-col">
             <div className="absolute top-0 left-0 bg-white text-[#003399] px-2 text-xs font-bold">{t.fig} 1.1 - {t.playerStats}</div>
-            <div className="grid grid-cols-2 gap-4 mt-8">
+            <div className="grid grid-cols-2 gap-4 mt-8 flex-1 min-h-0 overflow-y-auto scrollbar-hide content-start">
               {data.stats.map(stat => (
                 <div key={stat.id} className="border border-white p-2 text-center">
                   <div className="text-2xl font-bold">{stat.value}</div>
@@ -1043,7 +1083,7 @@ const RenderBlueprint = ({ slide, data, t }) => {
           {watermark}
         </div>
       );
-    
+     
       if (slide === 2) return (
         <div className={`h-full ${bgStyle} p-8 font-mono flex flex-col relative select-none`}>
           <div className={`absolute inset-0 ${grid}`}></div>
@@ -1103,10 +1143,14 @@ export default function YearInReviewGenerator() {
       return TEMPLATES.id; 
     }
   });
-  
+   
   const [currentTheme, setCurrentTheme] = useState('retro'); 
   const [currentSlide, setCurrentSlide] = useState(0);
+  
+  // ACTIVATED: Clean Mode Logic for Screenshots
   const [isCleanMode, setIsCleanMode] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [saveStatus, setSaveStatus] = useState('');
   const [language, setLanguage] = useState('id'); 
@@ -1115,6 +1159,46 @@ export default function YearInReviewGenerator() {
   const t = TRANSLATIONS[language]; 
   const totalSlides = 5; 
   const scrollContainerRef = useRef(null);
+
+  // --- CLEAN MODE LOGIC ---
+  const enterCleanMode = (e) => {
+    e.stopPropagation();
+    setIsCleanMode(true);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 2500);
+  };
+
+  const exitCleanMode = useCallback(() => {
+    if (isCleanMode) {
+      setIsCleanMode(false);
+      setShowToast(false);
+    }
+  }, [isCleanMode]);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+         if (isCleanMode) {
+             exitCleanMode();
+         } else if (isFullScreen) {
+             setIsFullScreen(false);
+         }
+      }
+    };
+
+    if (isFullScreen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    if (isCleanMode) {
+        window.addEventListener('click', exitCleanMode);
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('click', exitCleanMode);
+    };
+  }, [isFullScreen, isCleanMode, exitCleanMode]);
+  // --- END CLEAN MODE LOGIC ---
 
   const scrollThemes = (direction) => {
     if (scrollContainerRef.current) {
@@ -1143,7 +1227,7 @@ export default function YearInReviewGenerator() {
   }, [data]);
 
   const handleInputChange = (field, value) => setData(prev => ({ ...prev, [field]: value }));
-  
+   
   const handleStatChange = (id, field, value) => {
     setData(prev => ({
       ...prev,
@@ -1158,7 +1242,7 @@ export default function YearInReviewGenerator() {
       })
     }));
   };
-  
+   
   const addStat = () => {
     if (data.stats.length < 6) {
       setData(prev => ({ ...prev, stats: [...prev.stats, { id: Date.now(), label: 'New Stat', value: '0', icon: 'star' }] }));
@@ -1197,9 +1281,9 @@ export default function YearInReviewGenerator() {
   const addPhoto = () => {
     if (data.photos.length < 6) {
       const placeholders = [
-         'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=500',
-         'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&q=80&w=500',
-         'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&q=80&w=500'
+          'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=500',
+          'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&q=80&w=500',
+          'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&q=80&w=500'
       ];
       const randomPlaceholder = placeholders[Math.floor(Math.random() * placeholders.length)];
       setData(prev => ({ ...prev, photos: [...prev.photos, { id: Date.now(), url: randomPlaceholder, caption: 'New Memory' }] }));
@@ -1207,8 +1291,9 @@ export default function YearInReviewGenerator() {
   };
 
   const removePhoto = (id) => {
-    // Removed the length check to allow deleting any photo
-    setData(prev => ({ ...prev, photos: prev.photos.filter(p => p.id !== id) }));
+    if (data.photos.length > 2) {
+      setData(prev => ({ ...prev, photos: prev.photos.filter(p => p.id !== id) }));
+    }
   };
 
   const resetData = () => {
@@ -1247,42 +1332,75 @@ export default function YearInReviewGenerator() {
 
   return (
     <div className="min-h-screen bg-gray-50 text-slate-800 font-sans flex flex-col lg:flex-row lg:h-screen lg:overflow-hidden">
-      
+       
       {/* Help Modal */}
       {showHelp && (
         <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setShowHelp(false)}>
-           <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl relative animate-in fade-in zoom-in-95 duration-200" onClick={e => e.stopPropagation()}>
+            <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl relative animate-in fade-in zoom-in-95 duration-200" onClick={e => e.stopPropagation()}>
               <button onClick={() => setShowHelp(false)} className="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
                 <X className="w-5 h-5" />
               </button>
               <h3 className="text-xl font-black text-slate-900 mb-2">{t.helpTitle}</h3>
               <p className="text-slate-500 text-sm mb-6">{t.helpDesc}</p>
               <button onClick={() => setShowHelp(false)} className="w-full mt-8 bg-slate-900 text-white font-bold py-3 rounded-xl hover:bg-slate-800 transition-colors">
-                 {t.close}
+                  {t.close}
               </button>
-           </div>
+            </div>
         </div>
       )}
 
       {/* --- FULL SCREEN PREVIEW OVERLAY --- */}
       {isFullScreen && (
         <div className="fixed inset-0 z-[200] bg-black flex items-center justify-center p-0 md:p-4 h-[100dvh]">
-           <button onClick={() => setIsFullScreen(false)} className="absolute top-4 right-4 z-50 p-3 bg-slate-800/50 text-white rounded-full hover:bg-slate-700/80 backdrop-blur-md transition-all">
-             <X className="w-6 h-6" />
-           </button>
-           <button onClick={(e) => { e.stopPropagation(); prevSlide(); }} className="absolute left-4 top-1/2 -translate-y-1/2 z-50 p-3 bg-slate-800/50 text-white rounded-full hover:bg-slate-700/80 backdrop-blur-md transition-all hidden md:flex">
-             <ChevronLeft className="w-8 h-8" />
-           </button>
-           <button onClick={(e) => { e.stopPropagation(); nextSlide(); }} className="absolute right-4 top-1/2 -translate-y-1/2 z-50 p-3 bg-slate-800/50 text-white rounded-full hover:bg-slate-700/80 backdrop-blur-md transition-all hidden md:flex">
-             <ChevronRight className="w-8 h-8" />
-           </button>
-           
-           <div className="absolute inset-y-0 left-0 w-1/4 z-40 md:hidden" onClick={(e) => { e.stopPropagation(); prevSlide(); }} />
-           <div className="absolute inset-y-0 right-0 w-1/4 z-40 md:hidden" onClick={(e) => { e.stopPropagation(); nextSlide(); }} />
+            
+            {/* HIDE UI BUTTON (ADDED) */}
+            <button 
+                onClick={enterCleanMode} 
+                className={`absolute top-4 right-16 z-50 p-3 bg-emerald-600 text-white rounded-full hover:bg-emerald-500 backdrop-blur-md transition-all shadow-lg ${isCleanMode ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+                title="Hide UI for Screenshot"
+            >
+              <Camera className="w-6 h-6" />
+            </button>
 
-           <div className="w-full h-full md:aspect-[9/16] relative md:max-w-full shadow-2xl overflow-hidden bg-white">
-              {renderContent()}
-           </div>
+            {/* CLOSE BUTTON (Updated with transition) */}
+            <button 
+                onClick={() => setIsFullScreen(false)} 
+                className={`absolute top-4 right-4 z-50 p-3 bg-slate-800/50 text-white rounded-full hover:bg-slate-700/80 backdrop-blur-md transition-all ${isCleanMode ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            {/* NAV ARROWS (Updated with transition) */}
+            <button 
+                onClick={(e) => { e.stopPropagation(); prevSlide(); }} 
+                className={`absolute left-4 top-1/2 -translate-y-1/2 z-50 p-3 bg-slate-800/50 text-white rounded-full hover:bg-slate-700/80 backdrop-blur-md transition-all hidden md:flex ${isCleanMode ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+            >
+              <ChevronLeft className="w-8 h-8" />
+            </button>
+            <button 
+                onClick={(e) => { e.stopPropagation(); nextSlide(); }} 
+                className={`absolute right-4 top-1/2 -translate-y-1/2 z-50 p-3 bg-slate-800/50 text-white rounded-full hover:bg-slate-700/80 backdrop-blur-md transition-all hidden md:flex ${isCleanMode ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+            >
+              <ChevronRight className="w-8 h-8" />
+            </button>
+            
+            {/* Mobile tap areas */}
+            <div className={`absolute inset-y-0 left-0 w-1/4 z-40 md:hidden ${isCleanMode ? 'pointer-events-none' : ''}`} onClick={(e) => { e.stopPropagation(); prevSlide(); }} />
+            <div className={`absolute inset-y-0 right-0 w-1/4 z-40 md:hidden ${isCleanMode ? 'pointer-events-none' : ''}`} onClick={(e) => { e.stopPropagation(); nextSlide(); }} />
+
+            <div className="w-full h-full md:aspect-[9/16] relative md:max-w-full shadow-2xl overflow-hidden bg-white">
+               {renderContent()}
+            </div>
+
+            {/* TOAST MESSAGE (ADDED) */}
+            <div 
+                className={`absolute bottom-10 bg-black/90 text-white px-6 py-3 rounded-full border border-white/20 shadow-2xl flex items-center gap-3 transition-all duration-500 z-[60] ${
+                showToast ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+                }`}
+            >
+                <EyeOff size={18} className="text-emerald-400" />
+                <span className="font-medium text-sm">UI Hidden. Click anywhere to restore.</span>
+            </div>
         </div>
       )}
 
@@ -1312,7 +1430,7 @@ export default function YearInReviewGenerator() {
                 </button>
             </div>
           </header>
-          
+           
           <section className="mb-10 space-y-4">
             <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2"><Type className="w-4 h-4" /> {t.coreInfo}</h3>
             <div className="grid grid-cols-3 gap-4">
@@ -1393,7 +1511,7 @@ export default function YearInReviewGenerator() {
                 {data.photos.map((photo) => (
                    <div key={photo.id} className="relative group aspect-square rounded-lg overflow-hidden border border-slate-200 bg-slate-50">
                       <img src={photo.url} alt="User Upload" className="w-full h-full object-cover" />
-                      <button onClick={(e) => { e.stopPropagation(); removePhoto(photo.id); }} className="absolute top-1 right-1 bg-black/50 text-white p-1 rounded-full hover:bg-red-500 disabled:hidden transition-colors z-20"><Trash2 className="w-3 h-3" /></button>
+                      <button onClick={(e) => { e.stopPropagation(); removePhoto(photo.id); }} disabled={data.photos.length <= 2} className="absolute top-1 right-1 bg-black/50 text-white p-1 rounded-full hover:bg-red-500 disabled:hidden transition-colors z-20"><Trash2 className="w-3 h-3" /></button>
                       <label className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center transition-opacity cursor-pointer text-white z-10">
                          <Upload className="w-6 h-6 mb-1" />
                          <span className="text-[10px] uppercase font-bold">{t.change}</span>
@@ -1503,7 +1621,7 @@ export default function YearInReviewGenerator() {
               <div className="text-slate-500 font-mono text-xs">{currentSlide + 1} / {totalSlides}</div>
               <button onClick={nextSlide} className="p-4 bg-slate-800 rounded-full text-white hover:bg-slate-700 transition-colors shadow-lg border border-slate-700 group"><ChevronRight /></button>
             </div>
-            
+             
             <p className="mt-6 text-slate-500 text-[10px] uppercase tracking-wider opacity-60 flex items-center gap-1">
               <Share2 className="w-3 h-3" /> {t.screenshotHint}
             </p>
