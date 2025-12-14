@@ -6,14 +6,20 @@ import {
   Image as ImageIcon, Upload, Plus, Trash2, Wand2, Save, RotateCcw, 
   Flame, Languages, Bike, Footprints, Dumbbell, Plane, Gamepad2, Code, 
   PenTool, DollarSign, Headphones, Video, Utensils, Moon, MapPin, 
-  GitBranch, Twitter, Instagram, Linkedin, ShieldCheck, HelpCircle, X, EyeOff
+  GitBranch, Twitter, Instagram, Linkedin, ShieldCheck, HelpCircle, X, EyeOff, Sparkles // Added Sparkles
 } from 'lucide-react';
+
+// ... [BAGIAN CONSTANTS (ICON_MAP, DEFAULT_LABELS, THEMES, TEMPLATES, TRANSLATIONS, UTILITY FUNCTIONS, THEME RENDERERS) TETAP SAMA SEPERTI KODE SEBELUMNYA] ...
+// ... (Saya persingkat bagian atas agar fokus pada perubahan logika utama di bawah) ...
 
 /**
  * ------------------------------------------------------------------
- * 1. CONSTANTS & CONFIGURATION
+ * 1. CONSTANTS & CONFIGURATION (PASTE DARI KODE SEBELUMNYA DI SINI)
  * ------------------------------------------------------------------
  */
+// Pastikan kamu tetap menyertakan ICON_MAP, DEFAULT_LABELS, THEMES, TEMPLATES, TRANSLATIONS, 
+// UTILITY FUNCTIONS, dan SEMUA RENDERER (RenderRetro, RenderSwiss, dll) di sini.
+// Kode di bawah ini adalah sambungan dari Renderers sampai Main Component.
 
 const ICON_MAP = {
   coffee: <Coffee className="w-full h-full" />,
@@ -146,6 +152,11 @@ const TRANSLATIONS = {
     step1: "Fill in stats & memories", step2: "Upload photos", step3: "Choose theme", step4: "Open Screenshot Mode",
     close: "Got it!", madeBy: "made with year-in-review-generator",
     
+    // Onboarding
+    welcomeTitle: "Welcome to Year Edit!",
+    welcomeDesc: "Turn your yearly stats and memories into stunning, shareable aesthetic slides in seconds.",
+    start: "Start Creating",
+
     // Theme specific
     pressStart: "PRESS START", playerStats: "PLAYER_STATS", achievements: "ACHIEVEMENTS", memoryDump: "MEMORY_DUMP", endTrans: "END_OF_TRANSMISSION",
     annualReport: "ANNUAL REPORT", keyPoints: "KEY POINTS", endReport: "END REPORT", fig: "FIG",
@@ -153,9 +164,8 @@ const TRANSLATIONS = {
     systemBoot: ":: SYSTEM_BOOT ::", neuralStats: "NEURAL_STATS", coreMem: "CORE_MEMORY", visualLogs: "VISUAL_LOGS", endLine: "END_OF_LINE_",
     keyFigures: "Key Figures", fin: "Fin.", wow: "WOW!", pow: "POW!", snap: "SNAP!",
     aesthetics: "A E S T H E T I C S", memoriesExe: "memories.exe", visuals: "V I S U A L S",
-    volume: "VOL", indexRerum: "INDEX RERUM", chronicles: "CHRONICLES", plates: "PLATES", finis: "— FINIS —",
+    volume: "JILID", indexRerum: "INDEKS", chronicles: "KRONIK", plates: "PELAT", finis: "— FINIS —",
     
-    // FIX: Added missing keys for Brutal/Glass themes
     myStats: "MY STATS",
     wins: "BIG WINS",
     pics: "EVIDENCE",
@@ -173,6 +183,11 @@ const TRANSLATIONS = {
     helpTitle: "Cara Pakai", helpDesc: "Bikin rekap tahunan estetikmu.",
     step1: "Isi statistik & kenangan", step2: "Upload foto", step3: "Pilih tema", step4: "Buka Mode Screenshot",
     close: "Siap, gas!", madeBy: "dibuat dengan year-in-review-generator",
+
+    // Onboarding
+    welcomeTitle: "Selamat Datang di Edisi Tahunku!",
+    welcomeDesc: "Ubah statistik dan kenangan tahunanmu menjadi slide estetik yang siap dibagikan dalam hitungan detik.",
+    start: "Mulai Membuat",
     
     // Theme specific
     pressStart: "TEKAN MULAI", playerStats: "STATISTIK_PEMAIN", achievements: "PENCAPAIAN", memoryDump: "MEMORI_DUMP", endTrans: "TRANSMISI SELESAI",
@@ -183,19 +198,12 @@ const TRANSLATIONS = {
     aesthetics: "E S T E T I K A", memoriesExe: "memori.exe", visuals: "V I S U A L",
     volume: "JILID", indexRerum: "INDEKS", chronicles: "KRONIK", plates: "PELAT", finis: "— TAMAT —",
     
-    // FIX: Added missing keys for Brutal/Glass themes
     myStats: "STATISTIK",
     wins: "PENCAPAIAN",
     pics: "DOKUMENTASI",
     recap: "REKAP"
   }
 };
-
-/**
- * ------------------------------------------------------------------
- * 2. UTILITY FUNCTIONS (Logic Extraction)
- * ------------------------------------------------------------------
- */
 
 const getPhotoGridClasses = (count) => {
   if (count <= 2) return "grid-cols-1 grid-rows-2";
@@ -1147,7 +1155,7 @@ export default function YearInReviewGenerator() {
   const [currentTheme, setCurrentTheme] = useState('retro'); 
   const [currentSlide, setCurrentSlide] = useState(0);
   
-  // ACTIVATED: Clean Mode Logic for Screenshots
+  // Clean Mode Logic for Screenshots
   const [isCleanMode, setIsCleanMode] = useState(false);
   const [showToast, setShowToast] = useState(false);
 
@@ -1156,9 +1164,26 @@ export default function YearInReviewGenerator() {
   const [language, setLanguage] = useState('id'); 
   const [showHelp, setShowHelp] = useState(false);
 
+  // --- [NEW] Onboarding State ---
+  const [showOnboarding, setShowOnboarding] = useState(false);
+
   const t = TRANSLATIONS[language]; 
   const totalSlides = 5; 
   const scrollContainerRef = useRef(null);
+
+  // --- [NEW] Onboarding Check Effect ---
+  useEffect(() => {
+    const hasOnboarded = localStorage.getItem('hasOnboarded_v1');
+    if (!hasOnboarded) {
+      setShowOnboarding(true);
+    }
+  }, []);
+
+  // --- [NEW] Close Onboarding Handler ---
+  const handleCloseOnboarding = () => {
+    setShowOnboarding(false);
+    localStorage.setItem('hasOnboarded_v1', 'true');
+  };
 
   // --- CLEAN MODE LOGIC ---
   const enterCleanMode = (e) => {
@@ -1332,23 +1357,73 @@ export default function YearInReviewGenerator() {
 
   return (
     <div className="min-h-screen bg-gray-50 text-slate-800 font-sans flex flex-col lg:flex-row lg:h-screen lg:overflow-hidden">
-       
+        {/* --- [NEW] ONBOARDING MODAL --- */}
+      {showOnboarding && (
+        <div className="fixed inset-0 z-[300] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+            <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl relative animate-in fade-in zoom-in-95 duration-500 text-center border-4 border-slate-100">
+              <div className="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                 <Sparkles className="w-8 h-8 animate-pulse" />
+              </div>
+              <h3 className="text-3xl font-black text-slate-900 mb-4 tracking-tight">{t.welcomeTitle}</h3>
+              <p className="text-slate-500 text-lg mb-8 leading-relaxed">{t.welcomeDesc}</p>
+              
+              <div className="space-y-3 mb-8 text-left bg-slate-50 p-6 rounded-2xl">
+                 <div className="flex items-center gap-3 text-sm font-bold text-slate-700">
+                    <span className="w-6 h-6 rounded-full bg-indigo-200 text-indigo-700 flex items-center justify-center text-xs">1</span>
+                    {t.step1}
+                 </div>
+                 <div className="flex items-center gap-3 text-sm font-bold text-slate-700">
+                    <span className="w-6 h-6 rounded-full bg-indigo-200 text-indigo-700 flex items-center justify-center text-xs">2</span>
+                    {t.step2}
+                 </div>
+                 <div className="flex items-center gap-3 text-sm font-bold text-slate-700">
+                    <span className="w-6 h-6 rounded-full bg-indigo-200 text-indigo-700 flex items-center justify-center text-xs">3</span>
+                    {t.step3}
+                 </div>
+              </div>
+
+              <button onClick={handleCloseOnboarding} className="w-full bg-indigo-600 text-white font-bold text-lg py-4 rounded-2xl hover:bg-indigo-700 transition-transform active:scale-95 shadow-xl shadow-indigo-200">
+                  {t.start} 🚀
+              </button>
+            </div>
+        </div>
+      )}
+      
       {/* Help Modal */}
       {showHelp && (
         <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setShowHelp(false)}>
-            <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl relative animate-in fade-in zoom-in-95 duration-200" onClick={e => e.stopPropagation()}>
+           <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl relative animate-in fade-in zoom-in-95 duration-200" onClick={e => e.stopPropagation()}>
               <button onClick={() => setShowHelp(false)} className="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
                 <X className="w-5 h-5" />
               </button>
               <h3 className="text-xl font-black text-slate-900 mb-2">{t.helpTitle}</h3>
               <p className="text-slate-500 text-sm mb-6">{t.helpDesc}</p>
+              
+              <div className="space-y-4">
+                 <div className="flex gap-3">
+                    <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm shrink-0">1</div>
+                    <p className="text-sm text-slate-700 font-medium pt-1.5">{t.step1}</p>
+                 </div>
+                 <div className="flex gap-3">
+                    <div className="w-8 h-8 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center font-bold text-sm shrink-0">2</div>
+                    <p className="text-sm text-slate-700 font-medium pt-1.5">{t.step2}</p>
+                 </div>
+                 <div className="flex gap-3">
+                    <div className="w-8 h-8 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center font-bold text-sm shrink-0">3</div>
+                    <p className="text-sm text-slate-700 font-medium pt-1.5">{t.step3}</p>
+                 </div>
+                 <div className="flex gap-3">
+                    <div className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-sm shrink-0">4</div>
+                    <p className="text-sm text-slate-700 font-medium pt-1.5">{t.step4}</p>
+                 </div>
+              </div>
+
               <button onClick={() => setShowHelp(false)} className="w-full mt-8 bg-slate-900 text-white font-bold py-3 rounded-xl hover:bg-slate-800 transition-colors">
-                  {t.close}
+                 {t.close}
               </button>
-            </div>
+           </div>
         </div>
       )}
-
       {/* --- FULL SCREEN PREVIEW OVERLAY --- */}
       {isFullScreen && (
         <div className="fixed inset-0 z-[200] bg-black flex items-center justify-center p-0 md:p-4 h-[100dvh]">
