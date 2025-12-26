@@ -1,9 +1,11 @@
 **📅 Year in Review Generator**
+
 Turn your yearly stats and memories into aesthetic, shareable stories.
 A privacy-focused, zero-backend web application that empowers users to visualize their year (reading stats, fitness goals, coding commits, etc.) in a "Spotify Wrapped" style format. Features 12+ unique visual themes ranging from 8-Bit Retro to Cyberpunk Neon.
 🔗 Live Demo: https://year-in-review-jak.vercel.app/
 
 **✨ Key Features**
+
 🎨 12 Visual Themes
 Diverse aesthetic engines catering to different user personas:
 Retro: 8-Bit console nostalgia.
@@ -12,17 +14,21 @@ Neon: Cyberpunk/Dark mode aesthetics.
 LoFi, Minimal, Brutalism, Vaporwave, and more.
 
 **📸 Smart Screenshot Mode**
+
 Native "Download" buttons often fail on mobile webviews. We implemented a dedicated "Clean Mode":
 Toggles a full-screen overlay.
 Hides all UI chrome (buttons, navigation arrows).
 Allows users to take perfect native screenshots for Instagram Stories/TikTok.
+
 **🔒 Privacy-First (Local-First)**
 Zero Backend: No user data is sent to a server.
 Persistence: Data is saved automatically to the browser's localStorage, allowing users to return later without losing progress.
+
 **🚀 UX & Accessibility**
 Onboarding Flow: Interactive guide for first-time users.
 Internationalization (i18n): Full support for English (en) and Indonesian (id).
 Smart Summary: Deterministic algorithm that generates personalized yearly summaries based on the icons/stats selected by the user.
+
 **🛠️ Tech Stack**
 Frontend: React 18
 Styling: Tailwind CSS (Utility-first architecture)
