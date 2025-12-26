@@ -60,7 +60,7 @@ Follow these steps to run the project locally.
 
 1.  **Clone the repository**
     ```bash
-    git clone [https://github.com/fadlyzaki/year-in-review.git](https://github.com/fadlyzaki/year-in-review.git)
+    git clone https://github.com/fadlyzaki/year-in-review.git
     cd year-in-review
     ```
 
