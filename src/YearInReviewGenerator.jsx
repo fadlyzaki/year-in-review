@@ -1171,6 +1171,26 @@ export default function YearInReviewGenerator() {
   const totalSlides = 5; 
   const scrollContainerRef = useRef(null);
 
+// --- [NEW] Dynamic Favicon & Meta Title ---
+  useEffect(() => {
+    // 1. Update Browser Tab Title
+    document.title = `${t.title} ${data.year} | Create Your Story`;
+
+    // 2. Set Dynamic Emoji Favicon (Instant, no file upload needed)
+    const setFavicon = (emoji) => {
+      let link = document.querySelector("link[rel*='icon']");
+      if (!link) {
+        link = document.createElement('link');
+        link.rel = 'shortcut icon';
+        document.getElementsByTagName('head')[0].appendChild(link);
+      }
+      link.type = 'image/svg+xml';
+      link.href = `data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>${emoji}</text></svg>`;
+    };
+    
+    setFavicon('✨'); // You can change this emoji based on the theme if you want!
+  }, [language, data.year, t.title]);
+  
   // --- [NEW] Onboarding Check Effect ---
   useEffect(() => {
     const hasOnboarded = localStorage.getItem('hasOnboarded_v1');
