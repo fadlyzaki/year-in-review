@@ -21,6 +21,12 @@ import {
 // UTILITY FUNCTIONS, dan SEMUA RENDERER (RenderRetro, RenderSwiss, dll) di sini.
 // Kode di bawah ini adalah sambungan dari Renderers sampai Main Component.
 
+// --- [UPDATED] Batas Karakter yang Aman untuk Layout ---
+const MAX_CHARS = {
+  highlightTitle: 20, // Pas 1 baris
+  highlightDesc: 70   // Pas 3 baris estetik tanpa terpotong
+};
+
 const ICON_MAP = {
   coffee: <Coffee className="w-full h-full" />,
   book: <Book className="w-full h-full" />,
@@ -301,7 +307,8 @@ const RenderRetro = ({ slide, data, t }) => {
                <div className={`shrink-0 w-10 h-10 bg-emerald-900 text-white flex items-center justify-center text-xl font-bold border-2 border-white`}>{h.emoji || (i+1)}</div>
                <div className="min-w-0 flex-1">
                   <div className="font-bold uppercase text-sm mb-1 truncate">{h.title}</div>
-                  <div className="text-xs leading-snug line-clamp-2">{h.desc}</div>
+                  {/* [UPDATED] line-clamp-3 and smaller font for better visibility */}
+                  <div className="text-[10px] leading-snug line-clamp-3">{h.desc}</div>
                </div>
              </div>
            ))}
@@ -375,7 +382,7 @@ const RenderSwiss = ({ slide, data, t }) => {
         {darkWatermark}
       </div>
   );
-  if (slide === 2) return (
+if (slide === 2) return (
       <div className={`h-full ${bgClass} font-sans flex flex-col select-none`}>
          <div className={`bg-red-600 text-white p-6 pb-12 rounded-bl-[4rem]`}>
            <h3 className="text-4xl font-black leading-none">{t.keyPoints}</h3>
@@ -386,7 +393,8 @@ const RenderSwiss = ({ slide, data, t }) => {
                <div className="text-4xl shrink-0">{h.emoji}</div>
                <div className="min-w-0">
                   <h4 className="text-xl font-black uppercase mb-1 truncate">{h.title}</h4>
-                  <p className="text-sm opacity-70 font-medium leading-tight line-clamp-2">{h.desc}</p>
+                  {/* [UPDATED] line-clamp-3 and slightly smaller text */}
+                  <p className="text-xs opacity-70 font-medium leading-tight line-clamp-3">{h.desc}</p>
                </div>
              </div>
            ))}
@@ -452,6 +460,7 @@ const RenderLoFi = ({ slide, data, t }) => {
       </div>
   );
 
+  
   if (slide === 2) return (
       <div className={`h-full ${paperTexture} p-6 font-serif relative overflow-hidden select-none flex flex-col`}>
          <h3 className={`text-5xl font-sans font-black text-stone-200 absolute -right-4 top-10 rotate-90 z-0 select-none`}>{t.moments}</h3>
@@ -463,7 +472,8 @@ const RenderLoFi = ({ slide, data, t }) => {
                  <div className={`w-2 h-2 rounded-full bg-stone-300`}></div>
                  <h4 className="font-bold font-sans text-sm uppercase tracking-wide truncate">{h.title}</h4>
                </div>
-               <p className={`${secondaryColor} italic leading-snug line-clamp-2`}>{h.desc}</p>
+               {/* [UPDATED] line-clamp-3 */}
+               <p className={`${secondaryColor} italic leading-snug line-clamp-3 text-xs`}>{h.desc}</p>
              </div>
            ))}
          </div>
@@ -524,7 +534,7 @@ const RenderNeon = ({ slide, data, t }) => {
       </div>
     );
 
-    if (slide === 2) return (
+ if (slide === 2) return (
       <div className={`h-full ${bgStyle} p-6 font-sans relative overflow-hidden flex flex-col`}>
          <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[length:20px_20px]"></div>
          <h3 className={`text-xl font-bold uppercase mb-8 ${textPrimary} ${glowText} flex items-center gap-2`}><Zap className="w-5 h-5" /> {t.coreMem}</h3>
@@ -534,7 +544,8 @@ const RenderNeon = ({ slide, data, t }) => {
                <div className={`text-2xl ${glowTextSecondary}`}>{h.emoji}</div>
                <div>
                   <div className={`font-bold uppercase text-sm mb-1 ${textSecondary} ${glowTextSecondary} truncate`}>// {h.title}</div>
-                  <div className={`text-sm leading-snug text-white opacity-90 line-clamp-2`}>{h.desc}</div>
+                  {/* [UPDATED] line-clamp-3, text-xs */}
+                  <div className={`text-xs leading-snug text-white opacity-90 line-clamp-3`}>{h.desc}</div>
                </div>
              </div>
            ))}
@@ -588,6 +599,7 @@ const RenderMinimal = ({ slide, data, t }) => {
       </div>
     );
 
+   
     if (slide === 2) {
         return (
           <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col select-none`}>
@@ -597,7 +609,8 @@ const RenderMinimal = ({ slide, data, t }) => {
                  <div key={h.id} className="text-center">
                    <div className="flex justify-center mb-1 text-2xl">{h.emoji}</div>
                    <h4 className={`text-lg font-normal uppercase tracking-wide mb-1 ${textPrimary} truncate`}>{h.title}</h4>
-                   <p className="text-xs leading-tight text-stone-500 font-light italic px-4 line-clamp-2">{h.desc}</p>
+                   {/* [UPDATED] line-clamp-3 + small text */}
+                   <p className="text-[10px] leading-tight text-stone-500 font-light italic px-4 line-clamp-3">{h.desc}</p>
                  </div>
                ))}
              </div>
@@ -605,6 +618,7 @@ const RenderMinimal = ({ slide, data, t }) => {
           </div>
         );
     }
+
     if(slide===3) {
         const gridClass = getPhotoGridClasses(data.photos.length);
         return (
@@ -680,7 +694,8 @@ const RenderJournal = ({ slide, data, t }) => {
                       <h4 className={`font-bold ${penColor} font-handwriting text-lg mb-1 truncate`}>{h.title}</h4>
                       <span className="text-xl">{h.emoji}</span>
                   </div>
-                  <p className={`text-sm leading-snug ${pencilColor} font-handwriting line-clamp-2`}>{h.desc}</p>
+                  {/* [UPDATED] line-clamp-3 and text-xs */}
+                  <p className={`text-xs leading-snug ${pencilColor} font-handwriting line-clamp-3`}>{h.desc}</p>
                  </div>
                </div>
              </div>
@@ -689,6 +704,7 @@ const RenderJournal = ({ slide, data, t }) => {
          {watermark}
       </div>
   );
+
 
   if (slide === 3) {
       const gridClass = getPhotoGridClasses(data.photos.length);
@@ -739,7 +755,7 @@ const RenderGlass = ({ slide, data, t }) => {
         </div>
       );
      
-      if (slide === 2) return (
+     if (slide === 2) return (
         <div className={`h-full ${bgStyle} p-6 font-sans relative select-none overflow-hidden`}>
           <h3 className={`text-2xl font-bold text-white mb-8 drop-shadow-md`}>{t.highlights}</h3>
           <div className="space-y-4 relative z-10 min-h-0 overflow-y-auto scrollbar-hide">
@@ -749,7 +765,8 @@ const RenderGlass = ({ slide, data, t }) => {
                     <h4 className="text-lg font-bold">{h.title}</h4>
                     <span className="text-xl">{h.emoji}</span>
                 </div>
-                <p className={`text-sm text-white opacity-90 leading-snug line-clamp-2`}>{h.desc}</p>
+                {/* [UPDATED] text-xs and line-clamp-3 */}
+                <p className={`text-xs text-white opacity-90 leading-snug line-clamp-3`}>{h.desc}</p>
               </div>
             ))}
           </div>
@@ -815,7 +832,7 @@ const RenderBrutal = ({ slide, data, t }) => {
     );
      
     // Slide 2: Highlights
-    if (slide === 2) return (
+ if (slide === 2) return (
         <div className={`h-full ${bgStyle} p-6 font-sans relative select-none flex flex-col`}>
           <h3 className={`text-4xl font-black ${textPrimary} mb-8 bg-green-400 border-4 border-black inline-block p-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] shrink-0`}>{t.wins}</h3>
           <div className="space-y-6 flex-1 min-h-0 overflow-y-auto scrollbar-hide">
@@ -825,7 +842,8 @@ const RenderBrutal = ({ slide, data, t }) => {
                     <h4 className="text-xl font-black uppercase mb-1 bg-pink-300 inline-block px-1 border-2 border-black truncate max-w-[80%]">{h.title}</h4>
                     <span className="text-2xl">{h.emoji}</span>
                  </div>
-                <p className={`${textPrimary} font-bold leading-tight mt-2 line-clamp-2`}>{h.desc}</p>
+                {/* [UPDATED] line-clamp-3, slightly smaller font */}
+                <p className={`${textPrimary} font-medium text-sm leading-tight mt-2 line-clamp-3`}>{h.desc}</p>
               </div>
             ))}
           </div>
@@ -893,7 +911,7 @@ const RenderVapor = ({ slide, data, t }) => {
         </div>
       );
      
-      if (slide === 2) return (
+     if (slide === 2) return (
         <div className={`h-full ${bgStyle} p-6 font-mono relative select-none overflow-hidden flex flex-col`}>
            <div className={`absolute inset-0 ${gridStyle} opacity-30`}></div>
            <h3 className="text-2xl text-pink-400 mb-6 relative z-10 uppercase shrink-0">{t.memoriesExe}</h3>
@@ -902,7 +920,8 @@ const RenderVapor = ({ slide, data, t }) => {
                <div key={h.id} className="bg-gradient-to-r from-cyan-900/80 to-purple-900/80 p-4 border-l-4 border-cyan-400 relative">
                  <div className="absolute top-2 right-2 text-2xl opacity-50">{h.emoji}</div>
                  <h4 className="text-white font-bold text-lg">{h.title}</h4>
-                 <p className="text-pink-200 text-sm line-clamp-2">{h.desc}</p>
+                 {/* [UPDATED] line-clamp-3 and text-xs */}
+                 <p className="text-pink-200 text-xs line-clamp-3">{h.desc}</p>
                </div>
              ))}
            </div>
@@ -958,7 +977,7 @@ const RenderAcademia = ({ slide, data, t }) => {
         </div>
       );
      
-      if (slide === 2) return (
+    if (slide === 2) return (
         <div className={`h-full ${bgStyle} p-8 font-serif flex flex-col select-none`}>
           <h3 className="text-2xl text-[#d4af37] border-b border-[#5c4d3c] pb-2 mb-8 italic shrink-0">{t.chronicles}</h3>
           <div className="space-y-8 flex-1 min-h-0 overflow-y-auto scrollbar-hide pt-4">
@@ -967,7 +986,8 @@ const RenderAcademia = ({ slide, data, t }) => {
                 <span className="text-[#d4af37] text-xl font-bold mr-2">§ {i+1}</span>
                 <span className="mr-2 text-xl">{h.emoji}</span>
                 <h4 className="inline text-lg font-bold">{h.title}</h4>
-                <p className="text-[#8a7e68] mt-1 text-sm leading-relaxed pl-8 line-clamp-2">{h.desc}</p>
+                {/* [UPDATED] line-clamp-3 and text-xs */}
+                <p className="text-[#8a7e68] mt-1 text-xs leading-relaxed pl-8 line-clamp-3">{h.desc}</p>
               </div>
             ))}
           </div>
@@ -1024,7 +1044,7 @@ const RenderPop = ({ slide, data, t }) => {
         </div>
       );
      
-      if (slide === 2) return (
+    if (slide === 2) return (
         <div className={`h-full bg-cyan-300 p-6 font-sans relative select-none flex flex-col`}>
            <div className="absolute inset-0 bg-[radial-gradient(circle,black_1px,transparent_1px)] bg-[length:10px_10px] opacity-10"></div>
            <h3 className="text-5xl font-black text-black mb-6 italic drop-shadow-[2px_2px_0px_white] shrink-0">{t.pow}</h3>
@@ -1033,7 +1053,8 @@ const RenderPop = ({ slide, data, t }) => {
                <div key={h.id} className="bg-white border-4 border-black p-4 shadow-[4px_4px_0px_black] relative mt-2">
                  <div className="absolute -top-3 -right-3 text-3xl transform rotate-12">{h.emoji}</div>
                  <h4 className="text-xl font-black uppercase">{h.title}</h4>
-                 <p className="text-sm font-bold line-clamp-2">{h.desc}</p>
+                 {/* [UPDATED] line-clamp-3 and text-xs */}
+                 <p className="text-xs font-bold line-clamp-3">{h.desc}</p>
                </div>
              ))}
            </div>
@@ -1091,8 +1112,8 @@ const RenderBlueprint = ({ slide, data, t }) => {
           {watermark}
         </div>
       );
-     
-      if (slide === 2) return (
+      
+     if (slide === 2) return (
         <div className={`h-full ${bgStyle} p-8 font-mono flex flex-col relative select-none`}>
           <div className={`absolute inset-0 ${grid}`}></div>
           <div className="border-4 border-white p-6 relative z-10 h-full flex flex-col">
@@ -1112,6 +1133,7 @@ const RenderBlueprint = ({ slide, data, t }) => {
           {watermark}
         </div>
       );
+
 
     if (slide === 3) {
         const gridClass = getPhotoGridClasses(data.photos.length);
@@ -1190,7 +1212,7 @@ export default function YearInReviewGenerator() {
     
     setFavicon('✨'); // You can change this emoji based on the theme if you want!
   }, [language, data.year, t.title]);
-  
+
   // --- [NEW] Onboarding Check Effect ---
   useEffect(() => {
     const hasOnboarded = localStorage.getItem('hasOnboarded_v1');
@@ -1571,7 +1593,7 @@ export default function YearInReviewGenerator() {
             )}
           </section>
 
-          {/* HIGHLIGHTS SECTION */}
+          {/* HIGHLIGHTS SECTION (With Character Counter) */}
           <section className="mb-10">
             <div className="flex justify-between items-center mb-4">
                <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2"><Layout className="w-4 h-4" /> {t.highlights}</h3>
@@ -1580,13 +1602,49 @@ export default function YearInReviewGenerator() {
               {data.highlights.map((item) => (
                 <div key={item.id} className="p-4 bg-white rounded-xl border border-slate-200 shadow-sm relative group">
                    <button onClick={() => removeHighlight(item.id)} disabled={data.highlights.length <= 2} className="absolute top-4 right-4 p-1 text-slate-300 hover:text-red-500 disabled:opacity-0 transition-colors"><Trash2 className="w-4 h-4" /></button>
-                   <div className="flex gap-2 mb-2 items-center">
-                     <div className="w-10 flex-shrink-0">
-                       <input type="text" value={item.emoji || ''} onChange={(e) => handleHighlightChange(item.id, 'emoji', e.target.value)} className="w-full h-10 text-center text-xl border border-slate-200 rounded-lg focus:border-indigo-500 outline-none" placeholder="✨" maxLength={2} />
+                   
+                   {/* Emoji & Title Row */}
+                   <div className="flex gap-2 mb-2 items-start">
+                     <div className="w-12 flex-shrink-0">
+                       <input 
+                         type="text" 
+                         value={item.emoji || ''} 
+                         onChange={(e) => handleHighlightChange(item.id, 'emoji', e.target.value)} 
+                         className="w-full h-10 text-center text-xl border border-slate-200 rounded-lg focus:border-indigo-500 outline-none" 
+                         placeholder="✨" 
+                         maxLength={2} 
+                       />
                      </div>
-                     <input type="text" value={item.title} onChange={(e) => handleHighlightChange(item.id, 'title', e.target.value)} className="flex-1 text-sm font-bold border-b border-slate-100 pb-2 focus:border-indigo-500 outline-none pr-8" placeholder={t.highlightTitle}/>
+                     <div className="flex-1 relative">
+                        <input 
+                          type="text" 
+                          value={item.title} 
+                          onChange={(e) => handleHighlightChange(item.id, 'title', e.target.value)} 
+                          className="w-full text-sm font-bold border-b border-slate-100 pb-2 focus:border-indigo-500 outline-none pr-8" 
+                          placeholder={t.highlightTitle}
+                          maxLength={MAX_CHARS.highlightTitle} 
+                        />
+                        {/* Title Counter */}
+                        <span className={`absolute right-0 bottom-2 text-[10px] ${item.title.length >= MAX_CHARS.highlightTitle ? 'text-red-500 font-bold' : 'text-slate-300'}`}>
+                          {item.title.length}/{MAX_CHARS.highlightTitle}
+                        </span>
+                     </div>
                    </div>
-                  <textarea value={item.desc} onChange={(e) => handleHighlightChange(item.id, 'desc', e.target.value)} className="w-full text-xs text-slate-600 resize-none outline-none h-12" placeholder={t.desc}/>
+
+                  {/* Description Area */}
+                  <div className="relative">
+                    <textarea 
+                      value={item.desc} 
+                      onChange={(e) => handleHighlightChange(item.id, 'desc', e.target.value)} 
+                      className="w-full text-xs text-slate-600 resize-none outline-none h-16 p-2 bg-slate-50 rounded-lg focus:ring-1 focus:ring-indigo-500" 
+                      placeholder={t.desc}
+                      maxLength={MAX_CHARS.highlightDesc}
+                    />
+                    {/* Description Counter */}
+                    <span className={`absolute right-2 bottom-2 text-[10px] ${item.desc.length >= MAX_CHARS.highlightDesc ? 'text-red-500 font-bold' : 'text-slate-400'}`}>
+                      {item.desc.length}/{MAX_CHARS.highlightDesc}
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>
@@ -1596,6 +1654,7 @@ export default function YearInReviewGenerator() {
               </button>
             )}
           </section>
+
 
           {/* PHOTOS SECTION */}
           <section className="mb-10">
