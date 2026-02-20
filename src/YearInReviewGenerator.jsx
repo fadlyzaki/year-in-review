@@ -474,6 +474,7 @@ const RenderLoFi = ({ slide, data, t }) => {
                </div>
                {/* [UPDATED] line-clamp-3 */}
                <p className={`${secondaryColor} italic leading-snug line-clamp-3 text-xs`}>{h.desc}</p>
+          
              </div>
            ))}
          </div>
@@ -1112,7 +1113,7 @@ const RenderBlueprint = ({ slide, data, t }) => {
           {watermark}
         </div>
       );
-      
+
      if (slide === 2) return (
         <div className={`h-full ${bgStyle} p-8 font-mono flex flex-col relative select-none`}>
           <div className={`absolute inset-0 ${grid}`}></div>
