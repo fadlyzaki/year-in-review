@@ -34,9 +34,9 @@ Native "Download" buttons often fail on in-app mobile webviews (like clicking a 
 * **Persistence:** Data is saved automatically to the browser's `localStorage`, allowing users to return later without losing their progress.
 
 ### 🚀 UX & Accessibility
-* **Magic Write / Smart Summary:** A deterministic algorithm that reads your selected stats and automatically generates personalized, aesthetic summary paragraphs.
+* **Magic Write ("Tulis Ajaib"):** A deterministic algorithm that reads your selected stats and automatically generates personalized, aesthetic summary paragraphs.
 * **Internationalization (i18n):** Full localization support for English (`en`) and Indonesian (`id`).
-* **Interactive UI:** Smooth transitions, responsive forms, and live previews.
+* **Interactive UI:** Features a highly intuitive split-pane architecture with a real-time updating live preview engine and smooth theme transitions.
 
 ---
 

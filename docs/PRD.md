@@ -17,16 +17,17 @@
 ## 4. Key Features & Requirements
 
 ### 4.1. Data Entry & Customization
-- **Personalized Stats:** Users can input numerical data paired with 30+ categorized icons (e.g., Books Read, Workouts, Lines of Code, Travel, Gaming).
-- **Core Memories:** Users can add multiple text-based highlights with titles, descriptions, and emojis.
-- **Photo Dump:** Support for uploading local images directly into the layout.
+- **Split-Pane Architecture:** Users interact with a split-pane layout featuring an interactive editor on the left and a real-time live preview on the right.
+- **Personalized Stats:** Users can instantly add and edit numerical data paired with 30+ categorized icons (e.g., Books Read, Workouts, Lines of Code, Travel, Gaming).
+- **Core Memories:** Users can dynamically add multiple text-based highlights with titles, descriptions, and emojis.
+- **Photo Dump:** Support for seamless uploading of local images directly into predefined layout slots.
 
 ### 4.2. Theming Engine
 - The application must support at least 12 distinct stylistic themes, rendering the inputted data uniquely.
 - **Available Themes:** 8-Bit Retro, Swiss Grid, Lo-Fi Scrapbook, Cyberpunk Neon, Modern Minimalist, Hand-Drawn Journal, Glassmorphism, Neo-Brutalism, Vaporwave, Dark Academia, Pop Art, and Blueprint.
 
 ### 4.3. Smart Generation
-- **Smart Summary ("Magic Write"):** An algorithm that automatically generates a personalized, aesthetic summary paragraph based on the user's most prominent inputted stats and active language.
+- **Magic Write ("Tulis Ajaib"):** An algorithm that instantly generates a personalized, aesthetic summary paragraph based on the user's most prominent inputted stats and active language.
 
 ### 4.4. Internationalization (i18n)
 - Native support for multiple languages, specifically **English (`en`)** and **Indonesian (`id`)**.
